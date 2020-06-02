@@ -6,5 +6,6 @@ This is an RPG game using pixel art. You will fight monsters, explore dungeon fl
 A fun game for all the family.
 
 Current progress:
-- Planning in progress.
+HTML is (mostly) complete!
+The map editor is at version 2: I can currently add new maps, but I can only use the mossy wall and the blank space
 
