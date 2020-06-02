@@ -2,3 +2,9 @@
     font-family: monospace;
     font-size: 1.05em;
 }
+span {
+    margin-right: -10px;
+}
+div {
+    margin-top: -5px;
+}
