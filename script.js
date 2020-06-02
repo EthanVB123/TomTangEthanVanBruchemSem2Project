@@ -35,8 +35,21 @@ var roomsExplored = [0,0,0,0,0]
 // 0 = empty space
 // 1 = wall
 // 2 = passage
-var room1 = ['0000000000','0111121110', '0100000010', '0100000010','0100000010','0100000010','0100000010','0100000010','0111111110','0000000000']
-var room1fullstring = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
+// 3 = green slime
+/* 
+Room structure
+0000000000
+0111111110
+0100000010
+0100000010
+0100000010
+0100000010
+0100000010
+0100000010
+0111111110
+0000000000
+*/
+var room1fullstring = '0000000000011111111001000000100100000010010003001001000000100100000010010000001001111111100000000000'
 var room1splitstring = room1fullstring
 // Event listeners
     setInterval(mainGameLoop, 100)
@@ -69,6 +82,9 @@ function updateMap() {
 
         } else if (room1splitstring[0] == 1) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
+            room1splitstring = room1splitstring.substring(1)
+        } else if (room1splitstring[0] == 3) {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/GreenSlime.png'
             room1splitstring = room1splitstring.substring(1)
         }
 
