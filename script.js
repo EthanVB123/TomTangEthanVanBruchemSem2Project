@@ -149,6 +149,7 @@ function changeHP(amount) {
 
 function updateMap() {
     document.getElementsByClassName('00')[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
+    document.getElementsByClassName('77')[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
 }
 function mainGameLoop() {
     updateMap()
