@@ -1,13 +1,19 @@
 // Variables to declare
 var currentHP = 10;
 var maxHP = 10;
+var HPbar = document.getElementsByClassName('HPbar')[0]
+var percentHP = currentHP / maxHP
 
 var currentMP = 5;
 var maxMP = 5;
+var MPbar = document.getElementsByClassName('MPbar')[0]
+var percentMP = currentMP / maxMP
 
 var currentXP = 0;
 var XPToLevelUp = 10;
-var currentLevel = 0;
+var currentLevel = 1;
+var XPbar = document.getElementsByClassName('XPbar')[0]
+var percentXP = currentXP / XPToLevelUp
 
 var strength = 1;
 var dexterity = 1;
@@ -23,7 +29,7 @@ var weapon2 = ['[Empty]', 0, 0]
 var weapon3 = ['[Empty]', 0, 0]
 var weapon4 = ['[Empty]', 0, 0]
 // Items are [name, MP, effect]
-var item1 = ['Restore 5 HP', 1, changeHP(5)]
+var item1 = ['[Empty]', 0, 0]
 var item2 = ['[Empty]', 0, 0]
 var item3 = ['[Empty]', 0, 0]
 var item4 = ['[Empty]', 0, 0]
@@ -119,14 +125,7 @@ function moveDown() {
         playery -= 1
     }
 }
-// change HP: use positive number to heal, use negative number to take damage
-function changeHP(amount) {
-    currentHP += amount
-    if (currentHP > maxHP) {
-        currentHP = maxHP
-    }
-}
-// updateMap: the room variable is a 10x10 array variable
+// updateMap: the room variable is a 100char string variable
 function addPlayerToMap() {
     playerIndex = 10*playery + playerx
     room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
@@ -163,8 +162,97 @@ function updateMap() {
     
     }
 }
+
+
+// This section of the code that follows is about the HP, MP and XP bars.
+function drawBars() {
+    var barFill = '|__________|'
+    percentHP = currentHP/maxHP
+    percentMP = currentMP/maxMP
+    percentXP = currentXP/XPToLevelUp
+    
+    if (percentHP > 0.95) {
+        barFill = '|==========|'
+    } else if (percentHP > 0.85) {
+        barFill = '|=========_|'
+    } else if (percentHP > 0.75) {
+        barFill = '|========__|'
+    } else if (percentHP > 0.65) {
+        barFill = '|=======___|'
+    } else if (percentHP > 0.55) {
+        barFill = '|======____|'
+    } else if (percentHP > 0.45) {
+        barFill = '|=====_____|'
+    } else if (percentHP > 0.35) {
+        barFill = '|====______|'
+    } else if (percentHP > 0.25) {
+        barFill = '|===_______|'
+    } else if (percentHP > 0.15) {
+        barFill = '|==________|'
+    } else if (percentHP > 0.05) {
+        barFill = '|=_________|'
+    } else {
+        barFill = '|__________|'
+    }
+    document.getElementsByClassName('HPbar')[0].innerHTML = 'HP '+ barFill+' '+currentHP+'/'+maxHP
+
+    if (percentMP > 0.95) {
+        barFill = '|==========|'
+    } else if (percentMP > 0.85) {
+        barFill = '|=========_|'
+    } else if (percentMP > 0.75) {
+        barFill = '|========__|'
+    } else if (percentMP > 0.65) {
+        barFill = '|=======___|'
+    } else if (percentMP > 0.55) {
+        barFill = '|======____|'
+    } else if (percentMP > 0.45) {
+        barFill = '|=====_____|'
+    } else if (percentMP > 0.35) {
+        barFill = '|====______|'
+    } else if (percentMP > 0.25) {
+        barFill = '|===_______|'
+    } else if (percentMP > 0.15) {
+        barFill = '|==________|'
+    } else if (percentMP > 0.05) {
+        barFill = '|=_________|'
+    } else {
+        barFill = '|__________|'
+    }
+    document.getElementsByClassName('MPbar')[0].innerHTML = 'MP '+ barFill+' '+currentMP+'/'+maxMP
+
+    if (percentXP > 0.95) {
+        barFill = '|==========|'
+    } else if (percentXP > 0.85) {
+        barFill = '|=========_|'
+    } else if (percentXP > 0.75) {
+        barFill = '|========__|'
+    } else if (percentXP > 0.65) {
+        barFill = '|=======___|'
+    } else if (percentXP > 0.55) {
+        barFill = '|======____|'
+    } else if (percentXP > 0.45) {
+        barFill = '|=====_____|'
+    } else if (percentXP > 0.35) {
+        barFill = '|====______|'
+    } else if (percentXP > 0.25) {
+        barFill = '|===_______|'
+    } else if (percentXP > 0.15) {
+        barFill = '|==________|'
+    } else if (percentXP > 0.05) {
+        barFill = '|=_________|'
+    } else {
+        barFill = '|__________|'
+    }
+    document.getElementsByClassName('XPbar')[0].innerHTML = 'XP '+ barFill+' '+currentXP+'/'+XPToLevelUp + ' LV '+currentLevel
+
+}
+
+
+
+
 function mainGameLoop() {
     addPlayerToMap()
     updateMap()
-    
+    drawBars()
 }
