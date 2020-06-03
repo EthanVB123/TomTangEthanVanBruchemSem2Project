@@ -58,7 +58,7 @@ var room1splitstring = room1fullstringWithoutPlayer
 var room1fullstringWithPlayer = room1fullstringWithoutPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
-    
+    document.onkeypress=keypresschecker
 // Functions
 // key Pressed function - what to do if a key is pressed?
 // Credit to this code is from
@@ -71,24 +71,54 @@ function keypresschecker(e){
     
     if (actualkey=="w") {
         console.log('key W pressed')
-        playery -= 1
+        moveUp()
      }
     if (actualkey=="a") {
         console.log('key A pressed')
-        playerx -= 1
+        moveLeft()
     }
     if (actualkey=="s") {
         console.log('key S pressed') 
-        playery += 1
+        moveDown()
     }
     if (actualkey=="d") {
         console.log('key D pressed')
+        moveRight()
+    }
+}
+// The following are movement functions: allows movement, but blocks if move onto: [1] wall
+function moveLeft() {
+    playerx -= 1
+    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
+    console.log('Function called')
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
         playerx += 1
     }
 }
-document.onkeypress=keypresschecker
-
-
+function moveRight() {
+    playerx += 1
+    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
+    console.log('Function called')
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+        playerx -= 1
+    }
+}
+function moveUp() {
+    playery -= 1
+    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
+    console.log('Function called')
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+        playery += 1
+    }
+}
+function moveDown() {
+    playery += 1
+    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
+    console.log('Function called')
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+        playery -= 1
+    }
+}
 // change HP: use positive number to heal, use negative number to take damage
 function changeHP(amount) {
     currentHP += amount
