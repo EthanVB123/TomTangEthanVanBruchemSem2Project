@@ -58,16 +58,37 @@ var room1splitstring = room1fullstringWithoutPlayer
 var room1fullstringWithPlayer = room1fullstringWithoutPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
-    document.addEventListener('keydown', keyPressed())
+    
 // Functions
 // key Pressed function - what to do if a key is pressed?
-function keyPressed() {
-    console.log('Key is pressed!')
-    if (event.key == 39) {
+// Credit to this code is from
+// http://www.javascriptkit.com/javatutors/javascriptkey2.shtml
+
+function keypresschecker(e){
+    var evtobj=window.event? event : e //distinguish between IE's explicit event object (window.event) and Firefox's implicit.
+    var unicode=evtobj.charCode? evtobj.charCode : evtobj.keyCode
+    var actualkey=String.fromCharCode(unicode)
+    
+    if (actualkey=="w") {
+        console.log('key W pressed')
+        playery -= 1
+     }
+    if (actualkey=="a") {
+        console.log('key A pressed')
+        playerx -= 1
+    }
+    if (actualkey=="s") {
+        console.log('key S pressed') 
+        playery += 1
+    }
+    if (actualkey=="d") {
+        console.log('key D pressed')
         playerx += 1
     }
-
 }
+document.onkeypress=keypresschecker
+
+
 // change HP: use positive number to heal, use negative number to take damage
 function changeHP(amount) {
     currentHP += amount
@@ -79,7 +100,6 @@ function changeHP(amount) {
 function addPlayerToMap() {
     playerIndex = 10*playery + playerx
     room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
-    console.log(room1fullstringWithPlayer)
 }
 function updateMap() {
     room1splitstring = room1fullstringWithPlayer
