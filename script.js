@@ -23,6 +23,9 @@ var gold = 10;
 var playerx = 5;
 var playery = 5;
 
+var enemyx = 3;
+var enemyy = 3;
+
 // Weapons are [name, MP, damage]
 var weapon1 = ['Your fists', 1, strength]
 var weapon2 = ['[Empty]', 0, 0]
@@ -58,9 +61,10 @@ Room structure
 0111111110
 0000000000
 */
-var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010003001001000000100100000010010000001001111111100000000000'
+var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
 var room1splitstring = room1fullstringWithoutPlayer
 var room1fullstringWithPlayer = room1fullstringWithoutPlayer
+var room1fullstringWithEnemies = room1fullstringWithPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
@@ -140,8 +144,12 @@ function addPlayerToMap() {
     playerIndex = 10*playery + playerx
     room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
 }
+function addEnemyToMap() {
+    enemyIndex = 10*enemyy + enemyx
+    room1fullstringWithEnemies = room1fullstringWithPlayer.substring(0,enemyIndex)+'3'+room1fullstringWithPlayer.substring(enemyIndex+1)
+}
 function updateMap() {
-    room1splitstring = room1fullstringWithPlayer
+    room1splitstring = room1fullstringWithEnemies
     var square = '00'
     var square1 = 0
     var square2 = 0
@@ -323,6 +331,7 @@ function endTurn() {
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
     addPlayerToMap()
+    addEnemyToMap()
     updateMap()
     drawBars()
 }
