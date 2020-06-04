@@ -38,8 +38,7 @@ var currentFloor = 1
 var currentRoom = 0
 var roomsExplored = [0,0,0,0,0]
 // Elements to change
-
-
+btn1 = document.getElementById('button1')
 // Rooms
 // 0 = empty space
 // 1 = wall
@@ -65,6 +64,11 @@ var room1fullstringWithPlayer = room1fullstringWithoutPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
+    if(document.getElementById('button1').clicked == true)
+{
+   alert("button was clicked");
+}
+    
 // Functions
 // key Pressed function - what to do if a key is pressed?
 // Credit to this code is from
@@ -76,53 +80,53 @@ function keypresschecker(e){
     var actualkey=String.fromCharCode(unicode)
     
     if (actualkey=="w") {
-        console.log('key W pressed')
-        moveUp()
+        if (currentMP > 0) {
+        moveUp() }
      }
     if (actualkey=="a") {
-        console.log('key A pressed')
-        moveLeft()
+        if (currentMP > 0) {
+        moveLeft() }
     }
     if (actualkey=="s") {
-        console.log('key S pressed') 
-        moveDown()
+        if (currentMP > 0) {
+        moveDown() }
     }
     if (actualkey=="d") {
-        console.log('key D pressed')
-        moveRight()
+        if (currentMP > 0) {
+        moveRight() }
     }
 }
 // The following are movement functions: allows movement, but blocks if move onto: [1] wall
 function moveLeft() {
     playerx -= 1
-    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
-    console.log('Function called')
+    currentMP -= 1
     if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
         playerx += 1
+        currentMP += 1
     }
 }
 function moveRight() {
+    currentMP -= 1
     playerx += 1
-    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
-    console.log('Function called')
     if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
         playerx -= 1
+        currentMP += 1
     }
 }
 function moveUp() {
+    currentMP -= 1
     playery -= 1
-    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
-    console.log('Function called')
     if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
         playery += 1
+        currentMP += 1
     }
 }
 function moveDown() {
+    currentMP -= 1
     playery += 1
-    console.log(room1fullstringWithoutPlayer[10*playery+playerx])
-    console.log('Function called')
     if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
         playery -= 1
+        currentMP += 1
     }
 }
 // updateMap: the room variable is a 100char string variable
@@ -248,9 +252,27 @@ function drawBars() {
 
 }
 
+// This code following is about the 6 buttons in the Actions panel.
+function btn1pressed() {
+    console.log('btn1 is pressed')
+}
+function btn2pressed() {
+    console.log('btn2 is pressed')
+}
+function btn3pressed() {
+    console.log('btn3 is pressed')
+}
+function btn4pressed() {
+    console.log('btn4 is pressed')
+}
+function btn5pressed() {
+    console.log('btn5 is pressed')
+}
+function btn6pressed() {
+    console.log('btn6 is pressed')
+}
 
-
-
+// The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
     addPlayerToMap()
     updateMap()
