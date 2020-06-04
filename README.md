@@ -5,12 +5,20 @@ Pixel Dungeon 64
 This is an RPG game using pixel art. You will fight monsters, explore dungeon floors, find treasure, and win the game!
 A fun game for all the family.
 
-Current progress:
-VERSION 1.2
-HTML is (mostly) complete!
-The map editor is at version 2: I can currently add new maps, but I can only use the mossy wall and the blank space
+# CONTROLS
+Move the player with the WASD keys.
+That's it at the moment.
 
-Changelog:
+CHANGELOG
+VERSION 1.5
+- version 1 of the HP MP XP bars added.
+- I don't think much more work needs to happen on these.
+
+VERSION 1.4
+- Basic collision detection added for the player - can't walk through walls or green slimes
+
+VERSION 1.3
+- The player is on the screen and can move with the WASD keys!
 
 VERSION 1.2
 - I can now change the map from the code.
