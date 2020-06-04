@@ -91,6 +91,16 @@ function keypresschecker(e){
         if (currentMP > 0) {
         moveRight() }
     }
+    if (actualkey=='z') {
+        endTurn()
+    }
+    if (actualkey=='x') {
+        if (currentMP > 0) {
+            changeMP(-1)
+            changeHP(1)
+            changeXP(1)
+        }
+    }
 }
 // The following are movement functions: allows movement, but blocks if move onto: [1] wall
 function moveLeft() {
@@ -264,7 +274,6 @@ function changeMP(amount) {
         currentMP = maxMP
     } else if (currentMP + amount <= 0) {
         currentMP = 0
-        alert('ur dead n00b')
     } else {
         currentMP += amount
     }
@@ -275,7 +284,6 @@ function changeXP(amount) {
         levelUp()
     } else if (currentXP + amount <= 0) {
         currentXP = 0
-        alert('ur dead n00b')
     } else {
         currentXP += amount
     }
@@ -308,7 +316,10 @@ function btn5pressed() {
 function btn6pressed() {
     console.log('btn6 is pressed')
 }
-
+function endTurn() {
+    // Let the monsters have a turn
+    currentMP = maxMP
+}
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
     addPlayerToMap()
