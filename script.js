@@ -38,7 +38,7 @@ var currentFloor = 1
 var currentRoom = 0
 var roomsExplored = [0,0,0,0,0]
 // Elements to change
-btn1 = document.getElementById('button1')
+
 // Rooms
 // 0 = empty space
 // 1 = wall
@@ -64,11 +64,7 @@ var room1fullstringWithPlayer = room1fullstringWithoutPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
-    if(document.getElementById('button1').clicked == true)
-{
-   alert("button was clicked");
-}
-    
+
 // Functions
 // key Pressed function - what to do if a key is pressed?
 // Credit to this code is from
@@ -251,7 +247,48 @@ function drawBars() {
     document.getElementsByClassName('XPbar')[0].innerHTML = 'XP '+ barFill+' '+currentXP+'/'+XPToLevelUp + ' LV '+currentLevel
 
 }
-
+function changeHP(amount) {
+    if (currentHP + amount >= maxHP) {
+        console.log('Hp at max')
+        currentHP = maxHP
+    } else if (currentHP + amount <= 0) {
+        currentHP = 0
+        alert('ur dead n00b')
+    } else {
+        currentHP += amount
+        console.log('Alter hp')
+    }
+}
+function changeMP(amount) {
+    if (currentMP + amount >= maxMP) {
+        currentMP = maxMP
+    } else if (currentMP + amount <= 0) {
+        currentMP = 0
+        alert('ur dead n00b')
+    } else {
+        currentMP += amount
+    }
+}
+function changeXP(amount) {
+    if (currentXP + amount >= XPToLevelUp) {
+        currentXP += amount
+        levelUp()
+    } else if (currentXP + amount <= 0) {
+        currentXP = 0
+        alert('ur dead n00b')
+    } else {
+        currentXP += amount
+    }
+}
+function levelUp() {
+    currentXP -= XPToLevelUp
+    currentLevel += 1
+    XPToLevelUp += 10
+    currentHP += 5
+    maxHP += 5
+    currentMP += 2
+    maxMP += 2
+}
 // This code following is about the 6 buttons in the Actions panel.
 function btn1pressed() {
     console.log('btn1 is pressed')
