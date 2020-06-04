@@ -4,6 +4,9 @@ var maxHP = 10;
 var HPbar = document.getElementsByClassName('HPbar')[0]
 var percentHP = currentHP / maxHP
 
+var enemyHP = 3;
+var enemyMaxHP = 3;
+
 var currentMP = 5;
 var maxMP = 5;
 var MPbar = document.getElementsByClassName('MPbar')[0]
@@ -26,11 +29,11 @@ var playery = 5;
 var enemyx = 3;
 var enemyy = 3;
 
-// Weapons are [name, MP, damage]
-var weapon1 = ['Your fists', 1, strength]
-var weapon2 = ['[Empty]', 0, 0]
-var weapon3 = ['[Empty]', 0, 0]
-var weapon4 = ['[Empty]', 0, 0]
+// Weapons are [name, MP, damage, type]
+var weapon1 = ['Your fists', 1, strength, 'melee']
+var weapon2 = ['Throw a rock', 2, dexterity, 'ranged']
+var weapon3 = ['[Empty]', 0, 0, 'blank']
+var weapon4 = ['[Empty]', 0, 0, 'blank']
 // Items are [name, MP, effect]
 var item1 = ['[Empty]', 0, 0]
 var item2 = ['[Empty]', 0, 0]
@@ -105,12 +108,32 @@ function keypresschecker(e){
             changeXP(1)
         }
     }
+    if (actualkey=='1') {
+        if (currentMP >= weapon1[1]) {
+            attack(weapon1)
+        }
+    }
+    if (actualkey=='2') {
+        if (currentMP >= weapon2[1]) {
+            attack(weapon2)
+        }
+    }
+    if (actualkey=='3') {
+        if (currentMP >= weapon3[1]) {
+            attack(weapon3)
+        }
+    }
+    if (actualkey=='4') {
+        if (currentMP >= weapon4[1]) {
+            attack(weapon4)
+        }
+    }
 }
 // The following are movement functions: allows movement, but blocks if move onto: [1] wall
 function moveLeft() {
     playerx -= 1
     currentMP -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
         playerx += 1
         currentMP += 1
     }
@@ -118,7 +141,7 @@ function moveLeft() {
 function moveRight() {
     currentMP -= 1
     playerx += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
         playerx -= 1
         currentMP += 1
     }
@@ -126,7 +149,7 @@ function moveRight() {
 function moveUp() {
     currentMP -= 1
     playery -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
         playery += 1
         currentMP += 1
     }
@@ -134,9 +157,63 @@ function moveUp() {
 function moveDown() {
     currentMP -= 1
     playery += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithoutPlayer[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
         playery -= 1
         currentMP += 1
+    }
+}
+// Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
+function attack(weapon) {
+    if (weapon[3] == 'melee') {
+        if (arePlayerAndEnemyAdjacent() == true) {
+            changeMP(-1*weapon[1])
+            changeEnemyHP(-1*weapon[2])
+            console.log('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+        } else {
+            console.log(" You're not adjacent.")
+        }
+    } 
+    if (weapon[3] == 'ranged') {
+        changeMP(-1*weapon[1])
+        changeEnemyHP(-1*weapon[2])
+        console.log('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+    } 
+    if (weapon[3] == 'blank' ) {
+        console.log('No weapon equipped.')
+    }
+        
+}
+function moveEnemy() {
+    var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemyx)
+    var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemyy)
+    var random1or0 = Math.round(Math.random())
+    if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
+        if (enemyx > playerx) {
+            enemyx -= 1
+        } else {
+            enemyx += 1
+        }
+    } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
+        if (enemyy > playery) {
+            enemyy -= 1
+        } else {
+            enemyy += 1
+        }
+    } else /* This case is where the two are equal */ {
+        if (random1or0 == 0) {
+            if (enemyx > playerx) {
+                enemyx -= 1
+            } else {
+                enemyx += 1
+            }
+        } else {
+            if (enemyy > playery) {
+                enemyy -= 1
+            } else {
+                enemyy += 1
+            }
+        }
+
     }
 }
 // updateMap: the room variable is a 100char string variable
@@ -267,16 +344,31 @@ function drawBars() {
 }
 function changeHP(amount) {
     if (currentHP + amount >= maxHP) {
-        console.log('Hp at max')
+        console.log('Hp at max, cannot increase higher')
         currentHP = maxHP
     } else if (currentHP + amount <= 0) {
         currentHP = 0
         alert('ur dead n00b')
     } else {
         currentHP += amount
-        console.log('Alter hp')
+        
     }
 }
+function changeEnemyHP(amount) {
+    if (enemyHP + amount >= enemyMaxHP) {
+        console.log('Enemy Hp at max, cannot increase higher')
+        enemyHP = enemyMaxHP
+    } else if (enemyHP + amount <= 0) {
+        enemyHP = 3
+        enemyx = 2
+        enemyy = 2
+        changeXP(5)
+        alert('You killed a green slime and gained 5 experience points!')
+    } else {
+        enemyHP += amount
+    }
+}
+
 function changeMP(amount) {
     if (currentMP + amount >= maxMP) {
         currentMP = maxMP
@@ -304,6 +396,7 @@ function levelUp() {
     maxHP += 5
     currentMP += 2
     maxMP += 2
+    strength += 1
 }
 // This code following is about the 6 buttons in the Actions panel.
 function btn1pressed() {
@@ -324,8 +417,19 @@ function btn5pressed() {
 function btn6pressed() {
     console.log('btn6 is pressed')
 }
+
+function arePlayerAndEnemyAdjacent() {
+    var listOfAdjacents = [1, 9, 10, 11]
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemyy + enemyx))
+    var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
+    return enemyAdjacent
+}
 function endTurn() {
-    // Let the monsters have a turn
+    if (arePlayerAndEnemyAdjacent() == true) {
+        changeHP(-1)
+    } else {
+        moveEnemy()
+    }
     currentMP = maxMP
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
