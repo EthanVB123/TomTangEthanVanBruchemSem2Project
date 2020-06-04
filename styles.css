@@ -8,3 +8,35 @@ span {
 div {
     margin-top: -5px;
 }
+body {
+    background-image: url("PixelDungeonImages/UI/Background.png");
+    background-color: #cccccc;
+    background-repeat: no-repeat;
+    background-size: 100%
+   }
+   .map {
+    height: 200;
+    width: 100%;
+  }
+   strong {
+    display: flex;
+    align-items: center;
+  }
+  .map {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+  .map {
+    margin: auto;
+    height: 50%;
+    padding: 10px;
+  }
+  .map {
+    padding: 70px 0;
+    text-align: center;
+  }
+  .information {
+    width: 100px;
+    float: left;
+  }
