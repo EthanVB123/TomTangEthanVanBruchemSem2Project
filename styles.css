@@ -3,6 +3,9 @@
     font-size: 1.05em;
     color: grey;
 }
+strong {
+  color: black;
+}
 span {
     margin-right: -11px;
 }
