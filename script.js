@@ -26,8 +26,14 @@ var gold = 10;
 var playerx = 5;
 var playery = 5;
 
-var enemyx = 3;
-var enemyy = 3;
+// Enemies are [x, y, #actions, damage, hp, xp, name]
+// green slimes are 1action 1damage 3hp 4xp
+// blue slimes are 2action 3damage 5hp 10xp
+// red slimes are 3action 5damage 10hp 25xp
+var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime']
+var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime']
+var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime']
+
 
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
@@ -43,6 +49,8 @@ var item4 = ['[Empty]', 0, 0]
 var currentFloor = 1
 var currentRoom = 0
 var roomsExplored = [0,0,0,0,0]
+
+var messages = ['message1', 'message2', 'message3']
 // Elements to change
 
 // Rooms
@@ -67,7 +75,9 @@ Room structure
 var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
 var room1splitstring = room1fullstringWithoutPlayer
 var room1fullstringWithPlayer = room1fullstringWithoutPlayer
-var room1fullstringWithEnemies = room1fullstringWithPlayer
+var room1fullstringWithEnemy1 = room1fullstringWithPlayer
+var room1fullstringWithEnemy2 = room1fullstringWithPlayer
+var room1fullstringWithEnemy3 = room1fullstringWithPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
@@ -109,9 +119,11 @@ function keypresschecker(e){
         }
     }
     if (actualkey=='1') {
+        
         if (currentMP >= weapon1[1]) {
             attack(weapon1)
-        }
+            console.log('Attacked!')
+        } else { addNewMessage("You're out of MP! ")}
     }
     if (actualkey=='2') {
         if (currentMP >= weapon2[1]) {
@@ -133,7 +145,7 @@ function keypresschecker(e){
 function moveLeft() {
     playerx -= 1
     currentMP -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playerx += 1
         currentMP += 1
     }
@@ -141,7 +153,7 @@ function moveLeft() {
 function moveRight() {
     currentMP -= 1
     playerx += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playerx -= 1
         currentMP += 1
     }
@@ -149,7 +161,7 @@ function moveRight() {
 function moveUp() {
     currentMP -= 1
     playery -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playery += 1
         currentMP += 1
     }
@@ -157,7 +169,7 @@ function moveUp() {
 function moveDown() {
     currentMP -= 1
     playery += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemies[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playery -= 1
         currentMP += 1
     }
@@ -165,68 +177,55 @@ function moveDown() {
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
     if (weapon[3] == 'melee') {
-        if (arePlayerAndEnemyAdjacent() == true) {
+        if (arePlayerAndEnemy1Adjacent() == true) {
+            console.log('Enemy 1')
             changeMP(-1*weapon[1])
-            changeEnemyHP(-1*weapon[2])
-            console.log('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
-        } else {
-            console.log(" You're not adjacent.")
+            changeEnemy1HP(-1*weapon[2])
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+        } else if (arePlayerAndEnemy2Adjacent() == true) {
+            console.log('Enemy 2')
+            changeMP(-1*weapon[1])
+            changeEnemy2HP(-1*weapon[2])
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+        } else if (arePlayerAndEnemy3Adjacent() == true) {
+            console.log('Enemy 3')
+            changeMP(-1*weapon[1])
+            changeEnemy3HP(-1*weapon[2])
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
         }
     } 
     if (weapon[3] == 'ranged') {
+        // Currently only attacks enemy 1
         changeMP(-1*weapon[1])
-        changeEnemyHP(-1*weapon[2])
-        console.log('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+        
+        changeEnemy1HP(-1*weapon[2])
+        addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
     } 
     if (weapon[3] == 'blank' ) {
-        console.log('No weapon equipped.')
+        addNewMessage('No weapon equipped.')
     }
         
 }
-function moveEnemy() {
-    var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemyx)
-    var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemyy)
-    var random1or0 = Math.round(Math.random())
-    if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
-        if (enemyx > playerx) {
-            enemyx -= 1
-        } else {
-            enemyx += 1
-        }
-    } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
-        if (enemyy > playery) {
-            enemyy -= 1
-        } else {
-            enemyy += 1
-        }
-    } else /* This case is where the two are equal */ {
-        if (random1or0 == 0) {
-            if (enemyx > playerx) {
-                enemyx -= 1
-            } else {
-                enemyx += 1
-            }
-        } else {
-            if (enemyy > playery) {
-                enemyy -= 1
-            } else {
-                enemyy += 1
-            }
-        }
 
-    }
-}
 // updateMap: the room variable is a 100char string variable
 function addPlayerToMap() {
     playerIndex = 10*playery + playerx
     room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
 }
-function addEnemyToMap() {
-    enemyIndex = 10*enemyy + enemyx
-    room1fullstringWithEnemies = room1fullstringWithPlayer.substring(0,enemyIndex)+'3'+room1fullstringWithPlayer.substring(enemyIndex+1)
+function addEnemy1ToMap() {
+    enemyIndex = 10*enemy1[1] + enemy1[0]
+    room1fullstringWithEnemy1 = room1fullstringWithPlayer.substring(0,enemyIndex)+'3'+room1fullstringWithPlayer.substring(enemyIndex+1)
+}
+function addEnemy2ToMap() {
+    enemyIndex = 10*enemy2[1] + enemy2[0]
+    room1fullstringWithEnemy2 = room1fullstringWithEnemy1.substring(0,enemyIndex)+'4'+room1fullstringWithEnemy1.substring(enemyIndex+1)
+}
+function addEnemy3ToMap() {
+    enemyIndex = 10*enemy3[1] + enemy3[0]
+    room1fullstringWithEnemy3 = room1fullstringWithEnemy2.substring(0,enemyIndex)+'5'+room1fullstringWithEnemy2.substring(enemyIndex+1)
 }
 function updateMap() {
-    room1splitstring = room1fullstringWithEnemies
+    room1splitstring = room1fullstringWithEnemy3
     var square = '00'
     var square1 = 0
     var square2 = 0
@@ -250,6 +249,12 @@ function updateMap() {
             room1splitstring = room1splitstring.substring(1)
         } else if (room1splitstring[0] == 'p') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/player.png'
+            room1splitstring = room1splitstring.substring(1)
+        } else if (room1splitstring[0] == 4) {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/BlueSlime.png'
+            room1splitstring = room1splitstring.substring(1)
+        } else if (room1splitstring[0] == 5) {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/RedSlime.png'
             room1splitstring = room1splitstring.substring(1)
         }
 
@@ -354,21 +359,48 @@ function changeHP(amount) {
         
     }
 }
-function changeEnemyHP(amount) {
-    if (enemyHP + amount >= enemyMaxHP) {
+function changeEnemy1HP(amount) {
+    if (enemy1[4] + amount >= enemyMaxHP) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemyHP = enemyMaxHP
-    } else if (enemyHP + amount <= 0) {
-        enemyHP = 3
-        enemyx = 2
-        enemyy = 2
-        changeXP(5)
-        alert('You killed a green slime and gained 5 experience points!')
+        enemy1[4] = enemyMaxHP
+    } else if (enemy1[4] + amount <= 0) {
+        enemy1[4] = 3
+        enemy1[0] = 2
+        enemy1[1] = 2
+        changeXP(enemy1[5])
+        alert('You killed a '+enemy1[6]' and gained '+enemy1[5]' experience points!')
     } else {
-        enemyHP += amount
+        enemy1[4] += amount
     }
 }
-
+function changeEnemy2HP(amount) {
+    if (enemy2[4] + amount >= enemyMaxHP) {
+        console.log('Enemy Hp at max, cannot increase higher')
+        enemy2[4] = enemyMaxHP
+    } else if (enemy2[4] + amount <= 0) {
+        enemy2[4] = 3
+        enemy2[0] = 2
+        enemy2[1] = 2
+        changeXP(enemy2[5])
+        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]' experience points!')
+    } else {
+        enemy2[4] += amount
+    }
+}
+function changeEnemy3HP(amount) {
+    if (enemy3[4] + amount >= enemyMaxHP) {
+        console.log('Enemy Hp at max, cannot increase higher')
+        enemy3[4] = enemyMaxHP
+    } else if (enemy3[4] + amount <= 0) {
+        enemy3[4] = 3
+        enemy3[0] = 2
+        enemy3[1] = 2
+        changeXP(enemy3[5])
+        alert('You killed a '+enemy3[6]' and gained '+enemy3[5]' experience points!')
+    } else {
+        enemy3[4] += amount
+    }
+}
 function changeMP(amount) {
     if (currentMP + amount >= maxMP) {
         currentMP = maxMP
@@ -396,46 +428,213 @@ function levelUp() {
     maxHP += 5
     currentMP += 2
     maxMP += 2
-    strength += 1
+    increaseStrength()
+    
+    
+}
+function increaseStrength() {
+    if (weapon1[3] == 'melee') {
+        weapon1[2] += 1
+    }
+    if (weapon2[3] == 'melee') {
+        weapon2[2] += 1
+    }
+    if (weapon3[3] == 'melee') {
+        weapon3[2] += 1
+    }
+    if (weapon4[3] == 'melee') {
+        weapon4[2] += 1
+    }
+}
+function increaseDexterity() {
+    if (weapon1[3] == 'ranged') {
+        weapon1[2] += 1
+    }
+    if (weapon2[3] == 'ranged') {
+        weapon2[2] += 1
+    }
+    if (weapon3[3] == 'ranged') {
+        weapon3[2] += 1
+    }
+    if (weapon4[3] == 'ranged') {
+        weapon4[2] += 1
+    }
 }
 // This code following is about the 6 buttons in the Actions panel.
-function btn1pressed() {
-    console.log('btn1 is pressed')
-}
-function btn2pressed() {
-    console.log('btn2 is pressed')
-}
-function btn3pressed() {
-    console.log('btn3 is pressed')
-}
-function btn4pressed() {
-    console.log('btn4 is pressed')
-}
-function btn5pressed() {
-    console.log('btn5 is pressed')
-}
-function btn6pressed() {
-    console.log('btn6 is pressed')
-}
 
-function arePlayerAndEnemyAdjacent() {
+
+function arePlayerAndEnemyAdjacent(x,y) {
     var listOfAdjacents = [1, 9, 10, 11]
-    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemyy + enemyx))
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*y + x))
     var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
     return enemyAdjacent
 }
-function endTurn() {
-    if (arePlayerAndEnemyAdjacent() == true) {
-        changeHP(-1)
-    } else {
-        moveEnemy()
+function arePlayerAndEnemy1Adjacent() {
+    var listOfAdjacents = [1, 9, 10, 11]
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy1[1] + enemy1[0]))
+    var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
+    return enemyAdjacent
+}
+function arePlayerAndEnemy2Adjacent() {
+    var listOfAdjacents = [1, 9, 10, 11]
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy2[1] + enemy2[0]))
+    var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
+    return enemyAdjacent
+}
+function arePlayerAndEnemy3Adjacent() {
+    var listOfAdjacents = [1, 9, 10, 11]
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy3[1] + enemy3[0]))
+    var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
+    return enemyAdjacent
+}
+function addNewMessage(str) {
+    messages.unshift(str)
+}
+function displayMessages() {
+    document.getElementsByClassName('info4')[0].innerHTML = messages[0]
+    document.getElementsByClassName('info5')[0].innerHTML = messages[1]
+    document.getElementsByClassName('info6')[0].innerHTML = messages[2]
+}
+// Enemies are [x, y, #actions, damage, hp, xp, name]
+function enemy1turn() {
+    for (var i = 0; i < enemy1[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(enemy1[0], enemy1[1])) {
+            addNewMessage(enemy1[6] + ' dealt ' + enemy1[3] + ' damage to you.')
+            changeHP(-1*enemy1[3])
+        } else {
+            // Move enemy
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy1[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy1[1])
+            var random1or0 = Math.round(Math.random())
+            if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
+                if (enemy1[0] > playerx) {
+                    enemy1[0] -= 1
+                } else {
+                    enemy1[0] += 1
+                }
+            } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
+                if (enemy1[1] > playery) {
+                    enemy1[1] -= 1
+                } else {
+                    enemy1[1] += 1
+                }
+            } else /* This case is where the two are equal */ {
+                if (random1or0 == 0) {
+                    if (enemy1[0] > playerx) {
+                        enemy1[0] -= 1
+                    } else {
+                        enemy1[0] += 1
+                    }
+                } else {
+                    if (enemy1[1] > playery) {
+                        enemy1[1] -= 1
+                    } else {
+                        enemy1[1] += 1
+                    }
+                }
+        
+            }
+        }
     }
+}
+
+function enemy2turn() {
+    for (var i = 0; i < enemy2[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(enemy2[0], enemy2[1])) {
+            addNewMessage(enemy2[6] + ' dealt ' + enemy2[3] + ' damage to you.')
+            changeHP(-1*enemy2[3])
+        } else {
+            // Move enemy
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy2[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy2[1])
+            var random1or0 = Math.round(Math.random())
+            if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
+                if (enemy2[0] > playerx) {
+                    enemy2[0] -= 1
+                } else {
+                    enemy2[0] += 1
+                }
+            } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
+                if (enemy2[1] > playery) {
+                    enemy2[1] -= 1
+                } else {
+                    enemy2[1] += 1
+                }
+            } else /* This case is where the two are equal */ {
+                if (random1or0 == 0) {
+                    if (enemy2[0] > playerx) {
+                        enemy2[0] -= 1
+                    } else {
+                        enemy2[0] += 1
+                    }
+                } else {
+                    if (enemy2[1] > playery) {
+                        enemy2[1] -= 1
+                    } else {
+                        enemy2[1] += 1
+                    }
+                }
+        
+            }
+        }
+    }
+}
+
+function enemy3turn() {
+    for (var i = 0; i < enemy3[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(enemy3[0], enemy3[1])) {
+            addNewMessage(enemy3[6] + ' dealt ' + enemy3[3] + ' damage to you.')
+            changeHP(-1*enemy3[3])
+        } else {
+            // Move enemy
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy3[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy3[1])
+            var random1or0 = Math.round(Math.random())
+            if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
+                if (enemy3[0] > playerx) {
+                    enemy3[0] -= 1
+                } else {
+                    enemy3[0] += 1
+                }
+            } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
+                if (enemy3[1] > playery) {
+                    enemy3[1] -= 1
+                } else {
+                    enemy3[1] += 1
+                }
+            } else /* This case is where the two are equal */ {
+                if (random1or0 == 0) {
+                    if (enemy3[0] > playerx) {
+                        enemy3[0] -= 1
+                    } else {
+                        enemy3[0] += 1
+                    }
+                } else {
+                    if (enemy3[1] > playery) {
+                        enemy3[1] -= 1
+                    } else {
+                        enemy3[1] += 1
+                    }
+                }
+        
+            }
+        }
+    }
+}
+
+function endTurn() {
+    enemy1turn()
+    enemy2turn()
+    enemy3turn()
     currentMP = maxMP
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
     addPlayerToMap()
-    addEnemyToMap()
+    addEnemy1ToMap()
+    addEnemy2ToMap()
+    addEnemy3ToMap()
     updateMap()
     drawBars()
+    displayMessages()
 }
