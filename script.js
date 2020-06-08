@@ -4,8 +4,6 @@ var maxHP = 10;
 var HPbar = document.getElementsByClassName('HPbar')[0]
 var percentHP = currentHP / maxHP
 
-var enemyHP = 3;
-var enemyMaxHP = 3;
 
 var currentMP = 5;
 var maxMP = 5;
@@ -48,7 +46,7 @@ var item4 = ['[Empty]', 0, 0]
 
 var currentFloor = 1
 var currentRoom = 0
-var roomsExplored = [0,0,0,0,0]
+var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
 var messages = ['message1', 'message2', 'message3']
 // Elements to change
@@ -73,11 +71,13 @@ Room structure
 0000000000
 */
 var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
-var room1splitstring = room1fullstringWithoutPlayer
-var room1fullstringWithPlayer = room1fullstringWithoutPlayer
-var room1fullstringWithEnemy1 = room1fullstringWithPlayer
-var room1fullstringWithEnemy2 = room1fullstringWithPlayer
-var room1fullstringWithEnemy3 = room1fullstringWithPlayer
+var room2fullstringWithoutPlayer = '0000000000011111111001100001100100000010010000001001000000100100000010011000011001111111100000000000'
+
+var splitstring = room1fullstringWithoutPlayer
+var fullstringWithPlayer = room1fullstringWithoutPlayer
+var fullstringWithEnemy1 = fullstringWithPlayer
+var fullstringWithEnemy2 = fullstringWithPlayer
+var fullstringWithEnemy3 = fullstringWithPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
@@ -145,7 +145,7 @@ function keypresschecker(e){
 function moveLeft() {
     playerx -= 1
     currentMP -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playerx += 1
         currentMP += 1
     }
@@ -153,7 +153,7 @@ function moveLeft() {
 function moveRight() {
     currentMP -= 1
     playerx += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playerx -= 1
         currentMP += 1
     }
@@ -161,7 +161,7 @@ function moveRight() {
 function moveUp() {
     currentMP -= 1
     playery -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playery += 1
         currentMP += 1
     }
@@ -169,7 +169,7 @@ function moveUp() {
 function moveDown() {
     currentMP -= 1
     playery += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
         playery -= 1
         currentMP += 1
     }
@@ -211,22 +211,22 @@ function attack(weapon) {
 // updateMap: the room variable is a 100char string variable
 function addPlayerToMap() {
     playerIndex = 10*playery + playerx
-    room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
+    fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
 }
 function addEnemy1ToMap() {
     enemyIndex = 10*enemy1[1] + enemy1[0]
-    room1fullstringWithEnemy1 = room1fullstringWithPlayer.substring(0,enemyIndex)+'3'+room1fullstringWithPlayer.substring(enemyIndex+1)
+    fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'3'+fullstringWithPlayer.substring(enemyIndex+1)
 }
 function addEnemy2ToMap() {
     enemyIndex = 10*enemy2[1] + enemy2[0]
-    room1fullstringWithEnemy2 = room1fullstringWithEnemy1.substring(0,enemyIndex)+'4'+room1fullstringWithEnemy1.substring(enemyIndex+1)
+    fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'4'+fullstringWithEnemy1.substring(enemyIndex+1)
 }
 function addEnemy3ToMap() {
     enemyIndex = 10*enemy3[1] + enemy3[0]
-    room1fullstringWithEnemy3 = room1fullstringWithEnemy2.substring(0,enemyIndex)+'5'+room1fullstringWithEnemy2.substring(enemyIndex+1)
+    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'5'+fullstringWithEnemy2.substring(enemyIndex+1)
 }
 function updateMap() {
-    room1splitstring = room1fullstringWithEnemy3
+    splitstring = fullstringWithEnemy3
     var square = '00'
     var square1 = 0
     var square2 = 0
@@ -237,26 +237,26 @@ function updateMap() {
             square = i.toString()
         }
         
-        if (room1splitstring[0] == 0) {
+        if (splitstring[0] == 0) {
             
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
-            room1splitstring = room1splitstring.substring(1)
+            splitstring = splitstring.substring(1)
 
-        } else if (room1splitstring[0] == 1) {
+        } else if (splitstring[0] == 1) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 3) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 3) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/GreenSlime.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 'p') {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'p') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/player.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 4) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 4) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/BlueSlime.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 5) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 5) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/RedSlime.png'
-            room1splitstring = room1splitstring.substring(1)
+            splitstring = splitstring.substring(1)
         }
 
     
