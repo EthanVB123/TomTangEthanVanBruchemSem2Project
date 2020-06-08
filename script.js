@@ -368,7 +368,7 @@ function changeEnemy1HP(amount) {
         enemy1[0] = 2
         enemy1[1] = 2
         changeXP(enemy1[5])
-        alert('You killed a '+enemy1[6]' and gained '+enemy1[5]' experience points!')
+        alert('You killed a '+enemy1[6]+' and gained '+enemy1[5]+' experience points!')
     } else {
         enemy1[4] += amount
     }
@@ -382,7 +382,7 @@ function changeEnemy2HP(amount) {
         enemy2[0] = 2
         enemy2[1] = 2
         changeXP(enemy2[5])
-        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]' experience points!')
+        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]+' experience points!')
     } else {
         enemy2[4] += amount
     }
@@ -396,7 +396,7 @@ function changeEnemy3HP(amount) {
         enemy3[0] = 2
         enemy3[1] = 2
         changeXP(enemy3[5])
-        alert('You killed a '+enemy3[6]' and gained '+enemy3[5]' experience points!')
+        alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
     } else {
         enemy3[4] += amount
     }
