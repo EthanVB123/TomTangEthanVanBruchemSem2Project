@@ -51,3 +51,10 @@ body {
   .itemssection { 
     margin: 0;
   }
+.button {
+  color: darkslategrey;
+}
+.floorinfo {
+  text-align: center;
+  font-weight: 200;
+}
