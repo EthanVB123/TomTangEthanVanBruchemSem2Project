@@ -3,9 +3,10 @@
     font-size: 1.05em;
     color: lightgray;
     box-sizing: border-box;
+    font-weight: normal;
 }
 strong {
-  color: lightgray;
+  color: lightslategray;
 }
 html {
   background-color: darkslategray;
@@ -38,23 +39,16 @@ body {
     padding: 70px 0;
     text-align: center;
   }
-  .information {
-    width: 100px;
-    float: left;
-  }
-  .information {
-    margin: 0;
-  }
-  .weaponssection {
-    margin: 0;
-  }
-  .itemssection { 
-    margin: 0;
-  }
 .button {
   color: darkslategrey;
 }
 .floorinfo {
   text-align: center;
   font-weight: 200;
+}
+.weaponssection {
+  text-align: left;
+}
+.itemssection {
+  text-align: right;
 }
