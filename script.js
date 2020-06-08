@@ -32,7 +32,7 @@ var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
 var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
 
-
+var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive']
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
 var weapon2 = ['Throw a rock', 2, dexterity, 'ranged']
@@ -45,7 +45,7 @@ var item3 = ['[Empty]', 0, 0]
 var item4 = ['[Empty]', 0, 0]
 
 var currentFloor = 1
-var currentRoom = 0
+var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
 var messages = ['message1', 'message2', 'message3']
@@ -193,7 +193,7 @@ function attack(weapon) {
             changeEnemy3HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
             console.log(-1*weapon[2])
-        }
+        } else { addNewMessage("You're not adjacent.")}
     } 
     if (weapon[3] == 'ranged') {
         // Currently only attacks enemy 1
@@ -214,8 +214,14 @@ function addPlayerToMap() {
     fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
 }
 function addEnemy1ToMap() {
-    enemyIndex = 10*enemy1[1] + enemy1[0]
-    fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'3'+fullstringWithPlayer.substring(enemyIndex+1)
+    if (room1enemies[3] == 'alive') {
+        enemyIndex = 10*enemy1[1] + enemy1[0]
+        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'3'+fullstringWithPlayer.substring(enemyIndex+1)
+    } else {
+        enemyIndex = 0
+        enemy1.splice(0, 2, 0, 0)
+        fullstringWithEnemy1 = fullstringWithPlayer
+    }
 }
 function addEnemy2ToMap() {
     enemyIndex = 10*enemy2[1] + enemy2[0]
@@ -370,6 +376,7 @@ function changeEnemy1HP(amount) {
         enemy1[1] = 2
         changeXP(enemy1[5])
         alert('You killed a '+enemy1[6]+' and gained '+enemy1[5]+' experience points!')
+        room1enemies[3] = 'dead' 
     } else {
         enemy1[4] += amount
     }
