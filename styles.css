@@ -1,10 +1,14 @@
 * {
     font-family: monospace;
     font-size: 1.05em;
-    color: grey;
+    color: lightgray;
+    box-sizing: border-box;
 }
 strong {
-  color: black;
+  color: lightgray;
+}
+html {
+  background-color: darkslategray;
 }
 span {
     margin-right: -11px;
@@ -14,9 +18,10 @@ div {
 }
 body {
     background-image: url("PixelDungeonImages/UI/Background.png");
-    background-color: #cccccc;
+    background-color: darkslategray;
     background-repeat: no-repeat;
-    background-size: 100%
+    background-blend-mode: hard-light;
+    background-size: 100%;
    }
    .map {
     height: 200;
@@ -32,15 +37,19 @@ body {
     padding: 10px;
   }
   .map {
-    margin: auto;
-    height: 50%;
-    padding: 10px;
-  }
-  .map {
     padding: 70px 0;
     text-align: center;
   }
   .information {
     width: 100px;
     float: left;
+  }
+  .information {
+    margin: 0;
+  }
+  .weaponssection {
+    margin: 0;
+  }
+  .itemssection { 
+    margin: 0;
   }
