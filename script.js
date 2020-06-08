@@ -192,6 +192,7 @@ function attack(weapon) {
             changeMP(-1*weapon[1])
             changeEnemy3HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+            console.log(-1*weapon[2])
         }
     } 
     if (weapon[3] == 'ranged') {
@@ -360,9 +361,9 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (enemy1[4] + amount >= enemyMaxHP) {
+    if (enemy1[4] + amount >= enemy1[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy1[4] = enemyMaxHP
+        enemy1[4] = enemy1[7]
     } else if (enemy1[4] + amount <= 0) {
         enemy1[4] = enemy1[7]
         enemy1[0] = 2
@@ -374,9 +375,9 @@ function changeEnemy1HP(amount) {
     }
 }
 function changeEnemy2HP(amount) {
-    if (enemy2[4] + amount >= enemyMaxHP) {
+    if (enemy2[4] + amount >= enemy2[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy2[4] = enemyMaxHP
+        enemy2[4] = enemy2[7]
     } else if (enemy2[4] + amount <= 0) {
         enemy2[4] = enemy2[7]
         enemy2[0] = 2
@@ -388,9 +389,9 @@ function changeEnemy2HP(amount) {
     }
 }
 function changeEnemy3HP(amount) {
-    if (enemy3[4] + amount >= enemyMaxHP) {
+    if (enemy3[4] + amount >= enemy3[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy3[4] = enemyMaxHP
+        enemy3[4] = enemy3[7]
     } else if (enemy3[4] + amount <= 0) {
         enemy3[4] = enemy3[7]
         enemy3[0] = 2
@@ -429,6 +430,7 @@ function levelUp() {
     currentMP += 2
     maxMP += 2
     increaseStrength()
+    increaseDexterity()
     
     
 }
@@ -490,8 +492,14 @@ function arePlayerAndEnemy3Adjacent() {
 
 // Information panel
 function displayHP() {
-    enemy1str = enemy1[6] + ': '+ enemy1[5] + ' / ' + enemy1[7]
+    enemy1str = enemy1[6] + ': '+ enemy1[4] + ' / ' + enemy1[7]
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
+
+    enemy2str = enemy2[6] + ': '+ enemy2[4] + ' / ' + enemy2[7]
+    document.getElementsByClassName('info2')[0].innerHTML = enemy2str
+
+    enemy3str = enemy3[6] + ': '+ enemy3[4] + ' / ' + enemy3[7]
+    document.getElementsByClassName('info3')[0].innerHTML = enemy3str
 }
 
 function addNewMessage(str) {
@@ -643,5 +651,6 @@ function mainGameLoop() {
     addEnemy3ToMap()
     updateMap()
     drawBars()
+    displayHP()
     displayMessages()
 }
