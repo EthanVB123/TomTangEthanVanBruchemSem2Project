@@ -141,11 +141,22 @@ function keypresschecker(e){
         }
     }
 }
-// The following are movement functions: allows movement, but blocks if move onto: [1] wall
+// Player can't move into whatever is in collisionList
+// Collision list contains Wall, Green Slime, Blue Slime, Red Slime
+var collisionList = ['1','3','4','5']
+function canYouGoHere() {
+    var x = true
+    for (i = 0; i < collisionList.length; i++) {
+        if (fullstringWithEnemy3[(10*playery+playerx)] == collisionList[i]) {
+            x = false
+        }
+    }
+    return x
+}
 function moveLeft() {
     playerx -= 1
     currentMP -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
     }
@@ -153,7 +164,7 @@ function moveLeft() {
 function moveRight() {
     currentMP -= 1
     playerx += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
     }
@@ -161,7 +172,7 @@ function moveRight() {
 function moveUp() {
     currentMP -= 1
     playery -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
     }
@@ -169,7 +180,7 @@ function moveUp() {
 function moveDown() {
     currentMP -= 1
     playery += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
     }
@@ -224,12 +235,24 @@ function addEnemy1ToMap() {
     }
 }
 function addEnemy2ToMap() {
-    enemyIndex = 10*enemy2[1] + enemy2[0]
-    fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'4'+fullstringWithEnemy1.substring(enemyIndex+1)
+    if (room1enemies[4] == 'alive') {
+        enemyIndex = 10*enemy2[1] + enemy2[0]
+        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'4'+fullstringWithEnemy1.substring(enemyIndex+1)
+    } else {
+        enemyIndex = 0
+        enemy2.splice(0, 2, 0, 0)
+        fullstringWithEnemy2 = fullstringWithEnemy1
+    }
 }
 function addEnemy3ToMap() {
+if (room1enemies[3] == 'alive') {
     enemyIndex = 10*enemy3[1] + enemy3[0]
     fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'5'+fullstringWithEnemy2.substring(enemyIndex+1)
+} else {
+    enemyIndex = 0
+    enemy3.splice(0, 2, 0, 0)
+    fullstringWithEnemy3 = fullstringWithEnemy2
+}
 }
 function updateMap() {
     splitstring = fullstringWithEnemy3
@@ -380,6 +403,7 @@ function changeEnemy1HP(amount) {
     } else {
         enemy1[4] += amount
     }
+
 }
 function changeEnemy2HP(amount) {
     if (enemy2[4] + amount >= enemy2[7]) {
@@ -391,6 +415,7 @@ function changeEnemy2HP(amount) {
         enemy2[1] = 2
         changeXP(enemy2[5])
         alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]+' experience points!')
+        room1enemies[4] = 'dead' 
     } else {
         enemy2[4] += amount
     }
@@ -405,6 +430,7 @@ function changeEnemy3HP(amount) {
         enemy3[1] = 2
         changeXP(enemy3[5])
         alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
+        room1enemies[5] = 'dead'
     } else {
         enemy3[4] += amount
     }
@@ -499,13 +525,24 @@ function arePlayerAndEnemy3Adjacent() {
 
 // Information panel
 function displayHP() {
-    enemy1str = enemy1[6] + ': '+ enemy1[4] + ' / ' + enemy1[7]
+    if (room1enemies[3] == 'alive') {
+        enemy1str = enemy1[6] + ': '+ enemy1[4] + ' / ' + enemy1[7]
+    } else {
+        enemy1str = '-- No Enemy --'
+    }
+    if (room1enemies[4] == 'alive') {
+        enemy2str = enemy2[6] + ': '+ enemy2[4] + ' / ' + enemy2[7]
+    } else {
+        enemy2str = '-- No Enemy --'
+    }
+    if (room1enemies[5] == 'alive') {
+        enemy3str = enemy3[6] + ': '+ enemy3[4] + ' / ' + enemy3[7]
+        
+    } else {
+        enemy3str = '-- No Enemy --'
+    }
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
-
-    enemy2str = enemy2[6] + ': '+ enemy2[4] + ' / ' + enemy2[7]
     document.getElementsByClassName('info2')[0].innerHTML = enemy2str
-
-    enemy3str = enemy3[6] + ': '+ enemy3[4] + ' / ' + enemy3[7]
     document.getElementsByClassName('info3')[0].innerHTML = enemy3str
 }
 
@@ -659,5 +696,5 @@ function mainGameLoop() {
     updateMap()
     drawBars()
     displayHP()
-    displayMessages()
+    displayMessages() 
 }
