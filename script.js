@@ -26,13 +26,13 @@ var gold = 10;
 var playerx = 5;
 var playery = 5;
 
-// Enemies are [x, y, #actions, damage, hp, xp, name]
+// Enemies are [x, y, #actions, damage, hp, xp, name, maxHP]
 // green slimes are 1action 1damage 3hp 4xp
 // blue slimes are 2action 3damage 5hp 10xp
 // red slimes are 3action 5damage 10hp 25xp
-var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime']
-var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime']
-var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime']
+var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
+var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
+var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
 
 
 // Weapons are [name, MP, damage, type]
@@ -364,11 +364,11 @@ function changeEnemy1HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         enemy1[4] = enemyMaxHP
     } else if (enemy1[4] + amount <= 0) {
-        enemy1[4] = 3
+        enemy1[4] = enemy1[7]
         enemy1[0] = 2
         enemy1[1] = 2
         changeXP(enemy1[5])
-        alert('You killed a '+enemy1[6]' and gained '+enemy1[5]' experience points!')
+        alert('You killed a '+enemy1[6]+' and gained '+enemy1[5]+' experience points!')
     } else {
         enemy1[4] += amount
     }
@@ -378,11 +378,11 @@ function changeEnemy2HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         enemy2[4] = enemyMaxHP
     } else if (enemy2[4] + amount <= 0) {
-        enemy2[4] = 3
+        enemy2[4] = enemy2[7]
         enemy2[0] = 2
         enemy2[1] = 2
         changeXP(enemy2[5])
-        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]' experience points!')
+        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]+' experience points!')
     } else {
         enemy2[4] += amount
     }
@@ -392,11 +392,11 @@ function changeEnemy3HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         enemy3[4] = enemyMaxHP
     } else if (enemy3[4] + amount <= 0) {
-        enemy3[4] = 3
+        enemy3[4] = enemy3[7]
         enemy3[0] = 2
         enemy3[1] = 2
         changeXP(enemy3[5])
-        alert('You killed a '+enemy3[6]' and gained '+enemy3[5]' experience points!')
+        alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
     } else {
         enemy3[4] += amount
     }
@@ -487,6 +487,13 @@ function arePlayerAndEnemy3Adjacent() {
     var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
     return enemyAdjacent
 }
+
+// Information panel
+function displayHP() {
+    enemy1str = enemy1[6] + ': '+ enemy1[5] + ' / ' + enemy1[7]
+    document.getElementsByClassName('info1')[0].innerHTML = enemy1str
+}
+
 function addNewMessage(str) {
     messages.unshift(str)
 }
