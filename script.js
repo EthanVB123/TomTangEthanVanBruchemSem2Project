@@ -45,6 +45,7 @@ var item3 = ['[Empty]', 0, 0]
 var item4 = ['[Empty]', 0, 0]
 
 var currentFloor = 1
+var room = 1
 var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
@@ -220,9 +221,15 @@ function attack(weapon) {
 }
 
 // updateMap: the room variable is a 100char string variable
+// The add player function also changes the room
 function addPlayerToMap() {
+    if (room == 1) {
+        currentRoom = room1fullstringWithoutPlayer
+    } else if (room == 2) {
+        currentRoom = room2fullstringWithoutPlayer
+    }
     playerIndex = 10*playery + playerx
-    fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
+    fullstringWithPlayer = currentRoom.substring(0,playerIndex)+'p'+currentRoom.substring(playerIndex+1)
 }
 function addEnemy1ToMap() {
     if (room1enemies[3] == 'alive') {
@@ -445,13 +452,12 @@ function changeMP(amount) {
     }
 }
 function changeXP(amount) {
-    if (currentXP + amount >= XPToLevelUp) {
-        currentXP += amount
+    currentXP += amount
+    while (currentXP + amount >= XPToLevelUp) {
         levelUp()
-    } else if (currentXP + amount <= 0) {
+    } 
+    if (currentXP + amount <= 0) {
         currentXP = 0
-    } else {
-        currentXP += amount
     }
 }
 function levelUp() {
@@ -697,4 +703,13 @@ function mainGameLoop() {
     drawBars()
     displayHP()
     displayMessages() 
+}
+
+// Cheat function
+function cheat() {
+    currentHP = Infinity
+    maxHP = Infinity
+    currentMP = Infinity
+    maxMP = Infinity
+    changeXP(1e+10)
 }
