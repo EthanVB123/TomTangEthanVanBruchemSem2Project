@@ -46,12 +46,14 @@ body {
   text-align: center;
   font-weight: 200;
 }
-.weaponssection {
-  text-align: left;
+.bars {
+  width: 40%;
+  height: 20%;
+  border: 10px solid greenyellow;
 }
-.itemssection {
-  width: 100px;
-  height: 200px;
-  padding: 0px;
-  border: 10px solid red;
+.statistics {
+  width: 40%;
+  height: 20%;
+  float: left;
+  border: 10px solid greenyellow;
 }

@@ -54,9 +54,9 @@ var messages = ['message1', 'message2', 'message3']
 
 // Rooms
 // 0 = empty space
-// 1 = wall
-// 2 = passage
-// 3 = green slime
+// w = wall
+// 1-9 = passage
+// Green slime is g, blue slime is b, red slime is r
 // 'p' = player
 /* 
 Room structure
@@ -71,8 +71,8 @@ Room structure
 0111111110
 0000000000
 */
-var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
-var room2fullstringWithoutPlayer = '0000000000011111111001100001100100000010010000001001000000100100000010011000011001111111100000000000'
+var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000w00w000000w00w000000w00w000000w00wwwwwwww00000000000'
+var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
 
 var splitstring = room1fullstringWithoutPlayer
 var fullstringWithPlayer = room1fullstringWithoutPlayer
@@ -147,7 +147,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
-var collisionList = ['1','3','4','5']
+var collisionList = ['w','g','b','r']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -171,7 +171,7 @@ function moveRight() {
     if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
-    }
+    } 
 }
 function moveUp() {
     currentMP -= 1
@@ -179,6 +179,10 @@ function moveUp() {
     if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
+    } else if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '2' ) {
+        room = 2
+        playerx = 5
+        playery = 7
     }
 }
 function moveDown() {
@@ -187,7 +191,11 @@ function moveDown() {
     if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
-    }
+    } else if (room2fullstringWithoutPlayer[(10*playery+playerx)] == '1' ) {
+        room = 1
+        playerx = 5
+        playery = 2
+    } 
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
@@ -237,7 +245,7 @@ function addPlayerToMap() {
 function addEnemy1ToMap() {
     if (room1enemies[3] == 'alive') {
         enemyIndex = 10*enemy1[1] + enemy1[0]
-        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'3'+fullstringWithPlayer.substring(enemyIndex+1)
+        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'g'+fullstringWithPlayer.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
         enemy1.splice(0, 2, 0, 0)
@@ -247,7 +255,7 @@ function addEnemy1ToMap() {
 function addEnemy2ToMap() {
     if (room1enemies[4] == 'alive') {
         enemyIndex = 10*enemy2[1] + enemy2[0]
-        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'4'+fullstringWithEnemy1.substring(enemyIndex+1)
+        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'b'+fullstringWithEnemy1.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
         enemy2.splice(0, 2, 0, 0)
@@ -257,7 +265,7 @@ function addEnemy2ToMap() {
 function addEnemy3ToMap() {
 if (room1enemies[5] == 'alive') {
     enemyIndex = 10*enemy3[1] + enemy3[0]
-    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'5'+fullstringWithEnemy2.substring(enemyIndex+1)
+    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'r'+fullstringWithEnemy2.substring(enemyIndex+1)
 } else {
     enemyIndex = 0
     enemy3.splice(0, 2, 0, 0)
@@ -266,6 +274,7 @@ if (room1enemies[5] == 'alive') {
 }
 function updateMap() {
     splitstring = fullstringWithEnemy3
+    passages = [1,2,3,4,5,6,7,8,9]
     var square = '00'
     var square1 = 0
     var square2 = 0
@@ -281,20 +290,47 @@ function updateMap() {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
             splitstring = splitstring.substring(1)
 
-        } else if (splitstring[0] == 1) {
+        } else if (splitstring[0] == 'w') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
             splitstring = splitstring.substring(1)
-        } else if (splitstring[0] == 3) {
+        } else if (splitstring[0] == 'g') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/GreenSlime.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'p') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/player.png'
             splitstring = splitstring.substring(1)
-        } else if (splitstring[0] == 4) {
+        } else if (splitstring[0] == 'b') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/BlueSlime.png'
             splitstring = splitstring.substring(1)
-        } else if (splitstring[0] == 5) {
+        } else if (splitstring[0] == 'r') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/RedSlime.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '1') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '2') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '3') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '4') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '5') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '6') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '7') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '8') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '9') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
             splitstring = splitstring.substring(1)
         }
 
