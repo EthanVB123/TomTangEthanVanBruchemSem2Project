@@ -141,6 +141,9 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
+    if (actualkey=='c') {
+        cheat()
+    }
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
@@ -433,8 +436,8 @@ function changeEnemy3HP(amount) {
         enemy3[4] = enemy3[7]
     } else if (enemy3[4] + amount <= 0) {
         enemy3[4] = enemy3[7]
-        enemy3[0] = 0
-        enemy3[1] = 0
+        enemy3[0] = 999
+        enemy3[1] = 999
         changeXP(enemy3[5])
         alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
         room1enemies[5] = 'dead'
