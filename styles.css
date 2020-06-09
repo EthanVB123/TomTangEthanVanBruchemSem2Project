@@ -95,3 +95,15 @@ body {
   left: 51%;
   position: absolute;
 }
+.ads {
+  top: 96.5%;
+  left: 2%;
+  position: absolute;
+}
+.adsbutton {
+  top: 96%;
+  left: 52%;
+  position: absolute;
+  color: darkslategrey;
+}
+
