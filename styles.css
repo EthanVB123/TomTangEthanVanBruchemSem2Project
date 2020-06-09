@@ -1,7 +1,7 @@
 * {
     font-family: monospace;
     font-size: 1.05em;
-    color: lightgray;
+    color: lightgrey;
     box-sizing: border-box;
     font-weight: normal;
 }
@@ -53,6 +53,9 @@ body {
   top: 25%;
   left: 77%;
   position: absolute;
+}
+.information {
+  font-weight: 200%;
 }
 .itemssection {
   top: 80%;
