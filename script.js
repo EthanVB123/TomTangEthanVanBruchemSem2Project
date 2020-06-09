@@ -163,10 +163,6 @@ function moveLeft() {
     if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
-    } else if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '2' ) {
-        room = 2
-        playerx = 7
-        playery = 5
     }
 }
 function moveRight() {
@@ -175,7 +171,7 @@ function moveRight() {
     if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
-    }
+    } 
 }
 function moveUp() {
     currentMP -= 1
@@ -195,7 +191,11 @@ function moveDown() {
     if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
-    }
+    } else if (room2fullstringWithoutPlayer[(10*playery+playerx)] == '1' ) {
+        room = 1
+        playerx = 5
+        playery = 2
+    } 
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
