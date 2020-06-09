@@ -21,27 +21,27 @@ var dexterity = 1;
 var magic = 1;
 var gold = 10;
 
-var playerx = 5;
-var playery = 5;
+var playerx = 6;
+var playery = 6;
 
-// Enemies are [x, y, #actions, damage, hp, xp, name, maxHP]
+// Enemies are [x, y, #actions, damage, hp, xp, name, maxHP, charString]
 // green slimes are 1action 1damage 3hp 4xp
 // blue slimes are 2action 3damage 5hp 10xp
 // red slimes are 3action 5damage 10hp 25xp
 // skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
-var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
-var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
-var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12]
+var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3, 'g']
+var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5, 'b']
+var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10,'r']
+var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 // Enemies in play
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
-
-var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive']
-var room2enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive']
+// enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
+var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',4,4,3,3,2,2]
+var room2enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
 var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
@@ -92,6 +92,7 @@ var fullstringWithEnemy3 = fullstringWithPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
+    initialiseRoom1()
 
 // Functions
 // key Pressed function - what to do if a key is pressed?
@@ -193,6 +194,7 @@ function moveUp() {
         room = 2
         playerx = 5
         playery = 7
+        initialiseRoom2()
     }
 }
 function moveDown() {
@@ -205,6 +207,7 @@ function moveDown() {
         room = 1
         playerx = 5
         playery = 2
+        initialiseRoom1()
     } 
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
@@ -253,9 +256,9 @@ function addPlayerToMap() {
     fullstringWithPlayer = currentRoom.substring(0,playerIndex)+'p'+currentRoom.substring(playerIndex+1)
 }
 function addEnemy1ToMap() {
-    if (room1enemies[3] == 'alive') {
+    if (currentEnemies[3] == 'alive') {
         enemyIndex = 10*currentEnemy1[1] + currentEnemy1[0]
-        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'g'+fullstringWithPlayer.substring(enemyIndex+1)
+        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+currentEnemy1[8]+fullstringWithPlayer.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
         currentEnemy1.splice(0, 2, 0, 0)
@@ -263,9 +266,9 @@ function addEnemy1ToMap() {
     }
 }
 function addEnemy2ToMap() {
-    if (room1enemies[4] == 'alive') {
+    if (currentEnemies[4] == 'alive') {
         enemyIndex = 10*currentEnemy2[1] + currentEnemy2[0]
-        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'b'+fullstringWithEnemy1.substring(enemyIndex+1)
+        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+currentEnemy2[8]+fullstringWithEnemy1.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
         currentEnemy2.splice(0, 2, 0, 0)
@@ -273,9 +276,9 @@ function addEnemy2ToMap() {
     }
 }
 function addEnemy3ToMap() {
-if (room1enemies[5] == 'alive') {
+if (currentEnemies[5] == 'alive') {
     enemyIndex = 10*currentEnemy3[1] + currentEnemy3[0]
-    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'r'+fullstringWithEnemy2.substring(enemyIndex+1)
+    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+currentEnemy3[8]+fullstringWithEnemy2.substring(enemyIndex+1)
 } else {
     enemyIndex = 0
     currentEnemy3.splice(0, 2, 0, 0)
@@ -311,6 +314,9 @@ function updateMap() {
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'b') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/BlueSlime.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 's') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/Bony.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'r') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/RedSlime.png'
@@ -455,7 +461,7 @@ function changeEnemy1HP(amount) {
         currentEnemy1[1] = 2
         changeXP(currentEnemy1[5])
         alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
-        room1enemies[3] = 'dead' 
+        currentEnemies[3] = 'dead' 
     } else {
         currentEnemy1[4] += amount
     }
@@ -471,7 +477,7 @@ function changeEnemy2HP(amount) {
         currentEnemy2[1] = 2
         changeXP(currentEnemy2[5])
         alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
-        room1enemies[4] = 'dead' 
+        currentEnemies[4] = 'dead' 
     } else {
         currentEnemy2[4] += amount
     }
@@ -486,7 +492,7 @@ function changeEnemy3HP(amount) {
         currentEnemy3[1] = 999
         changeXP(currentEnemy3[5])
         alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
-        room1enemies[5] = 'dead'
+        currentEnemies[5] = 'dead'
     } else {
         currentEnemy3[4] += amount
     }
@@ -580,17 +586,17 @@ function arePlayerAndEnemy3Adjacent() {
 
 // Information panel
 function displayHP() {
-    if (room1enemies[3] == 'alive') {
+    if (currentEnemies[3] == 'alive') {
         enemy1str = currentEnemy1[6] + ': '+ currentEnemy1[4] + ' / ' + currentEnemy1[7]
     } else {
         enemy1str = '-- No Enemy --'
     }
-    if (room1enemies[4] == 'alive') {
+    if (currentEnemies[4] == 'alive') {
         enemy2str = currentEnemy2[6] + ': '+ currentEnemy2[4] + ' / ' + currentEnemy2[7]
     } else {
         enemy2str = '-- No Enemy --'
     }
-    if (room1enemies[5] == 'alive') {
+    if (currentEnemies[5] == 'alive') {
         enemy3str = currentEnemy3[6] + ': '+ currentEnemy3[4] + ' / ' + currentEnemy3[7]
         
     } else {
@@ -748,6 +754,25 @@ function initialiseRoom1() {
     currentEnemy1 = room1enemies[0]
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
+    enemy1[0] = room1enemies[6]
+    enemy1[1] = room1enemies[7]
+    enemy2[0] = room1enemies[8]
+    enemy2[1] = room1enemies[9]
+    enemy3[0] = room1enemies[10]
+    enemy3[1] = room1enemies[11]
+    currentEnemies = room1enemies
+}
+function initialiseRoom2() {
+    currentEnemy1 = room2enemies[0]
+    currentEnemy2 = room2enemies[1]
+    currentEnemy3 = room2enemies[2]
+    enemy1[0] = room2enemies[6]
+    enemy1[1] = room2enemies[7]
+    enemy2[0] = room2enemies[8]
+    enemy2[1] = room2enemies[9]
+    enemy3[0] = room2enemies[10]
+    enemy3[1] = room2enemies[11]
+    currentEnemies = room2enemies
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
