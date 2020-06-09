@@ -28,11 +28,21 @@ var playery = 5;
 // green slimes are 1action 1damage 3hp 4xp
 // blue slimes are 2action 3damage 5hp 10xp
 // red slimes are 3action 5damage 10hp 25xp
+// skeletons are 2action 4damage 12hp 15xp
+
+// Enemy Bank
 var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
 var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
+var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12]
+// Enemies in play
+var currentEnemy1 = enemy1
+var currentEnemy2 = enemy2
+var currentEnemy3 = enemy3
 
 var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive']
+var room2enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive']
+var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
 var weapon2 = ['Throw a rock', 2, dexterity, 'ranged']
@@ -244,31 +254,31 @@ function addPlayerToMap() {
 }
 function addEnemy1ToMap() {
     if (room1enemies[3] == 'alive') {
-        enemyIndex = 10*enemy1[1] + enemy1[0]
+        enemyIndex = 10*currentEnemy1[1] + currentEnemy1[0]
         fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'g'+fullstringWithPlayer.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
-        enemy1.splice(0, 2, 0, 0)
+        currentEnemy1.splice(0, 2, 0, 0)
         fullstringWithEnemy1 = fullstringWithPlayer
     }
 }
 function addEnemy2ToMap() {
     if (room1enemies[4] == 'alive') {
-        enemyIndex = 10*enemy2[1] + enemy2[0]
+        enemyIndex = 10*currentEnemy2[1] + currentEnemy2[0]
         fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'b'+fullstringWithEnemy1.substring(enemyIndex+1)
     } else {
         enemyIndex = 0
-        enemy2.splice(0, 2, 0, 0)
+        currentEnemy2.splice(0, 2, 0, 0)
         fullstringWithEnemy2 = fullstringWithEnemy1
     }
 }
 function addEnemy3ToMap() {
 if (room1enemies[5] == 'alive') {
-    enemyIndex = 10*enemy3[1] + enemy3[0]
+    enemyIndex = 10*currentEnemy3[1] + currentEnemy3[0]
     fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'r'+fullstringWithEnemy2.substring(enemyIndex+1)
 } else {
     enemyIndex = 0
-    enemy3.splice(0, 2, 0, 0)
+    currentEnemy3.splice(0, 2, 0, 0)
     fullstringWithEnemy3 = fullstringWithEnemy2
 }
 }
@@ -436,49 +446,49 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (enemy1[4] + amount >= enemy1[7]) {
+    if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy1[4] = enemy1[7]
-    } else if (enemy1[4] + amount <= 0) {
-        enemy1[4] = enemy1[7]
-        enemy1[0] = 2
-        enemy1[1] = 2
-        changeXP(enemy1[5])
-        alert('You killed a '+enemy1[6]+' and gained '+enemy1[5]+' experience points!')
+        currentEnemy1[4] = currentEnemy1[7]
+    } else if (currentEnemy1[4] + amount <= 0) {
+        currentEnemy1[4] = currentEnemy1[7]
+        currentEnemy1[0] = 2
+        currentEnemy1[1] = 2
+        changeXP(currentEnemy1[5])
+        alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
         room1enemies[3] = 'dead' 
     } else {
-        enemy1[4] += amount
+        currentEnemy1[4] += amount
     }
 
 }
 function changeEnemy2HP(amount) {
-    if (enemy2[4] + amount >= enemy2[7]) {
+    if (currentEnemy2[4] + amount >= currentEnemy2[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy2[4] = enemy2[7]
-    } else if (enemy2[4] + amount <= 0) {
-        enemy2[4] = enemy2[7]
-        enemy2[0] = 2
-        enemy2[1] = 2
-        changeXP(enemy2[5])
-        alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]+' experience points!')
+        currentEnemy2[4] = currentEnemy2[7]
+    } else if (currentEnemy2[4] + amount <= 0) {
+        currentEnemy2[4] = currentEnemy2[7]
+        currentEnemy2[0] = 2
+        currentEnemy2[1] = 2
+        changeXP(currentEnemy2[5])
+        alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         room1enemies[4] = 'dead' 
     } else {
-        enemy2[4] += amount
+        currentEnemy2[4] += amount
     }
 }
 function changeEnemy3HP(amount) {
-    if (enemy3[4] + amount >= enemy3[7]) {
+    if (currentEnemy3[4] + amount >= currentEnemy3[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy3[4] = enemy3[7]
-    } else if (enemy3[4] + amount <= 0) {
-        enemy3[4] = enemy3[7]
-        enemy3[0] = 999
-        enemy3[1] = 999
-        changeXP(enemy3[5])
-        alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
+        currentEnemy3[4] = currentEnemy3[7]
+    } else if (currentEnemy3[4] + amount <= 0) {
+        currentEnemy3[4] = currentEnemy3[7]
+        currentEnemy3[0] = 999
+        currentEnemy3[1] = 999
+        changeXP(currentEnemy3[5])
+        alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
         room1enemies[5] = 'dead'
     } else {
-        enemy3[4] += amount
+        currentEnemy3[4] += amount
     }
 }
 function changeMP(amount) {
@@ -551,19 +561,19 @@ function arePlayerAndEnemyAdjacent(x,y) {
 }
 function arePlayerAndEnemy1Adjacent() {
     var listOfAdjacents = [1, 9, 10, 11]
-    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy1[1] + enemy1[0]))
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*currentEnemy1[1] + currentEnemy1[0]))
     var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
     return enemyAdjacent
 }
 function arePlayerAndEnemy2Adjacent() {
     var listOfAdjacents = [1, 9, 10, 11]
-    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy2[1] + enemy2[0]))
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*currentEnemy2[1] + currentEnemy2[0]))
     var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
     return enemyAdjacent
 }
 function arePlayerAndEnemy3Adjacent() {
     var listOfAdjacents = [1, 9, 10, 11]
-    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*enemy3[1] + enemy3[0]))
+    var differenceOfIndexes = Math.abs((10*playery + playerx)-(10*currentEnemy3[1] + currentEnemy3[0]))
     var enemyAdjacent = listOfAdjacents.includes(differenceOfIndexes)
     return enemyAdjacent
 }
@@ -571,17 +581,17 @@ function arePlayerAndEnemy3Adjacent() {
 // Information panel
 function displayHP() {
     if (room1enemies[3] == 'alive') {
-        enemy1str = enemy1[6] + ': '+ enemy1[4] + ' / ' + enemy1[7]
+        enemy1str = currentEnemy1[6] + ': '+ currentEnemy1[4] + ' / ' + currentEnemy1[7]
     } else {
         enemy1str = '-- No Enemy --'
     }
     if (room1enemies[4] == 'alive') {
-        enemy2str = enemy2[6] + ': '+ enemy2[4] + ' / ' + enemy2[7]
+        enemy2str = currentEnemy2[6] + ': '+ currentEnemy2[4] + ' / ' + currentEnemy2[7]
     } else {
         enemy2str = '-- No Enemy --'
     }
     if (room1enemies[5] == 'alive') {
-        enemy3str = enemy3[6] + ': '+ enemy3[4] + ' / ' + enemy3[7]
+        enemy3str = currentEnemy3[6] + ': '+ currentEnemy3[4] + ' / ' + currentEnemy3[7]
         
     } else {
         enemy3str = '-- No Enemy --'
@@ -601,39 +611,39 @@ function displayMessages() {
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
-    for (var i = 0; i < enemy1[2]; i++) {
-        if (arePlayerAndEnemyAdjacent(enemy1[0], enemy1[1])) {
-            addNewMessage(enemy1[6] + ' dealt ' + enemy1[3] + ' damage to you.')
-            changeHP(-1*enemy1[3])
+    for (var i = 0; i < currentEnemy1[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(currentEnemy1[0], currentEnemy1[1])) {
+            addNewMessage(currentEnemy1[6] + ' dealt ' + currentEnemy1[3] + ' damage to you.')
+            changeHP(-1*currentEnemy1[3])
         } else {
             // Move enemy
-            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy1[0])
-            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy1[1])
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-currentEnemy1[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-currentEnemy1[1])
             var random1or0 = Math.round(Math.random())
             if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
-                if (enemy1[0] > playerx) {
-                    enemy1[0] -= 1
+                if (currentEnemy1[0] > playerx) {
+                    currentEnemy1[0] -= 1
                 } else {
-                    enemy1[0] += 1
+                    currentEnemy1[0] += 1
                 }
             } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
-                if (enemy1[1] > playery) {
-                    enemy1[1] -= 1
+                if (currentEnemy1[1] > playery) {
+                    currentEnemy1[1] -= 1
                 } else {
-                    enemy1[1] += 1
+                    currentEnemy1[1] += 1
                 }
             } else /* This case is where the two are equal */ {
                 if (random1or0 == 0) {
-                    if (enemy1[0] > playerx) {
-                        enemy1[0] -= 1
+                    if (currentEnemy1[0] > playerx) {
+                        currentEnemy1[0] -= 1
                     } else {
-                        enemy1[0] += 1
+                        currentEnemy1[0] += 1
                     }
                 } else {
-                    if (enemy1[1] > playery) {
-                        enemy1[1] -= 1
+                    if (currentEnemy1[1] > playery) {
+                        currentEnemy1[1] -= 1
                     } else {
-                        enemy1[1] += 1
+                        currentEnemy1[1] += 1
                     }
                 }
         
@@ -643,39 +653,39 @@ function enemy1turn() {
 }
 
 function enemy2turn() {
-    for (var i = 0; i < enemy2[2]; i++) {
-        if (arePlayerAndEnemyAdjacent(enemy2[0], enemy2[1])) {
-            addNewMessage(enemy2[6] + ' dealt ' + enemy2[3] + ' damage to you.')
-            changeHP(-1*enemy2[3])
+    for (var i = 0; i < currentEnemy2[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(currentEnemy2[0], currentEnemy2[1])) {
+            addNewMessage(currentEnemy2[6] + ' dealt ' + currentEnemy2[3] + ' damage to you.')
+            changeHP(-1*currentEnemy2[3])
         } else {
             // Move enemy
-            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy2[0])
-            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy2[1])
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-currentEnemy2[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-currentEnemy2[1])
             var random1or0 = Math.round(Math.random())
             if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
-                if (enemy2[0] > playerx) {
-                    enemy2[0] -= 1
+                if (currentEnemy2[0] > playerx) {
+                    currentEnemy2[0] -= 1
                 } else {
-                    enemy2[0] += 1
+                    currentEnemy2[0] += 1
                 }
             } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
-                if (enemy2[1] > playery) {
-                    enemy2[1] -= 1
+                if (currentEnemy2[1] > playery) {
+                    currentEnemy2[1] -= 1
                 } else {
-                    enemy2[1] += 1
+                    currentEnemy2[1] += 1
                 }
             } else /* This case is where the two are equal */ {
                 if (random1or0 == 0) {
-                    if (enemy2[0] > playerx) {
-                        enemy2[0] -= 1
+                    if (currentEnemy2[0] > playerx) {
+                        currentEnemy2[0] -= 1
                     } else {
-                        enemy2[0] += 1
+                        currentEnemy2[0] += 1
                     }
                 } else {
-                    if (enemy2[1] > playery) {
-                        enemy2[1] -= 1
+                    if (currentEnemy2[1] > playery) {
+                        currentEnemy2[1] -= 1
                     } else {
-                        enemy2[1] += 1
+                        currentEnemy2[1] += 1
                     }
                 }
         
@@ -685,39 +695,39 @@ function enemy2turn() {
 }
 
 function enemy3turn() {
-    for (var i = 0; i < enemy3[2]; i++) {
-        if (arePlayerAndEnemyAdjacent(enemy3[0], enemy3[1])) {
-            addNewMessage(enemy3[6] + ' dealt ' + enemy3[3] + ' damage to you.')
-            changeHP(-1*enemy3[3])
+    for (var i = 0; i < currentEnemy3[2]; i++) {
+        if (arePlayerAndEnemyAdjacent(currentEnemy3[0], currentEnemy3[1])) {
+            addNewMessage(currentEnemy3[6] + ' dealt ' + currentEnemy3[3] + ' damage to you.')
+            changeHP(-1*currentEnemy3[3])
         } else {
             // Move enemy
-            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-enemy3[0])
-            var yDistancebetweenEnemyandPlayer = Math.abs(playery-enemy3[1])
+            var xDistancebetweenEnemyandPlayer = Math.abs(playerx-currentEnemy3[0])
+            var yDistancebetweenEnemyandPlayer = Math.abs(playery-currentEnemy3[1])
             var random1or0 = Math.round(Math.random())
             if (xDistancebetweenEnemyandPlayer > yDistancebetweenEnemyandPlayer) {
-                if (enemy3[0] > playerx) {
-                    enemy3[0] -= 1
+                if (currentEnemy3[0] > playerx) {
+                    currentEnemy3[0] -= 1
                 } else {
-                    enemy3[0] += 1
+                    currentEnemy3[0] += 1
                 }
             } else if (yDistancebetweenEnemyandPlayer > xDistancebetweenEnemyandPlayer) {
-                if (enemy3[1] > playery) {
-                    enemy3[1] -= 1
+                if (currentEnemy3[1] > playery) {
+                    currentEnemy3[1] -= 1
                 } else {
-                    enemy3[1] += 1
+                    currentEnemy3[1] += 1
                 }
             } else /* This case is where the two are equal */ {
                 if (random1or0 == 0) {
-                    if (enemy3[0] > playerx) {
-                        enemy3[0] -= 1
+                    if (currentEnemy3[0] > playerx) {
+                        currentEnemy3[0] -= 1
                     } else {
-                        enemy3[0] += 1
+                        currentEnemy3[0] += 1
                     }
                 } else {
-                    if (enemy3[1] > playery) {
-                        enemy3[1] -= 1
+                    if (currentEnemy3[1] > playery) {
+                        currentEnemy3[1] -= 1
                     } else {
-                        enemy3[1] += 1
+                        currentEnemy3[1] += 1
                     }
                 }
         
@@ -731,6 +741,13 @@ function endTurn() {
     enemy2turn()
     enemy3turn()
     currentMP = maxMP
+}
+
+// The following functions initialise new rooms and are called when you enter them
+function initialiseRoom1() {
+    currentEnemy1 = room1enemies[0]
+    currentEnemy2 = room1enemies[1]
+    currentEnemy3 = room1enemies[2]
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {

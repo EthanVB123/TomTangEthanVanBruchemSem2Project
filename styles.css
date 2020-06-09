@@ -21,56 +21,74 @@ body {
 .map {
     height: 200;
     width: 100%;
-}
-.map {
+  }
+   strong {
+    display: flex;
+    align-items: center;
+  }
+  .map {
+    position: absolute;
+    top: 30%;
+    left: 25%;
     margin: auto;
     width: 50%;
+    height: 50%;
     padding: 10px;
     padding: 70px 0;
     text-align: center;
-}
+    border: 10px solid greenyellow;
+  }
+  .information {
+    width: 100px;
+    float: left;
+  }
+  .information {
+    margin: 0;
+  }
+  .weaponssection {
+    margin: 0;
+  }
+  .itemssection { 
+    margin: 0;
+  }
 .button {
   color: darkslategrey;
 }
 
 .bars {
-  position: absolute;
-  top: 5%;
-  left: 2%;
-  text-align: left;
+  width: 50%;
+  height: 20%;
+  border: 10px solid greenyellow;
+  padding-bottom: 5%;
 }
 .statistics {
-  top: 3%;
-  left: 51%;
   position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 50%;
+  height: 20%;
+  float: right;
+  border: 10px solid greenyellow;
+  padding-top: -200px;
+  
 }
-.actions-main {
-  top: 25%;
-  left: 2%;
+.actions {
   position: absolute;
-}
-.information-main {
-  top: 25%;
-  left: 76.5%;
-  position: absolute;
-}
-.itemssection {
-  top: 80%;
-  left: 51%;
-  position: absolute;
-}
-.weaponssection {
-  top: 80%;
-  left: 2%;
-  position: absolute;
+  top: 20%;
+  left: 0%;
+  width: 25%;
+  height: 50%;
+  float: bottom;
+  border: 10px solid greenyellow;
 }
 .floorinfo {
-  top: 23%;
-  left: 41%;
   position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 50%;
+  height: 10%;
+  border: 10px solid greenyellow;
 }
-.map {
-  top: 35%;
-  left: 24%;
-  position: absolute;
+.info {
+  
 }
