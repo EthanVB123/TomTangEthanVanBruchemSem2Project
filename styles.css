@@ -32,11 +32,16 @@ body {
     align-items: center;
   }
   .map {
+    position: absolute;
+    top: 30%;
+    left: 25%;
     margin: auto;
     width: 50%;
+    height: 50%;
     padding: 10px;
     padding: 70px 0;
     text-align: center;
+    border: 10px solid greenyellow;
   }
   .information {
     width: 100px;
@@ -59,13 +64,39 @@ body {
   font-weight: 200;
 }
 .bars {
-  width: 40%;
+  width: 50%;
   height: 20%;
   border: 10px solid greenyellow;
+  padding-bottom: 5%;
 }
 .statistics {
-  width: 40%;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 50%;
   height: 20%;
-  float: left;
+  float: right;
   border: 10px solid greenyellow;
+  padding-top: -200px;
+  
+}
+.actions {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  width: 25%;
+  height: 50%;
+  float: bottom;
+  border: 10px solid greenyellow;
+}
+.floorinfo {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 50%;
+  height: 10%;
+  border: 10px solid greenyellow;
+}
+.info {
+  
 }
