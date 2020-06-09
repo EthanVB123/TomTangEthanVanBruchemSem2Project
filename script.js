@@ -4,8 +4,6 @@ var maxHP = 10;
 var HPbar = document.getElementsByClassName('HPbar')[0]
 var percentHP = currentHP / maxHP
 
-var enemyHP = 3;
-var enemyMaxHP = 3;
 
 var currentMP = 5;
 var maxMP = 5;
@@ -34,7 +32,7 @@ var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
 var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
 
-
+var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive']
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
 var weapon2 = ['Throw a rock', 2, dexterity, 'ranged']
@@ -47,8 +45,9 @@ var item3 = ['[Empty]', 0, 0]
 var item4 = ['[Empty]', 0, 0]
 
 var currentFloor = 1
-var currentRoom = 0
-var roomsExplored = [0,0,0,0,0]
+var room = 1
+var currentRoom = room1fullstringWithoutPlayer
+var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
 var messages = ['message1', 'message2', 'message3']
 // Elements to change
@@ -73,11 +72,13 @@ Room structure
 0000000000
 */
 var room1fullstringWithoutPlayer = '0000000000011111111001000000100100000010010000001001000000100100000010010000001001111111100000000000'
-var room1splitstring = room1fullstringWithoutPlayer
-var room1fullstringWithPlayer = room1fullstringWithoutPlayer
-var room1fullstringWithEnemy1 = room1fullstringWithPlayer
-var room1fullstringWithEnemy2 = room1fullstringWithPlayer
-var room1fullstringWithEnemy3 = room1fullstringWithPlayer
+var room2fullstringWithoutPlayer = '0000000000011111111001100001100100000010010000001001000000100100000010011000011001111111100000000000'
+
+var splitstring = room1fullstringWithoutPlayer
+var fullstringWithPlayer = room1fullstringWithoutPlayer
+var fullstringWithEnemy1 = fullstringWithPlayer
+var fullstringWithEnemy2 = fullstringWithPlayer
+var fullstringWithEnemy3 = fullstringWithPlayer
 // Event listeners
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
@@ -141,11 +142,22 @@ function keypresschecker(e){
         }
     }
 }
-// The following are movement functions: allows movement, but blocks if move onto: [1] wall
+// Player can't move into whatever is in collisionList
+// Collision list contains Wall, Green Slime, Blue Slime, Red Slime
+var collisionList = ['1','3','4','5']
+function canYouGoHere() {
+    var x = true
+    for (i = 0; i < collisionList.length; i++) {
+        if (fullstringWithEnemy3[(10*playery+playerx)] == collisionList[i]) {
+            x = false
+        }
+    }
+    return x
+}
 function moveLeft() {
     playerx -= 1
     currentMP -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
     }
@@ -153,7 +165,7 @@ function moveLeft() {
 function moveRight() {
     currentMP -= 1
     playerx += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
     }
@@ -161,7 +173,7 @@ function moveRight() {
 function moveUp() {
     currentMP -= 1
     playery -= 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
     }
@@ -169,7 +181,7 @@ function moveUp() {
 function moveDown() {
     currentMP -= 1
     playery += 1
-    if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '1' || room1fullstringWithEnemy3[(10*playery+playerx)] == '3') {
+    if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
     }
@@ -192,7 +204,8 @@ function attack(weapon) {
             changeMP(-1*weapon[1])
             changeEnemy3HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
-        }
+            console.log(-1*weapon[2])
+        } else { addNewMessage("You're not adjacent.")}
     } 
     if (weapon[3] == 'ranged') {
         // Currently only attacks enemy 1
@@ -208,24 +221,48 @@ function attack(weapon) {
 }
 
 // updateMap: the room variable is a 100char string variable
+// The add player function also changes the room
 function addPlayerToMap() {
+    if (room == 1) {
+        currentRoom = room1fullstringWithoutPlayer
+    } else if (room == 2) {
+        currentRoom = room2fullstringWithoutPlayer
+    }
     playerIndex = 10*playery + playerx
-    room1fullstringWithPlayer = room1fullstringWithoutPlayer.substring(0,playerIndex)+'p'+room1fullstringWithoutPlayer.substring(playerIndex+1)
+    fullstringWithPlayer = currentRoom.substring(0,playerIndex)+'p'+currentRoom.substring(playerIndex+1)
 }
 function addEnemy1ToMap() {
-    enemyIndex = 10*enemy1[1] + enemy1[0]
-    room1fullstringWithEnemy1 = room1fullstringWithPlayer.substring(0,enemyIndex)+'3'+room1fullstringWithPlayer.substring(enemyIndex+1)
+    if (room1enemies[3] == 'alive') {
+        enemyIndex = 10*enemy1[1] + enemy1[0]
+        fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+'3'+fullstringWithPlayer.substring(enemyIndex+1)
+    } else {
+        enemyIndex = 0
+        enemy1.splice(0, 2, 0, 0)
+        fullstringWithEnemy1 = fullstringWithPlayer
+    }
 }
 function addEnemy2ToMap() {
-    enemyIndex = 10*enemy2[1] + enemy2[0]
-    room1fullstringWithEnemy2 = room1fullstringWithEnemy1.substring(0,enemyIndex)+'4'+room1fullstringWithEnemy1.substring(enemyIndex+1)
+    if (room1enemies[4] == 'alive') {
+        enemyIndex = 10*enemy2[1] + enemy2[0]
+        fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+'4'+fullstringWithEnemy1.substring(enemyIndex+1)
+    } else {
+        enemyIndex = 0
+        enemy2.splice(0, 2, 0, 0)
+        fullstringWithEnemy2 = fullstringWithEnemy1
+    }
 }
 function addEnemy3ToMap() {
+if (room1enemies[3] == 'alive') {
     enemyIndex = 10*enemy3[1] + enemy3[0]
-    room1fullstringWithEnemy3 = room1fullstringWithEnemy2.substring(0,enemyIndex)+'5'+room1fullstringWithEnemy2.substring(enemyIndex+1)
+    fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'5'+fullstringWithEnemy2.substring(enemyIndex+1)
+} else {
+    enemyIndex = 0
+    enemy3.splice(0, 2, 0, 0)
+    fullstringWithEnemy3 = fullstringWithEnemy2
+}
 }
 function updateMap() {
-    room1splitstring = room1fullstringWithEnemy3
+    splitstring = fullstringWithEnemy3
     var square = '00'
     var square1 = 0
     var square2 = 0
@@ -236,26 +273,26 @@ function updateMap() {
             square = i.toString()
         }
         
-        if (room1splitstring[0] == 0) {
+        if (splitstring[0] == 0) {
             
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
-            room1splitstring = room1splitstring.substring(1)
+            splitstring = splitstring.substring(1)
 
-        } else if (room1splitstring[0] == 1) {
+        } else if (splitstring[0] == 1) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/MossWall.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 3) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 3) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/GreenSlime.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 'p') {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'p') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/player.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 4) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 4) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/BlueSlime.png'
-            room1splitstring = room1splitstring.substring(1)
-        } else if (room1splitstring[0] == 5) {
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 5) {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/RedSlime.png'
-            room1splitstring = room1splitstring.substring(1)
+            splitstring = splitstring.substring(1)
         }
 
     
@@ -360,43 +397,47 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (enemy1[4] + amount >= enemyMaxHP) {
+    if (enemy1[4] + amount >= enemy1[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy1[4] = enemyMaxHP
+        enemy1[4] = enemy1[7]
     } else if (enemy1[4] + amount <= 0) {
         enemy1[4] = enemy1[7]
         enemy1[0] = 2
         enemy1[1] = 2
         changeXP(enemy1[5])
         alert('You killed a '+enemy1[6]+' and gained '+enemy1[5]+' experience points!')
+        room1enemies[3] = 'dead' 
     } else {
         enemy1[4] += amount
     }
+
 }
 function changeEnemy2HP(amount) {
-    if (enemy2[4] + amount >= enemyMaxHP) {
+    if (enemy2[4] + amount >= enemy2[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy2[4] = enemyMaxHP
+        enemy2[4] = enemy2[7]
     } else if (enemy2[4] + amount <= 0) {
         enemy2[4] = enemy2[7]
         enemy2[0] = 2
         enemy2[1] = 2
         changeXP(enemy2[5])
         alert('You killed a '+enemy2[6]+' and gained '+enemy2[5]+' experience points!')
+        room1enemies[4] = 'dead' 
     } else {
         enemy2[4] += amount
     }
 }
 function changeEnemy3HP(amount) {
-    if (enemy3[4] + amount >= enemyMaxHP) {
+    if (enemy3[4] + amount >= enemy3[7]) {
         console.log('Enemy Hp at max, cannot increase higher')
-        enemy3[4] = enemyMaxHP
+        enemy3[4] = enemy3[7]
     } else if (enemy3[4] + amount <= 0) {
         enemy3[4] = enemy3[7]
         enemy3[0] = 2
         enemy3[1] = 2
         changeXP(enemy3[5])
         alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
+        room1enemies[5] = 'dead'
     } else {
         enemy3[4] += amount
     }
@@ -411,13 +452,12 @@ function changeMP(amount) {
     }
 }
 function changeXP(amount) {
-    if (currentXP + amount >= XPToLevelUp) {
-        currentXP += amount
+    currentXP += amount
+    while (currentXP + amount >= XPToLevelUp) {
         levelUp()
-    } else if (currentXP + amount <= 0) {
+    } 
+    if (currentXP + amount <= 0) {
         currentXP = 0
-    } else {
-        currentXP += amount
     }
 }
 function levelUp() {
@@ -429,6 +469,7 @@ function levelUp() {
     currentMP += 2
     maxMP += 2
     increaseStrength()
+    increaseDexterity()
     
     
 }
@@ -490,8 +531,25 @@ function arePlayerAndEnemy3Adjacent() {
 
 // Information panel
 function displayHP() {
-    enemy1str = enemy1[6] + ': '+ enemy1[5] + ' / ' + enemy1[7]
+    if (room1enemies[3] == 'alive') {
+        enemy1str = enemy1[6] + ': '+ enemy1[4] + ' / ' + enemy1[7]
+    } else {
+        enemy1str = '-- No Enemy --'
+    }
+    if (room1enemies[4] == 'alive') {
+        enemy2str = enemy2[6] + ': '+ enemy2[4] + ' / ' + enemy2[7]
+    } else {
+        enemy2str = '-- No Enemy --'
+    }
+    if (room1enemies[5] == 'alive') {
+        enemy3str = enemy3[6] + ': '+ enemy3[4] + ' / ' + enemy3[7]
+        
+    } else {
+        enemy3str = '-- No Enemy --'
+    }
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
+    document.getElementsByClassName('info2')[0].innerHTML = enemy2str
+    document.getElementsByClassName('info3')[0].innerHTML = enemy3str
 }
 
 function addNewMessage(str) {
@@ -643,5 +701,15 @@ function mainGameLoop() {
     addEnemy3ToMap()
     updateMap()
     drawBars()
-    displayMessages()
+    displayHP()
+    displayMessages() 
+}
+
+// Cheat function
+function cheat() {
+    currentHP = Infinity
+    maxHP = Infinity
+    currentMP = Infinity
+    maxMP = Infinity
+    changeXP(1e+10)
 }

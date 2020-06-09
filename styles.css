@@ -22,7 +22,7 @@ body {
     background-color: darkslategray;
     background-repeat: no-repeat;
     background-blend-mode: hard-light;
-    background-size: 100%;
+    background-size: 100% 100%;
    }
    .map {
     height: 200;
