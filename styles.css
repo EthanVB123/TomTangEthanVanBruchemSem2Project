@@ -50,5 +50,8 @@ body {
   text-align: left;
 }
 .itemssection {
-  text-align: right;
+  width: 100px;
+  height: 200px;
+  padding: 0px;
+  border: 10px solid red;
 }

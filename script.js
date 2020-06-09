@@ -141,6 +141,9 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
+    if (actualkey=='c') {
+        cheat()
+    }
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
@@ -252,7 +255,7 @@ function addEnemy2ToMap() {
     }
 }
 function addEnemy3ToMap() {
-if (room1enemies[3] == 'alive') {
+if (room1enemies[5] == 'alive') {
     enemyIndex = 10*enemy3[1] + enemy3[0]
     fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+'5'+fullstringWithEnemy2.substring(enemyIndex+1)
 } else {
@@ -433,8 +436,8 @@ function changeEnemy3HP(amount) {
         enemy3[4] = enemy3[7]
     } else if (enemy3[4] + amount <= 0) {
         enemy3[4] = enemy3[7]
-        enemy3[0] = 2
-        enemy3[1] = 2
+        enemy3[0] = 999
+        enemy3[1] = 999
         changeXP(enemy3[5])
         alert('You killed a '+enemy3[6]+' and gained '+enemy3[5]+' experience points!')
         room1enemies[5] = 'dead'
@@ -453,7 +456,7 @@ function changeMP(amount) {
 }
 function changeXP(amount) {
     currentXP += amount
-    while (currentXP + amount >= XPToLevelUp) {
+    while (currentXP >= XPToLevelUp) {
         levelUp()
     } 
     if (currentXP + amount <= 0) {
@@ -707,9 +710,9 @@ function mainGameLoop() {
 
 // Cheat function
 function cheat() {
-    currentHP = Infinity
-    maxHP = Infinity
-    currentMP = Infinity
-    maxMP = Infinity
-    changeXP(1e+10)
+    currentHP = 1000
+    maxHP = 1000
+    currentMP = 1000
+    maxMP = 1000
+    changeXP(1000)
 }
