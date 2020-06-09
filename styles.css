@@ -1,149 +1,79 @@
 * {
-    font-family: monospace;
-    font-size: 1.05em;
-    color: lightgrey;
-    box-sizing: border-box;
-    font-weight: normal;
+  font-family: monospace;
+  font-size: 1.05em;
+  color: lightgrey;
+  box-sizing: border-box;
+  font-weight: normal;
 }
 strong {
-  color: lightslategray;
+color: lightslategray;
 }
 span {
-    margin-right: -11px;
+  margin-right: -11px;
 }
 div {
-    margin-top: -5px;
+  margin-top: -5px;
 }
 body {
-    background-image: url("PixelDungeonImages/UI/Background.png");
-    size: 100%;
+  background-image: url("PixelDungeonImages/UI/Background.png");
+  size: 100%;
 }
 .map {
-    height: 200;
-    width: 100%;
-<<<<<<< HEAD
-  }
-   strong {
-    display: flex;
-    align-items: center;
-  }
-  .map {
-    position: absolute;
-    top: 30%;
-    left: 25%;
-=======
+  height: 200;
+  width: 100%;
 }
 .map {
->>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
-    margin: auto;
-    width: 50%;
-    height: 50%;
-    padding: 10px;
-    padding: 70px 0;
-    text-align: center;
-<<<<<<< HEAD
-    border: 10px solid greenyellow;
-  }
-  .information {
-    width: 100px;
-    float: left;
-  }
-  .information {
-    margin: 0;
-  }
-  .weaponssection {
-    margin: 0;
-  }
-  .itemssection { 
-    margin: 0;
-  }
-=======
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  padding: 70px 0;
+  text-align: center;
 }
->>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
 .button {
-  color: darkslategrey;
+color: darkslategrey;
 }
 
 .bars {
-<<<<<<< HEAD
-  width: 50%;
-  height: 20%;
-  border: 10px solid greenyellow;
-  padding-bottom: 5%;
+position: absolute;
+top: 5%;
+left: 2%;
+text-align: left;
 }
 .statistics {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 50%;
-  height: 20%;
-  float: right;
-  border: 10px solid greenyellow;
-  padding-top: -200px;
-  
-}
-.actions {
-  position: absolute;
-  top: 20%;
-  left: 0%;
-  width: 25%;
-  height: 50%;
-  float: bottom;
-  border: 10px solid greenyellow;
-}
-.floorinfo {
-  position: absolute;
-  top: 20%;
-  left: 25%;
-  width: 50%;
-  height: 10%;
-  border: 10px solid greenyellow;
-}
-.info {
-  
-}
-=======
-  position: absolute;
-  top: 5%;
-  left: 2%;
-  text-align: left;
-}
-.statistics {
-  top: 3%;
-  left: 51%;
-  position: absolute;
+top: 3%;
+left: 51%;
+position: absolute;
 }
 .actions-main {
-  top: 25%;
-  left: 2%;
-  position: absolute;
+top: 25%;
+left: 2%;
+position: absolute;
 }
 .information-main {
-  top: 25%;
-  left: 77%;
-  position: absolute;
+top: 25%;
+left: 77%;
+position: absolute;
 }
 .information {
-  font-weight: 200%;
+font-weight: 200%;
 }
 .itemssection {
-  top: 80%;
-  left: 51%;
-  position: absolute;
+top: 80%;
+left: 51%;
+position: absolute;
 }
 .weaponssection {
-  top: 80%;
-  left: 2%;
-  position: absolute;
+top: 80%;
+left: 2%;
+position: absolute;
 }
 .floorinfo {
-  top: 23%;
-  left: 41%;
-  position: absolute;
+top: 23%;
+left: 41%;
+position: absolute;
 }
 .map {
-  top: 35%;
-  left: 24%;
-  position: absolute;
+top: 35%;
+left: 24%;
+position: absolute;
 }
->>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
