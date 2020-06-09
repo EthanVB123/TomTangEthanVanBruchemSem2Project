@@ -56,6 +56,7 @@ body {
 }
 
 .bars {
+  font-size: 1.5em;
   top: 3%;
   left: 2%;
   position: absolute;
@@ -66,19 +67,24 @@ body {
   position: absolute;
 }
 .floorinfo {
+  font-size: 2em;
   top: 22.5%;
-  left: 41%;
+  left: 35%;
   position: absolute;
 }
 .actions-main {
   top: 22%;
   left: 2%;
   position: absolute;
+  font-size: 1.25em;
 }
 .information-main {
   top: 22%;
   left: 76.5%;
   position: absolute;
+}
+.information {
+  font-size: 1.25em;
 }
 .map {
   top: 35%;
@@ -101,9 +107,8 @@ body {
   position: absolute;
 }
 .adsbutton {
-  top: 96%;
+  top: 96.5%;
   left: 52%;
   position: absolute;
-  color: darkslategrey;
 }
 
