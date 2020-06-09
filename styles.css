@@ -15,6 +15,7 @@ div {
   margin-top: -5px;
 }
 body {
+<<<<<<< HEAD
   background-image: url("PixelDungeonImages/UI/Background.png");
   size: 100%;
 }
@@ -29,22 +30,72 @@ body {
   padding: 70px 0;
   text-align: center;
 }
+=======
+    background-image: url("PixelDungeonImages/UI/Background.png");
+    size: 100%;
+    background-repeat: auto;
+}
+.map {
+    height: 200;
+    width: 100%;
+  }
+   strong {
+    display: flex;
+    align-items: center;
+  }
+  .map {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+    padding: 70px 0;
+    text-align: center;
+  }
+  .information {
+    width: 100px;
+    float: left;
+  }
+  .information {
+    margin: 0;
+  }
+  .weaponssection {
+    margin: 0;
+  }
+  .itemssection { 
+    margin: 0;
+  }
+>>>>>>> 741e00c32aecb654f86f7b60e4c9b79ca712652f
 .button {
 color: darkslategrey;
 }
 
 .bars {
+<<<<<<< HEAD
 position: absolute;
 top: 5%;
 left: 2%;
 text-align: left;
+=======
+  top: 3%;
+  left: 2%;
+  position: absolute;
+>>>>>>> 741e00c32aecb654f86f7b60e4c9b79ca712652f
 }
 .statistics {
 top: 3%;
 left: 51%;
 position: absolute;
 }
+.floorinfo {
+  top: 22.5%;
+  left: 41%;
+  position: absolute;
+}
 .actions-main {
+<<<<<<< HEAD
 top: 25%;
 left: 2%;
 position: absolute;
@@ -77,3 +128,41 @@ top: 35%;
 left: 24%;
 position: absolute;
 }
+=======
+  top: 22%;
+  left: 2%;
+  position: absolute;
+}
+.information-main {
+  top: 22%;
+  left: 76.5%;
+  position: absolute;
+}
+.map {
+  top: 35%;
+  left: 24.5%;
+  position: absolute;
+}
+.weaponssection {
+  top: 78%;
+  left: 2%;
+  position: absolute;
+}
+.itemssection {
+  top: 78%;
+  left: 51%;
+  position: absolute;
+}
+.ads {
+  top: 96.5%;
+  left: 2%;
+  position: absolute;
+}
+.adsbutton {
+  top: 96%;
+  left: 52%;
+  position: absolute;
+  color: darkslategrey;
+}
+
+>>>>>>> 741e00c32aecb654f86f7b60e4c9b79ca712652f
