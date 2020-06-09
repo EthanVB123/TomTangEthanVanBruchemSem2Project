@@ -1,14 +1,12 @@
 * {
     font-family: monospace;
     font-size: 1.05em;
-    color: lightgray;
+    color: lightgrey;
     box-sizing: border-box;
+    font-weight: normal;
 }
 strong {
-  color: lightgray;
-}
-html {
-  background-color: darkslategray;
+  color: lightslategray;
 }
 span {
     margin-right: -11px;
@@ -18,14 +16,12 @@ div {
 }
 body {
     background-image: url("PixelDungeonImages/UI/Background.png");
-    background-color: darkslategray;
-    background-repeat: no-repeat;
-    background-blend-mode: hard-light;
-    background-size: 100% 100%;
-   }
-   .map {
+    size: 100%;
+}
+.map {
     height: 200;
     width: 100%;
+<<<<<<< HEAD
   }
    strong {
     display: flex;
@@ -35,12 +31,17 @@ body {
     position: absolute;
     top: 30%;
     left: 25%;
+=======
+}
+.map {
+>>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
     margin: auto;
     width: 50%;
     height: 50%;
     padding: 10px;
     padding: 70px 0;
     text-align: center;
+<<<<<<< HEAD
     border: 10px solid greenyellow;
   }
   .information {
@@ -56,14 +57,15 @@ body {
   .itemssection { 
     margin: 0;
   }
+=======
+}
+>>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
 .button {
   color: darkslategrey;
 }
-.floorinfo {
-  text-align: center;
-  font-weight: 200;
-}
+
 .bars {
+<<<<<<< HEAD
   width: 50%;
   height: 20%;
   border: 10px solid greenyellow;
@@ -100,3 +102,48 @@ body {
 .info {
   
 }
+=======
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  text-align: left;
+}
+.statistics {
+  top: 3%;
+  left: 51%;
+  position: absolute;
+}
+.actions-main {
+  top: 25%;
+  left: 2%;
+  position: absolute;
+}
+.information-main {
+  top: 25%;
+  left: 77%;
+  position: absolute;
+}
+.information {
+  font-weight: 200%;
+}
+.itemssection {
+  top: 80%;
+  left: 51%;
+  position: absolute;
+}
+.weaponssection {
+  top: 80%;
+  left: 2%;
+  position: absolute;
+}
+.floorinfo {
+  top: 23%;
+  left: 41%;
+  position: absolute;
+}
+.map {
+  top: 35%;
+  left: 24%;
+  position: absolute;
+}
+>>>>>>> 443e49b69a47abcffe488092e68fdfbc7a3843ae
