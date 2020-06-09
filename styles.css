@@ -58,3 +58,14 @@ body {
   text-align: center;
   font-weight: 200;
 }
+.bars {
+  width: 40%;
+  height: 20%;
+  border: 10px solid greenyellow;
+}
+.statistics {
+  width: 40%;
+  height: 20%;
+  float: left;
+  border: 10px solid greenyellow;
+}
