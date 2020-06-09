@@ -24,14 +24,14 @@ var gold = 10;
 var playerx = 5;
 var playery = 5;
 
-// Enemies are [x, y, #actions, damage, hp, xp, name, maxHP, id letter]
-// green slimes are 1action 1damage 3hp 4xp g
-// blue slimes are 2action 3damage 5hp 10xp b
-// red slimes are 3action 5damage 10hp 25xp r
-// skeletons are 2action 4damage 12hp 15xp s
+// Enemies are [x, y, #actions, damage, hp, xp, name, maxHP]
+// green slimes are 1action 1damage 3hp 4xp
+// blue slimes are 2action 3damage 5hp 10xp
+// red slimes are 3action 5damage 10hp 25xp
+// skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3, 'g']
+var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3]
 var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5]
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10]
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12]
@@ -193,7 +193,6 @@ function moveUp() {
         room = 2
         playerx = 5
         playery = 7
-        initialiseRoom2()
     }
 }
 function moveDown() {
@@ -206,7 +205,6 @@ function moveDown() {
         room = 1
         playerx = 5
         playery = 2
-        initialiseRoom1()
     } 
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
@@ -750,11 +748,6 @@ function initialiseRoom1() {
     currentEnemy1 = room1enemies[0]
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
-}
-function initialiseRoom2() {
-    currentEnemy1 = room2enemies[0]
-    currentEnemy2 = room2enemies[1]
-    currentEnemy3 = room2enemies[2]
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
