@@ -14,7 +14,7 @@ m heals you and gives you XP, at the cost of MP.
 There is a cheat button, but we're not telling you what it is!
 * Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
 
-CHANGELOG
+# CHANGELOG
 VERSION 1.11
 - Styling added, optimised to Tom's computer.
 - Enemy HP bars added.
