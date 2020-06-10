@@ -439,13 +439,15 @@ function drawBars() {
     document.getElementsByClassName('XPbar')[0].innerHTML = 'XP '+ barFill+' '+currentXP+'/'+XPToLevelUp + ' LV '+currentLevel
 
 }
+
 function changeHP(amount) {
     if (currentHP + amount >= maxHP) {
         console.log('Hp at max, cannot increase higher')
         currentHP = maxHP
     } else if (currentHP + amount <= 0) {
         currentHP = 0
-        alert('ur dead n00b')
+        alert('Ur Dead N00B!!!')
+        location.reload()
     } else {
         currentHP += amount
         
