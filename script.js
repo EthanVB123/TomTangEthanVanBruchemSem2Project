@@ -40,8 +40,17 @@ var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
-var room1enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',4,4,3,3,2,2]
-var room2enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room1enemies = [enemy1, enemy1, enemy1, 'alive', 'alive', 'dead',4,4,3,3,2,2]
+var room2enemies = [enemy1, enemy1, enemy2, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room3enemies = [enemy2, enemy2, enemy2, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room4enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room5enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room6enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room7enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room8enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room9enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+
+
 var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
 var weapon1 = ['Your fists', 1, strength, 'melee']
@@ -81,8 +90,15 @@ Room structure
 0111111110
 0000000000
 */
-var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000w00w000000w00w000000w00w000000w00wwwwwwww00000000000'
-var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
+var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000800w000000w00w000000w00w000000w00wwww5www00000000000'
+var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000300w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
+var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w002000000400w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w003000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room5fullstringWithoutPlayer = '00000000000wwww1www00ww0000ww00w000000w00w000000600w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w005000000700w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w006000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w001000000900w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w008000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 
 var splitstring = room1fullstringWithoutPlayer
 var fullstringWithPlayer = room1fullstringWithoutPlayer
@@ -174,7 +190,42 @@ function moveLeft() {
     if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
-    }
+    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
+        room = 3
+        playerx = 5
+        playery = 7
+        initialiseRoom3()
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
+        room = 1
+        playerx = 5
+        playery = 7
+        initialiseRoom1()
+    } else if (currentRoom[(10*playery+playerx)] == '2' ) {
+        room = 2
+        playerx = 5
+        playery = 7
+        initialiseRoom2()
+    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
+        room = 3
+        playerx = 5
+        playery = 7
+        initialiseRoom3()
+    } 
 }
 function moveRight() {
     currentMP -= 1
@@ -182,6 +233,36 @@ function moveRight() {
     if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
+    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) { 
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+        playerx = 5
+        playery = 7
+        initialiseRoom5()
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        room = 9
+        playerx = 5
+        playery = 7
+        initialiseRoom9()
+    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
+        room = 4
+        playerx = 5
+        playery = 7
+        initialiseRoom4()
+    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
+        room = 3
+        playerx = 5
+        playery = 7
+        initialiseRoom3()
     } 
 }
 function moveUp() {
@@ -190,11 +271,16 @@ function moveUp() {
     if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
-    } else if (room1fullstringWithoutPlayer[(10*playery+playerx)] == '2' ) {
+    } else if (currentRoom[(10*playery+playerx)] == '2' ) {
         room = 2
         playerx = 5
         playery = 7
         initialiseRoom2()
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
+        room = 1
+        playerx = 5
+        playery = 7
+        initialiseRoom1()
     }
 }
 function moveDown() {
@@ -203,12 +289,17 @@ function moveDown() {
     if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
-    } else if (room2fullstringWithoutPlayer[(10*playery+playerx)] == '1' ) {
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
         playery = 2
         initialiseRoom1()
-    } 
+    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+        playerx = 5
+        playery = 7
+        initialiseRoom5()
+    }
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
@@ -251,6 +342,20 @@ function addPlayerToMap() {
         currentRoom = room1fullstringWithoutPlayer
     } else if (room == 2) {
         currentRoom = room2fullstringWithoutPlayer
+    } else if (room == 3) {
+        currentRoom = room3fullstringWithoutPlayer
+    } else if (room == 4) { 
+        currentRoom = room4fullstringWithoutPlayer
+    } else if (room == 5) {
+        currentRoom = room5fullstringWithoutPlayer
+    } else if (room == 6) {
+        currentRoom = room6fullstringWithoutPlayer
+    } else if (room == 7) {
+        currentRoom = room7fullstringWithoutPlayer
+    } else if (room == 8) {
+        currentRoom = room8fullstringWithoutPlayer
+    } else if (room == 9) {
+        currentRoom = room9fullstringWithoutPlayer
     }
     playerIndex = 10*playery + playerx
     fullstringWithPlayer = currentRoom.substring(0,playerIndex)+'p'+currentRoom.substring(playerIndex+1)
@@ -751,6 +856,7 @@ function endTurn() {
 
 // The following functions initialise new rooms and are called when you enter them
 function initialiseRoom1() {
+    room = 1
     currentEnemy1 = room1enemies[0]
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
@@ -761,8 +867,10 @@ function initialiseRoom1() {
     enemy3[0] = room1enemies[10]
     enemy3[1] = room1enemies[11]
     currentEnemies = room1enemies
+    addNewMessage('Welcome to Room 1!')
 }
 function initialiseRoom2() {
+    room = 2
     currentEnemy1 = room2enemies[0]
     currentEnemy2 = room2enemies[1]
     currentEnemy3 = room2enemies[2]
@@ -773,6 +881,105 @@ function initialiseRoom2() {
     enemy3[0] = room2enemies[10]
     enemy3[1] = room2enemies[11]
     currentEnemies = room2enemies
+    addNewMessage('Welcome to Room 2!')
+}
+function initialiseRoom3() {
+    room = 3
+    currentEnemy1 = room3enemies[0]
+    currentEnemy2 = room3enemies[1]
+    currentEnemy3 = room3enemies[2]
+    enemy1[0] = room3enemies[6]
+    enemy1[1] = room3enemies[7]
+    enemy2[0] = room3enemies[8]
+    enemy2[1] = room3enemies[9]
+    enemy3[0] = room3enemies[10]
+    enemy3[1] = room3enemies[11]
+    currentEnemies = room3enemies
+    addNewMessage('Welcome to Room 3!')
+}
+function initialiseRoom4() {
+    room = 4
+    currentEnemy1 = room4enemies[0]
+    currentEnemy2 = room4enemies[1]
+    currentEnemy3 = room4enemies[2]
+    enemy1[0] = room4enemies[6]
+    enemy1[1] = room4enemies[7]
+    enemy2[0] = room4enemies[8]
+    enemy2[1] = room4enemies[9]
+    enemy3[0] = room4enemies[10]
+    enemy3[1] = room4enemies[11]
+    currentEnemies = room4enemies
+    addNewMessage('Welcome to Room 4!')
+}
+function initialiseRoom5() {
+    room = 5
+    currentEnemy1 = room5enemies[0]
+    currentEnemy2 = room5enemies[1]
+    currentEnemy3 = room5enemies[2]
+    enemy1[0] = room5enemies[6]
+    enemy1[1] = room5enemies[7]
+    enemy2[0] = room5enemies[8]
+    enemy2[1] = room5enemies[9]
+    enemy3[0] = room5enemies[10]
+    enemy3[1] = room5enemies[11]
+    currentEnemies = room5enemies
+    addNewMessage('Welcome to Room 5!')
+}
+function initialiseRoom6() {
+    room = 6
+    currentEnemy1 = room6enemies[0]
+    currentEnemy2 = room6enemies[1]
+    currentEnemy3 = room6enemies[2]
+    enemy1[0] = room6enemies[6]
+    enemy1[1] = room6enemies[7]
+    enemy2[0] = room6enemies[8]
+    enemy2[1] = room6enemies[9]
+    enemy3[0] = room6enemies[10]
+    enemy3[1] = room6enemies[11]
+    currentEnemies = room6enemies
+    addNewMessage('Welcome to Room 6!')
+}
+function initialiseRoom7() {
+    room = 7
+    currentEnemy1 = room7enemies[0]
+    currentEnemy2 = room7enemies[1]
+    currentEnemy3 = room7enemies[2]
+    enemy1[0] = room7enemies[6]
+    enemy1[1] = room7enemies[7]
+    enemy2[0] = room7enemies[8]
+    enemy2[1] = room7enemies[9]
+    enemy3[0] = room7enemies[10]
+    enemy3[1] = room7enemies[11]
+    currentEnemies = room7enemies
+    addNewMessage('Welcome to Room 7!')
+}
+function initialiseRoom8() {
+    room = 8
+    currentEnemy1 = room8enemies[0]
+    currentEnemy2 = room8enemies[1]
+    currentEnemy3 = room8enemies[2]
+    enemy1[0] = room8enemies[6]
+    enemy1[1] = room8enemies[7]
+    enemy2[0] = room8enemies[8]
+    enemy2[1] = room8enemies[9]
+    enemy3[0] = room8enemies[10]
+    enemy3[1] = room8enemies[11]
+    currentEnemies = room8enemies
+    addNewMessage('Welcome to Room 8!')
+}
+function initialiseRoom9() {
+    room = 9
+    currentEnemy1 = room9enemies[0]
+    currentEnemy2 = room9enemies[1]
+    currentEnemy3 = room9enemies[2]
+    enemy1[0] = room9enemies[6]
+    enemy1[1] = room9enemies[7]
+    enemy2[0] = room9enemies[8]
+    enemy2[1] = room9enemies[9]
+    enemy3[0] = room9enemies[10]
+    enemy3[1] = room9enemies[11]
+    currentEnemies = room9enemies
+    addNewMessage('Welcome to Room 9!')
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
