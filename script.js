@@ -558,6 +558,7 @@ function increaseDexterity() {
         weapon4[2] += 1
     }
 }
+
 // This code following is about the 6 buttons in the Actions panel.
 
 
