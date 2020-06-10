@@ -2,6 +2,7 @@
 Tom Tang and Ethan Van Bruchem's semester 2 digital technology project.
 
 Pixel Dungeon 64
+
 This is an RPG game using pixel art. You will fight monsters, explore dungeon floors, find treasure, and win the game!
 A fun game for all the family.
 
@@ -11,7 +12,7 @@ Use the 1-4 keys to attack with your weapons. (You only have a weapon equipped i
 z ends your turn, refilling your MP and letting the enemies move and attack.
 m heals you and gives you XP, at the cost of MP.
 There is a cheat button, but we're not telling you what it is!
-# Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
+* Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
 
 CHANGELOG
 VERSION 1.11
