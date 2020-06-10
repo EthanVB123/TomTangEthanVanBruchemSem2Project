@@ -99,6 +99,7 @@ var fullstringWithEnemy3 = fullstringWithPlayer
 // Credit to this code is from
 // http://www.javascriptkit.com/javatutors/javascriptkey2.shtml
 
+//Seems that capital letters dont work when I pressed cap lock. Tried to fix with || operater but all buttons acts like Z after that --- Tom
 function keypresschecker(e){
     var evtobj=window.event? event : e //distinguish between IE's explicit event object (window.event) and Firefox's implicit.
     var unicode=evtobj.charCode? evtobj.charCode : evtobj.keyCode
