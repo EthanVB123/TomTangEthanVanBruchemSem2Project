@@ -90,7 +90,6 @@ Room structure
 0111111110
 0000000000
 */
-<<<<<<< HEAD
 var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000800w000000w00w000000w00w000000w00wwww5www00000000000'
 var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000300w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
 var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w002000000400w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
@@ -100,10 +99,6 @@ var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00500
 var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w006000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w001000000900w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w008000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-=======
-var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w000000w00w000000w00w000000w00w000000w00w000000w00w000000w00wwwwwwww00000000000'
-var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00w000000w00w000000w00w000000w00ww0000ww00wwww1www00000w0w000'
->>>>>>> be0070df6881c81edb4ff3cc6d0296abf22d6b26
 
 var splitstring = room1fullstringWithoutPlayer
 var fullstringWithPlayer = room1fullstringWithoutPlayer
@@ -196,26 +191,6 @@ function moveLeft() {
     if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
-    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
-        room = 8
-        playerx = 5
-        playery = 7
-        initialiseRoom8()
-    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
-        room = 3
-        playerx = 5
-        playery = 7
-        initialiseRoom3()
-    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
-        room = 6
-        playerx = 5
-        playery = 7
-        initialiseRoom6()
-    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
-        room = 6
-        playerx = 5
-        playery = 7
-        initialiseRoom6()
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
@@ -231,6 +206,36 @@ function moveLeft() {
         playerx = 5
         playery = 7
         initialiseRoom3()
+    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
+        room = 4
+        playerx = 5
+        playery = 7
+        initialiseRoom4()
+    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+        playerx = 5
+        playery = 7
+        initialiseRoom5()
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
+        room = 7
+        playerx = 5
+        playery = 7
+        initialiseRoom7()
+    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        room = 9
+        playerx = 5
+        playery = 7
+        initialiseRoom9()
     } 
 }
 function moveRight() {
@@ -239,36 +244,51 @@ function moveRight() {
     if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
-    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
-        room = 8
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
+        room = 1
         playerx = 5
         playery = 7
-        initialiseRoom8()
-    } else if (currentRoom[(10*playery+playerx)] == '6' ) { 
-        room = 6
+        initialiseRoom1()
+    } else if (currentRoom[(10*playery+playerx)] == '2' ) {
+        room = 2
         playerx = 5
         playery = 7
-        initialiseRoom6()
-    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
-        room = 5
-        playerx = 5
-        playery = 7
-        initialiseRoom5()
-    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
-        room = 9
-        playerx = 5
-        playery = 7
-        initialiseRoom9()
-    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
-        room = 4
-        playerx = 5
-        playery = 7
-        initialiseRoom4()
+        initialiseRoom2()
     } else if (currentRoom[(10*playery+playerx)] == '3' ) {
         room = 3
         playerx = 5
         playery = 7
         initialiseRoom3()
+    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
+        room = 4
+        playerx = 5
+        playery = 7
+        initialiseRoom4()
+    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+        playerx = 5
+        playery = 7
+        initialiseRoom5()
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
+        room = 7
+        playerx = 5
+        playery = 7
+        initialiseRoom7()
+    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        room = 9
+        playerx = 5
+        playery = 7
+        initialiseRoom9()
     } 
 }
 function moveUp() {
@@ -277,17 +297,52 @@ function moveUp() {
     if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
+    }  else if (currentRoom[(10*playery+playerx)] == '1' ) {
+        room = 1
+        playerx = 5
+        playery = 7
+        initialiseRoom1()
     } else if (currentRoom[(10*playery+playerx)] == '2' ) {
         room = 2
         playerx = 5
         playery = 7
         initialiseRoom2()
-    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
-        room = 1
+    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
+        room = 3
         playerx = 5
         playery = 7
-        initialiseRoom1()
-    }
+        initialiseRoom3()
+    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
+        room = 4
+        playerx = 5
+        playery = 7
+        initialiseRoom4()
+    } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+        playerx = 5
+        playery = 7
+        initialiseRoom5()
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
+        room = 7
+        playerx = 5
+        playery = 7
+        initialiseRoom7()
+    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        room = 9
+        playerx = 5
+        playery = 7
+        initialiseRoom9()
+    } 
 }
 function moveDown() {
     currentMP -= 1
@@ -295,17 +350,52 @@ function moveDown() {
     if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
-    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
+    }  else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
-        playery = 2
+        playery = 7
         initialiseRoom1()
+    } else if (currentRoom[(10*playery+playerx)] == '2' ) {
+        room = 2
+        playerx = 5
+        playery = 7
+        initialiseRoom2()
+    } else if (currentRoom[(10*playery+playerx)] == '3' ) {
+        room = 3
+        playerx = 5
+        playery = 7
+        initialiseRoom3()
+    } else if (currentRoom[(10*playery+playerx)] == '4' ) {
+        room = 4
+        playerx = 5
+        playery = 7
+        initialiseRoom4()
     } else if (currentRoom[(10*playery+playerx)] == '5' ) {
         room = 5
         playerx = 5
         playery = 7
         initialiseRoom5()
-    }
+    } else if (currentRoom[(10*playery+playerx)] == '6' ) {
+        room = 6
+        playerx = 5
+        playery = 7
+        initialiseRoom6()
+    } else if (currentRoom[(10*playery+playerx)] == '7' ) {
+        room = 7
+        playerx = 5
+        playery = 7
+        initialiseRoom7()
+    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        room = 8
+        playerx = 5
+        playery = 7
+        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        room = 9
+        playerx = 5
+        playery = 7
+        initialiseRoom9()
+    } 
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
