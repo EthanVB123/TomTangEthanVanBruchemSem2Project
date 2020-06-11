@@ -35,20 +35,22 @@ var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3, 'g']
 var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5, 'b']
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+var chest = [6, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+var boss1 = [6, 6, 2, 2, 100, 100, 'BOSS King Slime', 100, 'k']
 // Enemies in play
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
-var room1enemies = [enemy1, enemy1, enemy1, 'alive', 'alive', 'dead',4,4,3,3,2,2]
-var room2enemies = [enemy1, enemy1, enemy2, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room3enemies = [enemy2, enemy2, enemy2, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room4enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room5enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room6enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room7enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room8enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
-var room9enemies = [enemy2, enemy3, enemy4, 'alive', 'alive', 'alive',3,5,6,4,4,2]
+var room1enemies = [enemy1, enemy1, enemy1, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
+var room2enemies = [enemy1, enemy1, enemy1, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
+var room3enemies = [enemy1, enemy1, enemy2, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
+var room4enemies = [enemy2, enemy2, chest, 'alive', 'alive', 'dead', 3,5, 6,4, 4,2]
+var room5enemies = [enemy2, enemy2, enemy2, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
+var room6enemies = [enemy2, enemy3, enemy3, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
+var room7enemies = [chest, enemy3, enemy3, 'dead', 'dead', 'dead',3,5, 6,4, 4,2]
+var room8enemies = [enemy3, enemy3, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
+var room9enemies = [boss1, enemy1, enemy1, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
 
 
 var currentEnemies = room1enemies
@@ -461,8 +463,8 @@ function addEnemy1ToMap() {
         enemyIndex = 10*currentEnemy1[1] + currentEnemy1[0]
         fullstringWithEnemy1 = fullstringWithPlayer.substring(0,enemyIndex)+currentEnemy1[8]+fullstringWithPlayer.substring(enemyIndex+1)
     } else {
-        enemyIndex = 0
-        currentEnemy1.splice(0, 2, 0, 0)
+        enemy1[0] = 100
+        enemy1[1] = 100
         fullstringWithEnemy1 = fullstringWithPlayer
     }
 }
@@ -471,8 +473,8 @@ function addEnemy2ToMap() {
         enemyIndex = 10*currentEnemy2[1] + currentEnemy2[0]
         fullstringWithEnemy2 = fullstringWithEnemy1.substring(0,enemyIndex)+currentEnemy2[8]+fullstringWithEnemy1.substring(enemyIndex+1)
     } else {
-        enemyIndex = 0
-        currentEnemy2.splice(0, 2, 0, 0)
+        enemy2[0] = 100
+        enemy2[1] = 100
         fullstringWithEnemy2 = fullstringWithEnemy1
     }
 }
@@ -481,8 +483,8 @@ if (currentEnemies[5] == 'alive') {
     enemyIndex = 10*currentEnemy3[1] + currentEnemy3[0]
     fullstringWithEnemy3 = fullstringWithEnemy2.substring(0,enemyIndex)+currentEnemy3[8]+fullstringWithEnemy2.substring(enemyIndex+1)
 } else {
-    enemyIndex = 0
-    currentEnemy3.splice(0, 2, 0, 0)
+    enemy3[0] = 100
+    enemy3[1] = 100
     fullstringWithEnemy3 = fullstringWithEnemy2
 }
 }
@@ -957,6 +959,7 @@ function endTurn() {
 function initialiseRoom1() {
     room = 1
     currentEnemy1 = room1enemies[0]
+    changeEnemy1HP(1)
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
     enemy1[0] = room1enemies[6]
@@ -1027,8 +1030,11 @@ function initialiseRoom5() {
 function initialiseRoom6() {
     room = 6
     currentEnemy1 = room6enemies[0]
+    changeEnemy1HP(1)
     currentEnemy2 = room6enemies[1]
+    changeEnemy2HP(1)
     currentEnemy3 = room6enemies[2]
+    changeEnemy3HP(1)
     enemy1[0] = room6enemies[6]
     enemy1[1] = room6enemies[7]
     enemy2[0] = room6enemies[8]
