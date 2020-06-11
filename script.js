@@ -90,6 +90,7 @@ Room structure
 0111111110
 0000000000
 */
+<<<<<<< HEAD
 var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000800w000000w00w000000w00w000000w00wwww5www00000000000'
 var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000300w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
 var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w002000000400w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
@@ -99,6 +100,10 @@ var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00500
 var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w006000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w001000000900w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w008000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+=======
+var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w000000w00w000000w00w000000w00w000000w00w000000w00w000000w00wwwwwwww00000000000'
+var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w00w000000w00w000000w00w000000w00ww0000ww00wwww1www00000w0w000'
+>>>>>>> be0070df6881c81edb4ff3cc6d0296abf22d6b26
 
 var splitstring = room1fullstringWithoutPlayer
 var fullstringWithPlayer = room1fullstringWithoutPlayer
@@ -115,6 +120,7 @@ var fullstringWithEnemy3 = fullstringWithPlayer
 // Credit to this code is from
 // http://www.javascriptkit.com/javatutors/javascriptkey2.shtml
 
+//Seems that capital letters dont work when I pressed cap lock. Tried to fix with || operater but all buttons acts like Z after that --- Tom
 function keypresschecker(e){
     var evtobj=window.event? event : e //distinguish between IE's explicit event object (window.event) and Firefox's implicit.
     var unicode=evtobj.charCode? evtobj.charCode : evtobj.keyCode
@@ -174,7 +180,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
-var collisionList = ['w','g','b','r']
+var collisionList = ['w','g','b','r','s']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -544,13 +550,15 @@ function drawBars() {
     document.getElementsByClassName('XPbar')[0].innerHTML = 'XP '+ barFill+' '+currentXP+'/'+XPToLevelUp + ' LV '+currentLevel
 
 }
+
 function changeHP(amount) {
     if (currentHP + amount >= maxHP) {
         console.log('Hp at max, cannot increase higher')
         currentHP = maxHP
     } else if (currentHP + amount <= 0) {
         currentHP = 0
-        alert('ur dead n00b')
+        alert('Ur Dead N00B!!!')
+        location.reload()
     } else {
         currentHP += amount
         
@@ -661,6 +669,7 @@ function increaseDexterity() {
         weapon4[2] += 1
     }
 }
+
 // This code following is about the 6 buttons in the Actions panel.
 
 

@@ -6,6 +6,8 @@ Pixel Dungeon 64
 This is an RPG game using pixel art. You will fight monsters, explore dungeon floors, find treasure, and win the game!
 A fun game for all the family.
 
+Link: https://ethanvb123.github.io/TomTangEthanVanBruchemSem2Project/
+
 # CONTROLS
 Move the player with the WASD keys.
 Use the 1-4 keys to attack with your weapons. (You only have a weapon equipped in 1-2.)
@@ -14,7 +16,7 @@ m heals you and gives you XP, at the cost of MP.
 There is a cheat button, but we're not telling you what it is!
 * Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
 
-CHANGELOG
+# CHANGELOG
 VERSION 1.11
 - Styling added, optimised to Tom's computer.
 - Enemy HP bars added.
