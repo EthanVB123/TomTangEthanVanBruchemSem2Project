@@ -68,7 +68,7 @@ var room = 1
 var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
-var messages = ['message1', 'message2', 'message3']
+var messages = ['No message', 'No message', 'No message', 'No message', 'No message', 'No message']
 // Elements to change
 
 // Rooms
@@ -818,6 +818,9 @@ function displayMessages() {
     document.getElementsByClassName('info4')[0].innerHTML = messages[0]
     document.getElementsByClassName('info5')[0].innerHTML = messages[1]
     document.getElementsByClassName('info6')[0].innerHTML = messages[2]
+    document.getElementsByClassName('info7')[0].innerHTML = messages[3]
+    document.getElementsByClassName('info8')[0].innerHTML = messages[4]
+    document.getElementsByClassName('info9')[0].innerHTML = messages[5]
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
