@@ -17,6 +17,9 @@ There is a cheat button, but we're not telling you what it is!
 * Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
 
 # CHANGELOG
+VERSION 1.12
+- We have a full floor of 9 rooms now, and you can walk between rooms
+
 VERSION 1.11
 - Styling added, optimised to Tom's computer.
 - Enemy HP bars added.
