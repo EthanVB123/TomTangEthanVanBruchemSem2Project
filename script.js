@@ -70,7 +70,7 @@ var room = 1
 var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
-var messages = ['message1', 'message2', 'message3']
+var messages = ['No message', 'No message', 'No message', 'No message', 'No message', 'No message']
 // Elements to change
 
 // Rooms
@@ -92,15 +92,15 @@ Room structure
 0111111110
 0000000000
 */
-var room1fullstringWithoutPlayer = '00000000000wwww2www00w000000w00w000000w00w000000800w000000w00w000000w00w000000w00wwww5www00000000000'
-var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000300w000000w00w000000w00w000000w00ww0000ww00wwww1www00000000000'
-var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w002000000400w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w003000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room5fullstringWithoutPlayer = '00000000000wwww1www00ww0000ww00w000000w00w000000600w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w005000000700w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w006000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w001000000900w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww00w000000w008000000w00w000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w000000w00w000000ww0w000000800w000000ww0w000000w00w000000w00wwww5www00000w0w000'
+var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000www0w000000300w000000ww0w000000w00w000000w00ww0000ww00wwww1www00000w0w000'
+var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0200000040ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
+var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w003000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room5fullstringWithoutPlayer = '0000w0w0000wwww1www00ww0000ww00w000000ww0w000000600w000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
+var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0500000070ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
+var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w006000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0100000090ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
+var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w008000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 
 var splitstring = room1fullstringWithoutPlayer
 var fullstringWithPlayer = room1fullstringWithoutPlayer
@@ -820,6 +820,9 @@ function displayMessages() {
     document.getElementsByClassName('info4')[0].innerHTML = messages[0]
     document.getElementsByClassName('info5')[0].innerHTML = messages[1]
     document.getElementsByClassName('info6')[0].innerHTML = messages[2]
+    document.getElementsByClassName('info7')[0].innerHTML = messages[3]
+    document.getElementsByClassName('info8')[0].innerHTML = messages[4]
+    document.getElementsByClassName('info9')[0].innerHTML = messages[5]
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
