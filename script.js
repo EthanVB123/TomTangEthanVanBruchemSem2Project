@@ -177,7 +177,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
-var collisionList = ['w','g','b','r','s','B']
+var collisionList = ['w','g','b','r','s','k']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -551,7 +551,7 @@ function updateMap() {
         } else if (splitstring[0] == '9') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
             splitstring = splitstring.substring(1)
-        } else if (splitstring[0] == 'B') {
+        } else if (splitstring[0] == 'k') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
             splitstring = splitstring.substring(1)
         } 
