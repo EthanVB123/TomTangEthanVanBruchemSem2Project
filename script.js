@@ -70,7 +70,7 @@ var room = 1
 var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [0,0,0,0,0,0,0,0,0]
 
-var messages = ['No message', 'No message', 'No message', 'No message', 'No message', 'No message']
+var messages = ['No message', 'No message', 'No message', 'No message', 'No message', '11%', '22%', '33%', '44%', '55%', '66%', '77%', '88%', '100%']
 // Elements to change
 
 // Rooms
@@ -177,7 +177,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime
-var collisionList = ['w','g','b','r','s']
+var collisionList = ['w','g','b','r','s','B']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -551,7 +551,10 @@ function updateMap() {
         } else if (splitstring[0] == '9') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
             splitstring = splitstring.substring(1)
-        }
+        } else if (splitstring[0] == 'B') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
+            splitstring = splitstring.substring(1)
+        } 
 
     
     
@@ -824,6 +827,34 @@ function displayMessages() {
     document.getElementsByClassName('info8')[0].innerHTML = messages[4]
     document.getElementsByClassName('info9')[0].innerHTML = messages[5]
 }
+//Changes the explored percentage.
+function changeFloorInfo1() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[6]
+}
+function changeFloorInfo2() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[7]
+}
+function changeFloorInfo3() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[8]
+}
+function changeFloorInfo4() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[9]
+}
+function changeFloorInfo5() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[10]
+}
+function changeFloorInfo6() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[11]
+}
+function changeFloorInfo7() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[12]
+}
+function changeFloorInfo8() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[13]
+}
+function changeFloorInfo9() {
+    document.getElementsByClassName('info10')[0].innerHTML = messages[14]
+}
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
     for (var i = 0; i < currentEnemy1[2]; i++) {
@@ -972,6 +1003,8 @@ function initialiseRoom1() {
     enemy3[0] = room1enemies[10]
     enemy3[1] = room1enemies[11]
     currentEnemies = room1enemies
+    playerx = 6
+    playery = 6
     addNewMessage('Welcome to Room 1!')
 }
 function initialiseRoom2() {
@@ -1000,6 +1033,8 @@ function initialiseRoom3() {
     enemy3[0] = room3enemies[10]
     enemy3[1] = room3enemies[11]
     currentEnemies = room3enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 3!')
 }
 function initialiseRoom4() {
@@ -1014,6 +1049,8 @@ function initialiseRoom4() {
     enemy3[0] = room4enemies[10]
     enemy3[1] = room4enemies[11]
     currentEnemies = room4enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 4!')
 }
 function initialiseRoom5() {
@@ -1028,6 +1065,8 @@ function initialiseRoom5() {
     enemy3[0] = room5enemies[10]
     enemy3[1] = room5enemies[11]
     currentEnemies = room5enemies
+    playerx = 5
+    playery = 2
     addNewMessage('Welcome to Room 5!')
 }
 function initialiseRoom6() {
@@ -1045,6 +1084,8 @@ function initialiseRoom6() {
     enemy3[0] = room6enemies[10]
     enemy3[1] = room6enemies[11]
     currentEnemies = room6enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 6!')
 }
 function initialiseRoom7() {
@@ -1059,6 +1100,8 @@ function initialiseRoom7() {
     enemy3[0] = room7enemies[10]
     enemy3[1] = room7enemies[11]
     currentEnemies = room7enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 7!')
 }
 function initialiseRoom8() {
@@ -1073,6 +1116,8 @@ function initialiseRoom8() {
     enemy3[0] = room8enemies[10]
     enemy3[1] = room8enemies[11]
     currentEnemies = room8enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 8!')
 }
 function initialiseRoom9() {
@@ -1087,6 +1132,8 @@ function initialiseRoom9() {
     enemy3[0] = room9enemies[10]
     enemy3[1] = room9enemies[11]
     currentEnemies = room9enemies
+    playerx = 2
+    playery = 4
     addNewMessage('Welcome to Room 9!')
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
