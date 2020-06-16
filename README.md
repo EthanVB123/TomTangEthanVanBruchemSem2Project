@@ -17,6 +17,10 @@ There is a cheat button, but we're not telling you what it is!
 * Disclaimer: The buttons don't do anything. We're aware of this, and it is intentional, so please no complains that the buttons don't work.
 
 # CHANGELOG
+VERSION 1.13
+- Added the boss for LV 1, the  KingSlime. 
+- Graphic change between rooms are smoother.
+
 VERSION 1.12
 - We have a full floor of 9 rooms now, and you can walk between rooms
 
