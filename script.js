@@ -37,12 +37,13 @@ var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [6, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var boss1 = [6, 6, 2, 2, 100, 100, 'BOSS King Slime', 100, 'k']
+var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 // Enemies in play
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
-var room1enemies = [enemy1, enemy1, enemy1, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
+var room1enemies = [enemy1, placeholder, placeholder, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
 var room2enemies = [enemy1, enemy1, enemy1, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room3enemies = [enemy1, enemy1, enemy2, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room4enemies = [enemy2, enemy2, chest, 'alive', 'alive', 'dead', 3,5, 6,4, 4,2]
@@ -554,6 +555,12 @@ function updateMap() {
         } else if (splitstring[0] == 'k') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
             splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'z') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/entirelyWhiteSquare.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'c') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Chest.png'
+            splitstring = splitstring.substring(1)
         } 
 
     
@@ -858,6 +865,7 @@ function changeFloorInfo9() {
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
     for (var i = 0; i < currentEnemy1[2]; i++) {
+        console.log(currentEnemy1[2])
         if (arePlayerAndEnemyAdjacent(currentEnemy1[0], currentEnemy1[1])) {
             addNewMessage(currentEnemy1[6] + ' dealt ' + currentEnemy1[3] + ' damage to you.')
             changeHP(-1*currentEnemy1[3])
@@ -900,6 +908,7 @@ function enemy1turn() {
 
 function enemy2turn() {
     for (var i = 0; i < currentEnemy2[2]; i++) {
+        console.log(currentEnemy2[2])
         if (arePlayerAndEnemyAdjacent(currentEnemy2[0], currentEnemy2[1])) {
             addNewMessage(currentEnemy2[6] + ' dealt ' + currentEnemy2[3] + ' damage to you.')
             changeHP(-1*currentEnemy2[3])
@@ -942,6 +951,7 @@ function enemy2turn() {
 
 function enemy3turn() {
     for (var i = 0; i < currentEnemy3[2]; i++) {
+        console.log(currentEnemy3[2])
         if (arePlayerAndEnemyAdjacent(currentEnemy3[0], currentEnemy3[1])) {
             addNewMessage(currentEnemy3[6] + ' dealt ' + currentEnemy3[3] + ' damage to you.')
             changeHP(-1*currentEnemy3[3])
