@@ -123,19 +123,19 @@ function keypresschecker(e){
     var unicode=evtobj.charCode? evtobj.charCode : evtobj.keyCode
     var actualkey=String.fromCharCode(unicode)
     
-    if (actualkey=="w") {
+    if (actualkey=='w') {
         if (currentMP > 0) {
         moveUp() }
      }
-    if (actualkey=="a") {
+    if (actualkey=='a') {
         if (currentMP > 0) {
         moveLeft() }
     }
-    if (actualkey=="s") {
+    if (actualkey=='s') {
         if (currentMP > 0) {
         moveDown() }
     }
-    if (actualkey=="d") {
+    if (actualkey=='d') {
         if (currentMP > 0) {
         moveRight() }
     }
