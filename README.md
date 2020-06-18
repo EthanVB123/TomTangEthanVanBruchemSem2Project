@@ -19,7 +19,7 @@ There is a cheat button, but we're not telling you what it is!
 # CHANGELOG
 VERSION 1.13
 - Added the boss for LV 1, the  KingSlime. 
-- Graphic change between rooms are smoother and we have larger map and icons.
+- Graphic change between rooms are smoother and we have larger map and more fancy icons.
 
 VERSION 1.12
 - We have a full floor of 9 rooms now, and you can walk between rooms
