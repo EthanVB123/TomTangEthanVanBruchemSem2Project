@@ -177,7 +177,7 @@ function keypresschecker(e){
     }
 }
 // Player can't move into whatever is in collisionList
-// Collision list contains Wall, Green Slime, Blue Slime, Red Slime
+// Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
 var collisionList = ['w','g','b','r','s','k']
 function canYouGoHere() {
     var x = true
