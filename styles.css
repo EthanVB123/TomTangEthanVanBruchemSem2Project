@@ -94,15 +94,46 @@ body {
   left: 24.5%;
   position: absolute;
 }
-.weaponssection {
+.barIcon1 {
+  top: -4%;
+  left: 100%;
+  position: absolute;
+}
+.barIcon2 {
+  top: 35%;
+  left: 100%;
+  position: absolute;
+}
+.barIcon3 {
+  top: -8%;
+  left: 200%;
+  position: absolute;
+}
+.barIcon4 {
+  top: 22%;
+  left: 200%;
+  position: absolute;
+}
+.barIcon5 {
+  top: 52%;
+  left: 200%;
+  position: absolute;
+}
+.barIcon6 {
   top: 80%;
+  left: 200%;
+  position: absolute;
+}
+.weaponssection {
+  top: 78%;
   left: 2%;
   position: absolute;
 }
 .itemssection {
-  top: 80%;
+  top: 79%;
   left: 51%;
   position: absolute;
+  font-size: 1.2em;
 }
 .ads {
   top: 96.5%;
