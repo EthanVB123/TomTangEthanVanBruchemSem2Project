@@ -20,6 +20,8 @@ var strength = 1;
 var dexterity = 1;
 var magic = 1;
 var gold = 10;
+var goldReward = 20;
+var buffs = 1;
 
 var playerx = 6;
 var playery = 6;
@@ -43,15 +45,16 @@ var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
+// A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, placeholder, placeholder, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
-var room2enemies = [enemy1, enemy1, enemy1, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room3enemies = [enemy1, enemy1, enemy2, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room4enemies = [enemy2, enemy2, chest, 'alive', 'alive', 'dead', 3,5, 6,4, 4,2]
-var room5enemies = [enemy2, enemy2, enemy2, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room6enemies = [enemy2, enemy3, enemy3, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
-var room7enemies = [chest, enemy3, enemy3, 'dead', 'dead', 'dead',3,5, 6,4, 4,2]
-var room8enemies = [enemy3, enemy3, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room9enemies = [boss1, enemy1, enemy1, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
+var room2enemies = [enemy2, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
+var room3enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
+var room4enemies = [enemy3, placeholder, placeholder, 'alive', 'dead', 'dead', 3,5, 6,4, 4,2]
+var room5enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
+var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
+var room7enemies = [chest, placeholder, placeholder, 'dead', 'dead', 'dead',3,5, 6,4, 4,2] // The chest is dead! We will make it alive when it is coded for. This is not a bug.
+var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
+var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
 
 
 var currentEnemies = room1enemies
@@ -174,6 +177,9 @@ function keypresschecker(e){
     }
     if (actualkey=='c') {
         cheat()
+    }
+    if (actualkey=='b') {
+        grantBuff()
     }
 }
 // Player can't move into whatever is in collisionList
@@ -738,16 +744,12 @@ function levelUp() {
     currentXP -= XPToLevelUp
     currentLevel += 1
     XPToLevelUp += 10
-    currentHP += 5
-    maxHP += 5
-    currentMP += 2
-    maxMP += 2
-    increaseStrength()
-    increaseDexterity()
+    buffs += 2
     
     
 }
 function increaseStrength() {
+    strength += 1
     if (weapon1[3] == 'melee') {
         weapon1[2] += 1
     }
@@ -762,6 +764,7 @@ function increaseStrength() {
     }
 }
 function increaseDexterity() {
+    dexterity += 1
     if (weapon1[3] == 'ranged') {
         weapon1[2] += 1
     }
@@ -775,7 +778,40 @@ function increaseDexterity() {
         weapon4[2] += 1
     }
 }
-
+function grantBuff() {
+    var chosenBuff = prompt(`You have leveled up! You can select a buff now. You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
+    switch (chosenBuff) {
+        case 'melee':
+            increaseStrength()
+            break
+        case 'ranged':
+            increaseDexterity()
+            break
+        case 'hp':
+            maxHP += 5
+            changeHP(5)
+            break
+        case 'mp':
+            maxMP += 2
+            changeMP(2)
+            break
+        case 'gold':
+            gold += goldReward
+            break
+        case 'magic':
+            alert('Your magic increased')
+            break
+        default:
+            alert('Failed buff, please retry')
+            buffs += 1
+    }
+}
+function updateStats() {
+    document.getElementsByClassName('strength')[0].innerHTML = 'STRENGTH '+strength
+    document.getElementsByClassName('dexterity')[0].innerHTML = 'DEXTERITY '+dexterity
+    document.getElementsByClassName('magic')[0].innerHTML = 'MAGIC '+magic
+    document.getElementsByClassName('gold')[0].innerHTML = 'GOLD $'+gold
+}
 // This code following is about the 6 buttons in the Actions panel.
 
 
@@ -1010,12 +1046,12 @@ function initialiseRoom1() {
     changeEnemy1HP(1)
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
-    enemy1[0] = room1enemies[6]
-    enemy1[1] = room1enemies[7]
-    enemy2[0] = room1enemies[8]
-    enemy2[1] = room1enemies[9]
-    enemy3[0] = room1enemies[10]
-    enemy3[1] = room1enemies[11]
+    currentEnemy1[0] = room1enemies[6]
+    currentEnemy1[1] = room1enemies[7]
+    currentEnemy2[0] = room1enemies[8]
+    currentEnemy2[1] = room1enemies[9]
+    currentEnemy3[0] = room1enemies[10]
+    currentEnemy3[1] = room1enemies[11]
     currentEnemies = room1enemies
     playerx = 6
     playery = 6
@@ -1026,12 +1062,12 @@ function initialiseRoom2() {
     currentEnemy1 = room2enemies[0]
     currentEnemy2 = room2enemies[1]
     currentEnemy3 = room2enemies[2]
-    enemy1[0] = room2enemies[6]
-    enemy1[1] = room2enemies[7]
-    enemy2[0] = room2enemies[8]
-    enemy2[1] = room2enemies[9]
-    enemy3[0] = room2enemies[10]
-    enemy3[1] = room2enemies[11]
+    currentEnemy1[0] = room2enemies[6]
+    currentEnemy1[1] = room2enemies[7]
+    currentEnemy2[0] = room2enemies[8]
+    currentEnemy2[1] = room2enemies[9]
+    currentEnemy3[0] = room2enemies[10]
+    currentEnemy3[1] = room2enemies[11]
     currentEnemies = room2enemies
     addNewMessage('Welcome to Room 2!')
 }
@@ -1040,12 +1076,12 @@ function initialiseRoom3() {
     currentEnemy1 = room3enemies[0]
     currentEnemy2 = room3enemies[1]
     currentEnemy3 = room3enemies[2]
-    enemy1[0] = room3enemies[6]
-    enemy1[1] = room3enemies[7]
-    enemy2[0] = room3enemies[8]
-    enemy2[1] = room3enemies[9]
-    enemy3[0] = room3enemies[10]
-    enemy3[1] = room3enemies[11]
+    currentEnemy1[0] = room3enemies[6]
+    currentEnemy1[1] = room3enemies[7]
+    currentEnemy2[0] = room3enemies[8]
+    currentEnemy2[1] = room3enemies[9]
+    currentEnemy3[0] = room3enemies[10]
+    currentEnemy3[1] = room3enemies[11]
     currentEnemies = room3enemies
     playerx = 2
     playery = 4
@@ -1056,12 +1092,12 @@ function initialiseRoom4() {
     currentEnemy1 = room4enemies[0]
     currentEnemy2 = room4enemies[1]
     currentEnemy3 = room4enemies[2]
-    enemy1[0] = room4enemies[6]
-    enemy1[1] = room4enemies[7]
-    enemy2[0] = room4enemies[8]
-    enemy2[1] = room4enemies[9]
-    enemy3[0] = room4enemies[10]
-    enemy3[1] = room4enemies[11]
+    currentEnemy1[0] = room4enemies[6]
+    currentEnemy1[1] = room4enemies[7]
+    currentEnemy2[0] = room4enemies[8]
+    currentEnemy2[1] = room4enemies[9]
+    currentEnemy3[0] = room4enemies[10]
+    currentEnemy3[1] = room4enemies[11]
     currentEnemies = room4enemies
     playerx = 2
     playery = 4
@@ -1072,12 +1108,12 @@ function initialiseRoom5() {
     currentEnemy1 = room5enemies[0]
     currentEnemy2 = room5enemies[1]
     currentEnemy3 = room5enemies[2]
-    enemy1[0] = room5enemies[6]
-    enemy1[1] = room5enemies[7]
-    enemy2[0] = room5enemies[8]
-    enemy2[1] = room5enemies[9]
-    enemy3[0] = room5enemies[10]
-    enemy3[1] = room5enemies[11]
+    currentEnemy1[0] = room5enemies[6]
+    currentEnemy1[1] = room5enemies[7]
+    currentEnemy2[0] = room5enemies[8]
+    currentEnemy2[1] = room5enemies[9]
+    currentEnemy3[0] = room5enemies[10]
+    currentEnemy3[1] = room5enemies[11]
     currentEnemies = room5enemies
     playerx = 5
     playery = 2
@@ -1091,12 +1127,12 @@ function initialiseRoom6() {
     changeEnemy2HP(1)
     currentEnemy3 = room6enemies[2]
     changeEnemy3HP(1)
-    enemy1[0] = room6enemies[6]
-    enemy1[1] = room6enemies[7]
-    enemy2[0] = room6enemies[8]
-    enemy2[1] = room6enemies[9]
-    enemy3[0] = room6enemies[10]
-    enemy3[1] = room6enemies[11]
+    currentEnemy1[0] = room6enemies[6]
+    currentEnemy1[1] = room6enemies[7]
+    currentEnemy2[0] = room6enemies[8]
+    currentEnemy2[1] = room6enemies[9]
+    currentEnemy3[0] = room6enemies[10]
+    currentEnemy3[1] = room6enemies[11]
     currentEnemies = room6enemies
     playerx = 2
     playery = 4
@@ -1107,12 +1143,12 @@ function initialiseRoom7() {
     currentEnemy1 = room7enemies[0]
     currentEnemy2 = room7enemies[1]
     currentEnemy3 = room7enemies[2]
-    enemy1[0] = room7enemies[6]
-    enemy1[1] = room7enemies[7]
-    enemy2[0] = room7enemies[8]
-    enemy2[1] = room7enemies[9]
-    enemy3[0] = room7enemies[10]
-    enemy3[1] = room7enemies[11]
+    currentEnemy1[0] = room7enemies[6]
+    currentEnemy1[1] = room7enemies[7]
+    currentEnemy2[0] = room7enemies[8]
+    currentEnemy2[1] = room7enemies[9]
+    currentEnemy3[0] = room7enemies[10]
+    currentEnemy3[1] = room7enemies[11]
     currentEnemies = room7enemies
     playerx = 2
     playery = 4
@@ -1123,12 +1159,12 @@ function initialiseRoom8() {
     currentEnemy1 = room8enemies[0]
     currentEnemy2 = room8enemies[1]
     currentEnemy3 = room8enemies[2]
-    enemy1[0] = room8enemies[6]
-    enemy1[1] = room8enemies[7]
-    enemy2[0] = room8enemies[8]
-    enemy2[1] = room8enemies[9]
-    enemy3[0] = room8enemies[10]
-    enemy3[1] = room8enemies[11]
+    currentEnemy1[0] = room8enemies[6]
+    currentEnemy1[1] = room8enemies[7]
+    currentEnemy2[0] = room8enemies[8]
+    currentEnemy2[1] = room8enemies[9]
+    currentEnemy3[0] = room8enemies[10]
+    currentEnemy3[1] = room8enemies[11]
     currentEnemies = room8enemies
     playerx = 2
     playery = 4
@@ -1139,12 +1175,12 @@ function initialiseRoom9() {
     currentEnemy1 = room9enemies[0]
     currentEnemy2 = room9enemies[1]
     currentEnemy3 = room9enemies[2]
-    enemy1[0] = room9enemies[6]
-    enemy1[1] = room9enemies[7]
-    enemy2[0] = room9enemies[8]
-    enemy2[1] = room9enemies[9]
-    enemy3[0] = room9enemies[10]
-    enemy3[1] = room9enemies[11]
+    currentEnemy1[0] = room9enemies[6]
+    currentEnemy1[1] = room9enemies[7]
+    currentEnemy2[0] = room9enemies[8]
+    currentEnemy2[1] = room9enemies[9]
+    currentEnemy3[0] = room9enemies[10]
+    currentEnemy3[1] = room9enemies[11]
     currentEnemies = room9enemies
     playerx = 2
     playery = 4
@@ -1160,6 +1196,8 @@ function mainGameLoop() {
     drawBars()
     displayHP()
     displayMessages() 
+    updateStats()
+    checkforBuff()
 }
 
 // Cheat function
@@ -1169,4 +1207,10 @@ function cheat() {
     currentMP = 1000
     maxMP = 1000
     changeXP(1000)
+}
+function checkforBuff() {
+    if (buffs > 0) {
+        buffs -= 1
+        grantBuff()
+    }
 }
