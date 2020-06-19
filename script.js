@@ -96,14 +96,14 @@ Room structure
 0111111110
 0000000000
 */
-var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w000000w00w000000ww0w000000800w000000ww0w000000w00w000000w00wwww5www00000w0w000'
+var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w$00000w00w000000ww0w000000800w000000ww0w000000w00w000000w00wwww5www00000w0w000'
 var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000www0w000000300w000000ww0w000000w00w000000w00ww0000ww00wwww1www00000w0w000'
 var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0200000040ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
-var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w003000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w003000000w0ww000000w00w00000cw00ww0000ww00wwwwwwww00000000000'
 var room5fullstringWithoutPlayer = '0000w0w0000wwww1www00ww0000ww00w000000ww0w000000600w000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
 var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0500000070ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
-var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w006000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
-var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0100000090ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
+var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww000cww0ww000000w006000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0100000090ww000000ww0w00000cw00ww0000ww00wwwwwwww00000000000'
 var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w008000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 
 var splitstring = room1fullstringWithoutPlayer
@@ -184,7 +184,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
-var collisionList = ['w','g','b','r','s','k']
+var collisionList = ['w','g','b','r','s','k','$','c']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -567,7 +567,11 @@ function updateMap() {
         } else if (splitstring[0] == 'c') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Chest.png'
             splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == '$') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Shop.png'
+            splitstring = splitstring.substring(1)
         } 
+        
 
     
     
