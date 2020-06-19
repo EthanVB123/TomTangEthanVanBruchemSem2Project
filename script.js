@@ -786,7 +786,7 @@ function increaseDexterity() {
     }
 }
 function grantBuff() {
-    var chosenBuff = prompt(`You have leveled up! You can select a buff now. You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
+    var chosenBuff = prompt(`Leveling Up! Please select a buff!  You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
     switch (chosenBuff) {
         case 'melee':
             increaseStrength()

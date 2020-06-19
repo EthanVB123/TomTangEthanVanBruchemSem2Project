@@ -39,6 +39,7 @@ Gold is used to exchange treasures in the shop.
 # CHANGELOG
 VERSION 1.14
 - Added shop, locked door and chests to the map.
+- Added buff selection system. 
 
 VERSION 1.13
 - Added the boss for LV 1, the  KingSlime. 
