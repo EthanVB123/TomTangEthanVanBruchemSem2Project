@@ -38,6 +38,8 @@ var enemy2 = [4, 4, 2, 3, 5, 10, 'Blue Slime', 5, 'b']
 var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [6, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+var lock = [6, 6, 0, 0, 1, 's', 'Lock', 1, 'L']
+var key = [6, 6, 0, 0, 1, 's', 'Key', 1, 'K']
 var boss1 = [6, 6, 2, 2, 100, 100, 'BOSS King Slime', 100, 'k']
 var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 // Enemies in play
@@ -46,13 +48,13 @@ var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
 // A bug is thrown if two of the same enemies are in the room!
-var room1enemies = [enemy1, placeholder, placeholder, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
+var room1enemies = [enemy1, lock, placeholder, 'alive', 'dead', 'dead',5,5, 3,3, 3,3]
 var room2enemies = [enemy2, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
 var room3enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
-var room4enemies = [enemy3, placeholder, placeholder, 'alive', 'dead', 'dead', 3,5, 6,4, 4,2]
+var room4enemies = [enemy3, chest, key, 'alive', 'dead', 'dead', 3,5, 6,4, 4,2]
 var room5enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
 var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'dead',3,5, 6,4, 4,2]
-var room7enemies = [chest, placeholder, placeholder, 'dead', 'dead', 'dead',3,5, 6,4, 4,2] // The chest is dead! We will make it alive when it is coded for. This is not a bug.
+var room7enemies = [chest, key, placeholder, 'dead', 'dead', 'dead',3,5, 6,4, 4,2] // The chest is dead! We will make it alive when it is coded for. This is not a bug.
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 6,4, 4,2]
 
@@ -99,10 +101,10 @@ Room structure
 var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w$00000w00w000000ww0w000000800w000000ww0w000000w00w000000w00wwww5www00000w0w000'
 var room2fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000www0w000000300w000000ww0w000000w00w000000w00ww0000ww00wwww1www00000w0w000'
 var room3fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0200000040ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
-var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w003000000w0ww000000w00w00000cw00ww0000ww00wwwwwwww00000000000'
+var room4fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000K00w003000000w0ww000000w00w00000cw00ww0000ww00wwwwwwww00000000000'
 var room5fullstringWithoutPlayer = '0000w0w0000wwww1www00ww0000ww00w000000ww0w000000600w000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
 var room6fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0500000070ww000000ww0w000000w00ww0000ww00wwwwwwww00000000000'
-var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww000cww0ww000000w006000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
+var room7fullstringWithoutPlayer = '00000000000wwwwwwww00ww000cww0ww000000w006000K00w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 var room8fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000ww0100000090ww000000ww0w00000cw00ww0000ww00wwwwwwww00000000000'
 var room9fullstringWithoutPlayer = '00000000000wwwwwwww00ww0000ww0ww000000w008000000w0ww000000w00w000000w00ww0000ww00wwwwwwww00000000000'
 
@@ -184,7 +186,7 @@ function keypresschecker(e){
 }
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
-var collisionList = ['w','g','b','r','s','k','$','c']
+var collisionList = ['w','g','b','r','s','k','$','c','K','L']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -553,10 +555,10 @@ function updateMap() {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == '8') {
-            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Lock.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == '9') {
-            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/WoodenWall.png'
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Lock.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'k') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
@@ -569,6 +571,12 @@ function updateMap() {
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == '$') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Shop.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'L') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Lock.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'K') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Icons/Items/Key.png'
             splitstring = splitstring.substring(1)
         } 
         
