@@ -20,6 +20,8 @@ var strength = 1;
 var dexterity = 1;
 var magic = 1;
 var gold = 10;
+var goldReward = 20;
+var buffs = 1;
 
 var playerx = 6;
 var playery = 6;
@@ -175,6 +177,9 @@ function keypresschecker(e){
     }
     if (actualkey=='c') {
         cheat()
+    }
+    if (actualkey=='b') {
+        grantBuff()
     }
 }
 // Player can't move into whatever is in collisionList
@@ -735,16 +740,12 @@ function levelUp() {
     currentXP -= XPToLevelUp
     currentLevel += 1
     XPToLevelUp += 10
-    currentHP += 5
-    maxHP += 5
-    currentMP += 2
-    maxMP += 2
-    increaseStrength()
-    increaseDexterity()
+    buffs += 2
     
     
 }
 function increaseStrength() {
+    strength += 1
     if (weapon1[3] == 'melee') {
         weapon1[2] += 1
     }
@@ -759,6 +760,7 @@ function increaseStrength() {
     }
 }
 function increaseDexterity() {
+    dexterity += 1
     if (weapon1[3] == 'ranged') {
         weapon1[2] += 1
     }
@@ -772,7 +774,40 @@ function increaseDexterity() {
         weapon4[2] += 1
     }
 }
-
+function grantBuff() {
+    var chosenBuff = prompt(`You have leveled up! You can select a buff now. You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
+    switch (chosenBuff) {
+        case 'melee':
+            increaseStrength()
+            break
+        case 'ranged':
+            increaseDexterity()
+            break
+        case 'hp':
+            maxHP += 5
+            changeHP(5)
+            break
+        case 'mp':
+            maxMP += 2
+            changeMP(2)
+            break
+        case 'gold':
+            gold += goldReward
+            break
+        case 'magic':
+            alert('Your magic increased')
+            break
+        default:
+            alert('Failed buff, please retry')
+            buffs += 1
+    }
+}
+function updateStats() {
+    document.getElementsByClassName('strength')[0].innerHTML = 'STRENGTH '+strength
+    document.getElementsByClassName('dexterity')[0].innerHTML = 'DEXTERITY '+dexterity
+    document.getElementsByClassName('magic')[0].innerHTML = 'MAGIC '+magic
+    document.getElementsByClassName('gold')[0].innerHTML = 'GOLD $'+gold
+}
 // This code following is about the 6 buttons in the Actions panel.
 
 
@@ -1157,6 +1192,8 @@ function mainGameLoop() {
     drawBars()
     displayHP()
     displayMessages() 
+    updateStats()
+    checkforBuff()
 }
 
 // Cheat function
@@ -1166,4 +1203,10 @@ function cheat() {
     currentMP = 1000
     maxMP = 1000
     changeXP(1000)
+}
+function checkforBuff() {
+    if (buffs > 0) {
+        buffs -= 1
+        grantBuff()
+    }
 }
