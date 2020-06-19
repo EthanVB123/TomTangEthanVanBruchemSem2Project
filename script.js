@@ -790,20 +790,25 @@ function grantBuff() {
     switch (chosenBuff) {
         case 'melee':
             increaseStrength()
+            alert('Your Strength increased')
             break
         case 'ranged':
             increaseDexterity()
+            alert('Your Dexterity increased')
             break
         case 'hp':
             maxHP += 5
             changeHP(5)
+            alert('Your HP increased')
             break
         case 'mp':
             maxMP += 2
             changeMP(2)
+            alert('Your MP increased')
             break
         case 'gold':
             gold += goldReward
+            alert('Your gold increased')
             break
         case 'magic':
             alert('Your magic increased')
