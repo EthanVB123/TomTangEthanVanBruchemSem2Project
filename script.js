@@ -1248,5 +1248,5 @@ function floorInformation() {
     }
     roundToTwo();
     // it seems that 56. 00000000001% explored is still displayed after this ~~~
-    document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${num2}% explored`
+    document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${Math.round(num2)}% explored`
 }
