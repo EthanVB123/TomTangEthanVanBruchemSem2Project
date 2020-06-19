@@ -152,7 +152,6 @@ function keypresschecker(e){
         if (currentMP > 0) {
             changeMP(-1)
             changeHP(1)
-            changeXP(1)
         }
     }
     if (actualkey=='1') {
