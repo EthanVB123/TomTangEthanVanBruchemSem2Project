@@ -1241,5 +1241,12 @@ function floorInformation() {
     var num = count/9
     var num2 = num.toFixed(2)
     num2 *= 100
+    Math.round((num + 0.00001) * 100) / 100
+    Math.round((num2 + 0.00001) * 100) / 100
+    function roundToTwo(num2) {    
+        return +(Math.round(num2 + "e+2")  + "e-2");
+    }
+    roundToTwo();
+    // it seems that 56. 00000000001% explored is still displayed after this ~~~
     document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${num2}% explored`
 }
