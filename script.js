@@ -72,7 +72,7 @@ var item4 = ['[Empty]', 0, 0]
 var currentFloor = 1
 var room = 1
 var currentRoom = room1fullstringWithoutPlayer
-var roomsExplored = [0,0,0,0,0,0,0,0,0]
+var roomsExplored = [1,0,0,0,0,0,0,0,0]
 
 var messages = ['No message', 'No message', 'No message', 'No message', 'No message', '11%', '22%', '33%', '44%', '55%', '66%', '77%', '88%', '100%']
 // Elements to change
@@ -1056,6 +1056,7 @@ function initialiseRoom1() {
     playerx = 6
     playery = 6
     addNewMessage('Welcome to Room 1!')
+    roomsExplored[0] = 1
 }
 function initialiseRoom2() {
     room = 2
@@ -1070,6 +1071,7 @@ function initialiseRoom2() {
     currentEnemy3[1] = room2enemies[11]
     currentEnemies = room2enemies
     addNewMessage('Welcome to Room 2!')
+    roomsExplored[1] = 1
 }
 function initialiseRoom3() {
     room = 3
@@ -1086,6 +1088,7 @@ function initialiseRoom3() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 3!')
+    roomsExplored[2] = 1
 }
 function initialiseRoom4() {
     room = 4
@@ -1102,6 +1105,7 @@ function initialiseRoom4() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 4!')
+    roomsExplored[3] = 1
 }
 function initialiseRoom5() {
     room = 5
@@ -1118,6 +1122,7 @@ function initialiseRoom5() {
     playerx = 5
     playery = 2
     addNewMessage('Welcome to Room 5!')
+    roomsExplored[4] = 1
 }
 function initialiseRoom6() {
     room = 6
@@ -1137,6 +1142,7 @@ function initialiseRoom6() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 6!')
+    roomsExplored[5] = 1
 }
 function initialiseRoom7() {
     room = 7
@@ -1153,6 +1159,7 @@ function initialiseRoom7() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 7!')
+    roomsExplored[6] = 1
 }
 function initialiseRoom8() {
     room = 8
@@ -1169,6 +1176,7 @@ function initialiseRoom8() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 8!')
+    roomsExplored[7] = 1
 }
 function initialiseRoom9() {
     room = 9
@@ -1185,6 +1193,7 @@ function initialiseRoom9() {
     playerx = 2
     playery = 4
     addNewMessage('Welcome to Room 9!')
+    roomsExplored[8] = 1
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
@@ -1198,6 +1207,7 @@ function mainGameLoop() {
     displayMessages() 
     updateStats()
     checkforBuff()
+    floorInformation()
 }
 
 // Cheat function
@@ -1206,11 +1216,22 @@ function cheat() {
     maxHP = 1000
     currentMP = 1000
     maxMP = 1000
-    changeXP(1000)
 }
 function checkforBuff() {
     if (buffs > 0) {
         buffs -= 1
         grantBuff()
     }
+}
+function floorInformation() {
+    var count = 0
+    for (i = 0; i <= 9; i++) {
+        if (roomsExplored[i] == 1) {
+            count += 1
+        }
+    }
+    var num = count/9
+    var num2 = num.toFixed(2)
+    num2 *= 100
+    document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${num2}% explored`
 }
