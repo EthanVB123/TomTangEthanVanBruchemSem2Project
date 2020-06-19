@@ -1250,3 +1250,4 @@ function floorInformation() {
     // it seems that 56. 00000000001% explored is still displayed after this ~~~
     document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${Math.round(num2)}% explored`
 }
+//Now it wworks.
