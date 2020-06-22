@@ -744,7 +744,7 @@ function changeEnemy3HP(amount) {
     } else {
         currentEnemy3[4] += amount
     }
-}
+} // Alerts are not working =(
 function changeMP(amount) {
     if (currentMP + amount >= maxMP) {
         currentMP = maxMP

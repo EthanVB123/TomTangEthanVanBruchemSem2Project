@@ -37,6 +37,10 @@ Gold is used to exchange treasures in the shop.
 * Made with git, github and Microsoft VS code.
 
 # CHANGELOG
+VERSION 1.15
+- Major bug fixes: no more enemy glitches.
+- You can gain loot from the chest now.
+- Because of time issue, we might need to reduce the complexity of this project by adding less weapons and creatures.
 VERSION 1.14
 - Added shop, locked door and chests to the map.
 - Added buff selection system. 
