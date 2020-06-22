@@ -22,6 +22,7 @@ var magic = 1;
 var gold = 10;
 var goldReward = 20;
 var buffs = 1;
+var keys = 0;
 
 var playerx = 6;
 var playery = 6;
@@ -61,8 +62,8 @@ var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5
 
 var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
-var weapon1 = ['Your fists', 1, strength, 'melee']
-var weapon2 = ['Throw a rock', 2, dexterity, 'ranged']
+var weapon1 = ['Small knife', 1, strength, 'melee']
+var weapon2 = ['Bow', 2, dexterity, 'ranged']
 var weapon3 = ['[Empty]', 0, 0, 'blank']
 var weapon4 = ['[Empty]', 0, 0, 'blank']
 // Items are [name, MP, effect]
@@ -691,9 +692,13 @@ function changeEnemy1HP(amount) {
         currentEnemy1[4] = currentEnemy1[7]
         currentEnemy1[0] = 2
         currentEnemy1[1] = 2
-        changeXP(currentEnemy1[5])
-        alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
-        currentEnemies[3] = 'dead' 
+        if (Number.isInteger(currentEnemy1[5])) {
+            changeXP(currentEnemy1[5])
+            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+        } else {
+            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+        }
+            currentEnemies[3] = 'dead' 
     } else {
         currentEnemy1[4] += amount
     }
@@ -707,7 +712,12 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
         currentEnemy2[0] = 2
         currentEnemy2[1] = 2
-        changeXP(currentEnemy2[5])
+        if (Number.isInteger(currentEnemy1[5])) {
+            changeXP(currentEnemy1[5])
+            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+        } else {
+            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+        }
         alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         currentEnemies[4] = 'dead' 
     } else {
@@ -722,7 +732,12 @@ function changeEnemy3HP(amount) {
         currentEnemy3[4] = currentEnemy3[7]
         currentEnemy3[0] = 999
         currentEnemy3[1] = 999
-        changeXP(currentEnemy3[5])
+        if (Number.isInteger(currentEnemy1[5])) {
+            changeXP(currentEnemy1[5])
+            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+        } else {
+            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+        }
         alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
         currentEnemies[5] = 'dead'
     } else {
@@ -914,10 +929,18 @@ function changeFloorInfo8() {
 function changeFloorInfo9() {
     document.getElementsByClassName('info10')[0].innerHTML = messages[14]
 }
+// Weapons are [name, MP, damage, type]
+function updateWeaponsAndItems() {
+    document.getElementsByClassName('w1')[0].innerHTML = weapon1[0] + ' ' + weapon1[1] + 'MP ' + weapon1[3]
+    document.getElementsByClassName('w2')[0].innerHTML = weapon2[0] + ' '+ weapon2[1] + 'MP ' + weapon2[3]
+    document.getElementsByClassName('w3')[0].innerHTML = weapon3[0] +' '+ weapon3[1] + 'MP ' + weapon3[3]
+    document.getElementsByClassName('w4')[0].innerHTML = 'Key x'+keys
+}
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
     for (var i = 0; i < currentEnemy1[2]; i++) {
         console.log(currentEnemy1[2])
+
         if (arePlayerAndEnemyAdjacent(currentEnemy1[0], currentEnemy1[1])) {
             addNewMessage(currentEnemy1[6] + ' dealt ' + currentEnemy1[3] + ' damage to you.')
             changeHP(-1*currentEnemy1[3])
@@ -1220,6 +1243,7 @@ function mainGameLoop() {
     updateStats()
     checkforBuff()
     floorInformation()
+    updateWeaponsAndItems()
 }
 
 // Cheat function
@@ -1254,4 +1278,21 @@ function floorInformation() {
     // it seems that 56. 00000000001% explored is still displayed after this ~~~
     document.getElementsByClassName('floorinfo')[0].innerHTML = `Floor: 1 --- ${Math.round(num2)}% explored`
 }
-//Now it wworks.
+//Now it works.
+
+function lootBox() {
+    var randomN = Math.random()
+    if (randomN > 0.9) {
+        changeXP(15)
+        return '15 experience points'
+    } else if (randomN > 0.7) {
+        gold += 30
+        return '30 gold'
+    } else if (randomN > 0.4) {
+        gold += 10
+        return '10 gold'
+    } else {
+        gold += 1
+        return 'Only one gold piece :('
+    }
+}
