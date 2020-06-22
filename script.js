@@ -41,7 +41,7 @@ var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
-var key = [5, 4, 0, 0, 1, 's', 'Key', 1, 'K']
+var key = [5, 4, 0, 0, 1, 'k', 'Key', 1, 'K']
 var boss1 = [6, 6, 4, 4, 100, 100, 'BOSS King Slime', 100, 'k']
 var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 // Enemies in play
@@ -77,7 +77,8 @@ var currentFloor = 1
 var room = 1
 var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [1,0,0,0,0,0,0,0,0]
-
+var lock18unlocked = false
+var lock89unlocked = false
 var messages = ['No message', 'No message', 'No message', 'No message', 'No message', '11%', '22%', '33%', '44%', '55%', '66%', '77%', '88%', '100%']
 // Elements to change
 
@@ -97,7 +98,7 @@ Room structure
 0100000010
 0100000010
 0100000010
-0111111110
+0111111110 
 0000000000
 */
 var room1fullstringWithoutPlayer = '0000w0w0000wwww2www00w$00000w00w000000ww0w000000800w000000ww0w000000w00w000000w00wwww5www00000w0w000'
@@ -204,10 +205,25 @@ function moveLeft() {
         playerx += 1
         currentMP += 1
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
-        room = 1
-        playerx = 5
-        playery = 7
-        initialiseRoom1()
+        if (lock18unlocked == true) {
+            room = 1
+            playerx = 5
+            playery = 7
+            initialiseRoom1()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 1
+            playerx = 5
+            playery = 7
+            initialiseRoom1()
+            lock18unlocked = true
+        } else {
+            playerx += 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
+        
     } else if (currentRoom[(10*playery+playerx)] == '2' ) {
         room = 2
         playerx = 5
@@ -224,10 +240,25 @@ function moveLeft() {
         playery = 7
         initialiseRoom4()
     } else if (currentRoom[(10*playery+playerx)] == '5' ) {
-        room = 5
-        playerx = 5
-        playery = 7
-        initialiseRoom5()
+        
+        if (lock89unlocked == true) {
+            room = 5
+            playerx = 5
+            playery = 7
+            initialiseRoom5()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 5
+            playerx = 5
+            playery = 7
+            initialiseRoom5()
+            lock89unlocked = true
+        } else {
+            playerx += 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
     } else if (currentRoom[(10*playery+playerx)] == '6' ) {
         room = 6
         playerx = 5
@@ -238,7 +269,7 @@ function moveLeft() {
         playerx = 5
         playery = 7
         initialiseRoom7()
-    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
+    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
         room = 8
         playerx = 5
         playery = 7
@@ -291,16 +322,46 @@ function moveRight() {
         playerx = 5
         playery = 7
         initialiseRoom7()
-    }else if (currentRoom[(10*playery+playerx)] == '8' ) {
-        room = 8
-        playerx = 5
-        playery = 7
-        initialiseRoom8()
+    } else if (currentRoom[(10*playery+playerx)] == '8' ) {
+        
+        if (lock18unlocked == true) {
+            room = 8
+            playerx = 5
+            playery = 7
+            initialiseRoom8()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 8
+            playerx = 5
+            playery = 7
+            initialiseRoom8()
+            lock18unlocked = true
+        } else {
+            playerx -= 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
     } else if (currentRoom[(10*playery+playerx)] == '9' ) {
-        room = 9
-        playerx = 5
-        playery = 7
-        initialiseRoom9()
+        
+        if (lock89unlocked == true) {
+            room = 9
+            playerx = 5
+            playery = 7
+            initialiseRoom9()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 9
+            playerx = 5
+            playery = 7
+            initialiseRoom9()
+            lock89unlocked = true
+        } else {
+            playerx -= 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
     } 
 }
 function moveUp() {
@@ -696,8 +757,11 @@ function changeEnemy1HP(amount) {
         if (Number.isInteger(currentEnemy1[5])) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
-        } else {
+        } else if (currentEnemy1[5] = 's') {
             alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+        } else {
+            keys += 1
+            alert(`You found a key! You now have ${keys} keys!`)
         }
             currentEnemies[3] = 'dead' 
     } else {
@@ -713,13 +777,12 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
         currentEnemy2[0] = 2
         currentEnemy2[1] = 2
-        if (Number.isInteger(currentEnemy1[5])) {
-            changeXP(currentEnemy1[5])
-            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+        if (Number.isInteger(currentEnemy2[5])) {
+            changeXP(currentEnemy2[5])
+            alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         } else {
-            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+            alert('You killed a '+currentEnemy2[6]+' and gained '+lootBox())
         }
-        alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         currentEnemies[4] = 'dead' 
     } else {
         currentEnemy2[4] += amount
@@ -733,13 +796,12 @@ function changeEnemy3HP(amount) {
         currentEnemy3[4] = currentEnemy3[7]
         currentEnemy3[0] = 999
         currentEnemy3[1] = 999
-        if (Number.isInteger(currentEnemy1[5])) {
-            changeXP(currentEnemy1[5])
-            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+        if (Number.isInteger(currentEnemy3[5])) {
+            changeXP(currentEnemy3[5])
+            alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
         } else {
-            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+            alert('You killed a '+currentEnemy3[6]+' and gained '+lootBox())
         }
-        alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
         currentEnemies[5] = 'dead'
     } else {
         currentEnemy3[4] += amount
