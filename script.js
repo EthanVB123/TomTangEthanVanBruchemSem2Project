@@ -873,18 +873,18 @@ function displayHP() {
     if (currentEnemies[3] == 'alive') {
         enemy1str = currentEnemy1[6] + ': '+ currentEnemy1[4] + ' / ' + currentEnemy1[7]
     } else {
-        enemy1str = '-- No Enemy --'
+        enemy1str = 'Placeholder: 0 / 0'
     }
     if (currentEnemies[4] == 'alive') {
         enemy2str = currentEnemy2[6] + ': '+ currentEnemy2[4] + ' / ' + currentEnemy2[7]
     } else {
-        enemy2str = '-- No Enemy --'
+        enemy2str = 'Placeholder: 0 / 0'
     }
     if (currentEnemies[5] == 'alive') {
         enemy3str = currentEnemy3[6] + ': '+ currentEnemy3[4] + ' / ' + currentEnemy3[7]
         
     } else {
-        enemy3str = '-- No Enemy --'
+        enemy3str = 'Placeholder: 0 / 0'
     }
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
     document.getElementsByClassName('info2')[0].innerHTML = enemy2str
