@@ -4,6 +4,8 @@ var maxHP = 10;
 var HPbar = document.getElementsByClassName('HPbar')[0]
 var percentHP = currentHP / maxHP
 
+var hpPotionAmount = 1
+var mpPotionAmount = 1
 
 var currentMP = 5;
 var maxMP = 5;
@@ -178,6 +180,14 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
+    if (actualkey=='5') {
+        hpPotion()
+        removehpPotion()
+    }
+    if (actualkey=='6') {
+        mpPotion()
+        removempPotion()
+    }
     if (actualkey=='c') {
         cheat()
     }
@@ -185,6 +195,25 @@ function keypresschecker(e){
         grantBuff()
     }
 }
+// HP and MP potions' functions
+function hpPotion() {
+    currentHP = maxHP
+}
+function removehpPotion() {
+    hpPotionAmount = 0
+}
+
+function mpPotion() {
+    currentMP = maxMP
+}
+function removempPotion() {
+    mpPotionAmount = 0
+}
+
+if (hpPotionAmount == 0) {
+    alert('You do not have any HP potions)
+}
+
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
 var collisionList = ['w','g','b','r','s','k','$','c','K',]
