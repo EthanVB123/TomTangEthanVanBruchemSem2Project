@@ -800,21 +800,12 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
         currentEnemy2[4] = currentEnemy2[7]
-<<<<<<< HEAD
         currentEnemy2[0] = 2
         currentEnemy2[1] = 2
         if (Number.isInteger(currentEnemy2[5])) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         } else if (currentEnemy2[5] = 's') {
-=======
-        currentEnemy2[0] = 999
-        currentEnemy2[1] = 999
-        if (Number.isInteger(currentEnemy1[5])) {
-            changeXP(currentEnemy1[5])
-            alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
-        } else {
->>>>>>> dad0ebd9c112e51f9e7d8f0ddf3b6556fc9f9762
             alert('You killed a '+currentEnemy2[6]+' and gained '+lootBox())
         } else {
             keys += 1
