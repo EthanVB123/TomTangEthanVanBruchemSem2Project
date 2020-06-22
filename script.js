@@ -210,10 +210,6 @@ function removempPotion() {
     mpPotionAmount = 0
 }
 
-if (hpPotionAmount == 0) {
-    alert('You do not have any HP potions)
-}
-
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
 var collisionList = ['w','g','b','r','s','k','$','c','K',]
