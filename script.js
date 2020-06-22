@@ -1286,14 +1286,18 @@ function lootBox() {
     if (randomN > 0.9) {
         changeXP(15)
         return '15 experience points'
+        alert('You gained 15 XP from the chest!')
     } else if (randomN > 0.7) {
         gold += 30
         return '30 gold'
+        alert('You gained 30 gold from the chest!')
     } else if (randomN > 0.4) {
         gold += 10
         return '10 gold'
+        alert('You gained 10 gold from the chest!')
     } else {
         gold += 1
         return 'Only one gold piece :('
+        alert('You gained 1 gold from the chest :(')
     }
 }
