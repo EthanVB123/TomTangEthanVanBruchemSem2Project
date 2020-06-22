@@ -51,12 +51,12 @@ var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
-var room2enemies = [enemy2, enemy1, placeholder, 'alive', 'alive', 'dead', 4,5, 3,3, 9,9]
-var room3enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,3, 4,4, 0,0]
-var room4enemies = [enemy3, chest, key, 'alive', 'alive', 'alive', 3,5, 7,6, 5,4]
-var room5enemies = [enemy2, enemy1, placeholder, 'alive', 'alive', 'dead', 4,5, 3,3, 9,9]
-var room6enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,3, 4,4, 0,0]
-var room7enemies = [enemy3, chest, key, 'alive', 'alive', 'alive', 3,5, 7,6, 5,4]
+var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room3enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room4enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
+var room5enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room7enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
 
@@ -565,7 +565,7 @@ function updateMap() {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'z') {
-            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/entirelyWhiteSquare.png'
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'c') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Chest.png'
@@ -691,8 +691,8 @@ function changeEnemy1HP(amount) {
         currentEnemy1[4] = currentEnemy1[7]
     } else if (currentEnemy1[4] + amount <= 0) {
         currentEnemy1[4] = currentEnemy1[7]
-        currentEnemy1[0] = 2
-        currentEnemy1[1] = 2
+        currentEnemy1[0] = 999
+        currentEnemy1[1] = 999
         if (Number.isInteger(currentEnemy1[5])) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
@@ -711,8 +711,8 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
         currentEnemy2[4] = currentEnemy2[7]
-        currentEnemy2[0] = 2
-        currentEnemy2[1] = 2
+        currentEnemy2[0] = 999
+        currentEnemy2[1] = 999
         if (Number.isInteger(currentEnemy1[5])) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
