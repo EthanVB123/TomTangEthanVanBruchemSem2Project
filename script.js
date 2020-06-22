@@ -4,6 +4,8 @@ var maxHP = 10;
 var HPbar = document.getElementsByClassName('HPbar')[0]
 var percentHP = currentHP / maxHP
 
+var hpPotionAmount = 1
+var mpPotionAmount = 1
 
 var currentMP = 5;
 var maxMP = 5;
@@ -51,12 +53,12 @@ var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
-var room2enemies = [enemy2, enemy1, placeholder, 'alive', 'alive', 'dead', 4,5, 3,3, 9,9]
-var room3enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,3, 4,4, 0,0]
-var room4enemies = [enemy3, chest, key, 'alive', 'alive', 'alive', 3,5, 7,6, 5,4]
-var room5enemies = [enemy2, enemy1, placeholder, 'alive', 'alive', 'dead', 4,5, 3,3, 9,9]
-var room6enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'dead',3,3, 4,4, 0,0]
-var room7enemies = [enemy3, chest, key, 'alive', 'alive', 'alive', 3,5, 7,6, 5,4]
+var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room3enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room4enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
+var room5enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room7enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
 
@@ -179,6 +181,14 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
+    if (actualkey=='5') {
+        hpPotion()
+        removehpPotion()
+    }
+    if (actualkey=='6') {
+        mpPotion()
+        removempPotion()
+    }
     if (actualkey=='c') {
         cheat()
     }
@@ -186,6 +196,21 @@ function keypresschecker(e){
         grantBuff()
     }
 }
+// HP and MP potions' functions
+function hpPotion() {
+    currentHP = maxHP
+}
+function removehpPotion() {
+    hpPotionAmount = 0
+}
+
+function mpPotion() {
+    currentMP = maxMP
+}
+function removempPotion() {
+    mpPotionAmount = 0
+}
+
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
 var collisionList = ['w','g','b','r','s','k','$','c','K',]
@@ -626,7 +651,7 @@ function updateMap() {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'z') {
-            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/entirelyWhiteSquare.png'
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
             splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'c') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Others/Chest.png'
@@ -752,8 +777,8 @@ function changeEnemy1HP(amount) {
         currentEnemy1[4] = currentEnemy1[7]
     } else if (currentEnemy1[4] + amount <= 0) {
         currentEnemy1[4] = currentEnemy1[7]
-        currentEnemy1[0] = 2
-        currentEnemy1[1] = 2
+        currentEnemy1[0] = 999
+        currentEnemy1[1] = 999
         if (Number.isInteger(currentEnemy1[5])) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
@@ -775,11 +800,19 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
         currentEnemy2[4] = currentEnemy2[7]
+<<<<<<< HEAD
         currentEnemy2[0] = 2
         currentEnemy2[1] = 2
         if (Number.isInteger(currentEnemy2[5])) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
+=======
+        currentEnemy2[0] = 999
+        currentEnemy2[1] = 999
+        if (Number.isInteger(currentEnemy1[5])) {
+            changeXP(currentEnemy1[5])
+            alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
+>>>>>>> 5001bedcd7de841fda7995a67bc32c740c2c8f6d
         } else {
             alert('You killed a '+currentEnemy2[6]+' and gained '+lootBox())
         }
@@ -806,7 +839,7 @@ function changeEnemy3HP(amount) {
     } else {
         currentEnemy3[4] += amount
     }
-}
+} // Alerts are not working =(
 function changeMP(amount) {
     if (currentMP + amount >= maxMP) {
         currentMP = maxMP
@@ -935,18 +968,18 @@ function displayHP() {
     if (currentEnemies[3] == 'alive') {
         enemy1str = currentEnemy1[6] + ': '+ currentEnemy1[4] + ' / ' + currentEnemy1[7]
     } else {
-        enemy1str = '-- No Enemy --'
+        enemy1str = 'Placeholder: 0 / 0'
     }
     if (currentEnemies[4] == 'alive') {
         enemy2str = currentEnemy2[6] + ': '+ currentEnemy2[4] + ' / ' + currentEnemy2[7]
     } else {
-        enemy2str = '-- No Enemy --'
+        enemy2str = 'Placeholder: 0 / 0'
     }
     if (currentEnemies[5] == 'alive') {
         enemy3str = currentEnemy3[6] + ': '+ currentEnemy3[4] + ' / ' + currentEnemy3[7]
         
     } else {
-        enemy3str = '-- No Enemy --'
+        enemy3str = 'Placeholder: 0 / 0'
     }
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
     document.getElementsByClassName('info2')[0].innerHTML = enemy2str
@@ -1348,14 +1381,18 @@ function lootBox() {
     if (randomN > 0.9) {
         changeXP(15)
         return '15 experience points'
+        alert('You gained 15 XP from the chest!')
     } else if (randomN > 0.7) {
         gold += 30
         return '30 gold'
+        alert('You gained 30 gold from the chest!')
     } else if (randomN > 0.4) {
         gold += 10
         return '10 gold'
+        alert('You gained 10 gold from the chest!')
     } else {
         gold += 1
         return 'Only one gold piece :('
+        alert('You gained 1 gold from the chest :(')
     }
 }
