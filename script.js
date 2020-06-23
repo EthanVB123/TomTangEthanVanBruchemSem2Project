@@ -49,7 +49,7 @@ var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
-// enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
+// enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y].
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
 var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
