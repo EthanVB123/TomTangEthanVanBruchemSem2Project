@@ -36,9 +36,9 @@ var playery = 6;
 // skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 1, 2, 4, 5, 'Green Slime', 4, 'g']
-var enemy2 = [4, 5, 2, 3, 8, 10, 'Blue Slime', 8, 'b']
-var enemy3 = [3, 5, 3, 4, 12, 20, 'Red Slime', 12,'r']
+var enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+var enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
@@ -55,10 +55,10 @@ var currentEnemy3 = enemy3
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
 var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
-var room3enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room3enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
 var room4enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room5enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
-var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
+var room6enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
 var room7enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
