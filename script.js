@@ -37,20 +37,20 @@ var playery = 6;
 // skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 1, 1, 3, 4, 'Green Slime', 3, 'g']
-var enemy2 = [4, 5, 2, 3, 5, 10, 'Blue Slime', 5, 'b']
-var enemy3 = [3, 5, 3, 5, 10, 25, 'Red Slime', 10,'r']
+var enemy1 = [3, 3, 2, 2, 5, 4, 'Green Slime', 4, 'g']
+var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 7, 'b']
+var enemy3 = [3, 5, 4, 4, 20, 25, 'Red Slime', 13,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
-var boss1 = [6, 6, 4, 4, 100, 100, 'BOSS King Slime', 100, 'k']
+var boss1 = [6, 6, 5, 6, 200, 150, 'BOSS King Slime', 150, 'k']
 var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 // Enemies in play
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
-// enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y]
+// enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y].
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
 var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
@@ -181,11 +181,11 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
-    if (actualkey=='5') {
+    if (actualkey=='5' && hpPotionAmount != 0) {
         hpPotion()
         removehpPotion()
     }
-    if (actualkey=='6') {
+    if (actualkey=='6'&& mpPotionAmount != 0) {
         mpPotion()
         removempPotion()
     }

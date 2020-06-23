@@ -39,10 +39,12 @@ Gold is used to exchange treasures in the shop.
 # CHANGELOG
 VERSION 1.17
 - We have fixed the ranged weapons by removing them! We now have 3 weapons which work.
+- Balance update, buffs the enemies.
 
 VERSION 1.16
 - Keys work now, and you grab them by walking over them.
 - So do locks!
+- MP and HP potions.
 - Minor bug fixes
 
 VERSION 1.15
