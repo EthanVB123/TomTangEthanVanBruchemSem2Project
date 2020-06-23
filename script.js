@@ -65,7 +65,7 @@ var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5
 
 var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
-var weapon1 = ['Small knife', 1, strength, 'melee']
+var weapon1 = ['-Small knife [1]', 1, strength, 'melee']
 var weapon2 = ['Bow', 2, dexterity, 'ranged']
 var weapon3 = ['[Empty]', 0, 0, 'blank']
 var weapon4 = ['[Empty]', 0, 0, 'blank']
