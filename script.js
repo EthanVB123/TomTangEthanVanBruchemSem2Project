@@ -42,7 +42,6 @@ var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 7, 'b']
 var enemy3 = [3, 5, 4, 4, 20, 25, 'Red Slime', 13,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
-var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
 var boss1 = [6, 6, 5, 6, 200, 150, 'BOSS King Slime', 150, 'k']
 var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
@@ -52,7 +51,7 @@ var currentEnemy2 = enemy2
 var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y].
 // A bug is thrown if two of the same enemies are in the room!
-var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
+var room1enemies = [enemy1, lock, placeholder, 'alive', 'alive', 'alive',3,3, 8,4, 9,9]
 var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
 var room3enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
 var room4enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
@@ -213,7 +212,7 @@ function removempPotion() {
 
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
-var collisionList = ['w','g','b','r','s','k','$','c']
+var collisionList = ['w','g','b','r','s','k','c']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -236,8 +235,10 @@ function moveLeft() {
             getRoom7Key()
         }
 
-    }
-        else if (currentRoom[(10*playery+playerx)] == '1' ) {
+    } else if (currentRoom[(10*playery+playerx)] == '$') {
+        playerx += 1
+        goToShop()
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         if (lock18unlocked == true) {
             room = 1
             playerx = 5
@@ -327,6 +328,9 @@ function moveRight() {
             getRoom7Key()
         }
 
+    } else if (currentRoom[(10*playery+playerx)] == '$') {
+        playerx -= 1
+        goToShop()
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
@@ -417,6 +421,9 @@ function moveUp() {
             getRoom7Key()
         }
 
+    } else if (currentRoom[(10*playery+playerx)] == '$') {
+        playery += 1
+        goToShop()
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
@@ -477,6 +484,9 @@ function moveDown() {
             getRoom7Key()
         }
 
+    } else if (currentRoom[(10*playery+playerx)] == '$') {
+        playery -= 1
+        goToShop()
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
@@ -1413,6 +1423,8 @@ function goToShop() {
     var purchased = prompt(`You have $${gold}. A HP potion costs $10. A MP potion costs $15. A buff currently costs ${priceOfBuff}. \r\n Type HP to buy HP, type MP to buy MP, type buff to buy a buff. \r\n Type quit to leave the store.`)
     switch(purchased) {
         case 'HP':
+        case 'hp':
+        case 'h':
             if (gold >= 10) {
                 gold -= 10
                 alert('You bought a HP potion!')
@@ -1422,7 +1434,10 @@ function goToShop() {
                 alert("You can't afford that.")
                 goToShop()
             }
+            break
         case 'MP':
+        case 'mp':
+        case 'm':
             if (gold >= 15) {
                 gold -= 15
                 alert('You bought a MP potion!')
@@ -1432,7 +1447,9 @@ function goToShop() {
                 alert("You can't afford that.")
                 goToShop()
             }
+            break
         case 'buff':
+        case 'b':
             if (gold >= priceOfBuff) {
                 gold -= priceOfBuff
                 grantBuff()
@@ -1442,8 +1459,12 @@ function goToShop() {
                 alert("You can't afford that.")
                 goToShop()
             }
-        case 'quit':
             break
+        case 'quit':
+        default:
+        alert('Thanks for your buisness! See you again soon!')
+            break
+        
     }   
 
 }
