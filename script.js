@@ -43,7 +43,6 @@ var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
-var key = [5, 4, 0, 0, 1, 'k', 'Key', 1, 'K']
 var boss1 = [6, 6, 4, 4, 100, 100, 'BOSS King Slime', 100, 'k']
 var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
 // Enemies in play
@@ -55,10 +54,10 @@ var currentEnemy3 = enemy3
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
 var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
 var room3enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
-var room4enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
+var room4enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room5enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
 var room6enemies = [enemy2, enemy3, placeholder, 'alive', 'alive', 'alive',4,5, 3,5, 0,0]
-var room7enemies = [chest, key, placeholder, 'alive', 'alive', 'alive', 7,6, 5,4, 0,0]
+var room7enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
 var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
 
@@ -213,7 +212,7 @@ function removempPotion() {
 
 // Player can't move into whatever is in collisionList
 // Collision list contains Wall, Green Slime, Blue Slime, Red Slime, and more.
-var collisionList = ['w','g','b','r','s','k','$','c','K',]
+var collisionList = ['w','g','b','r','s','k','$','c']
 function canYouGoHere() {
     var x = true
     for (i = 0; i < collisionList.length; i++) {
@@ -229,7 +228,15 @@ function moveLeft() {
     if (canYouGoHere() == false) {
         playerx += 1
         currentMP += 1
-    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
+    } else if (currentRoom[(10*playery+playerx)] == 'K') {
+        if (room = 4) {
+            getRoom4Key()
+        } else if (room = 7) {
+            getRoom7Key()
+        }
+
+    }
+        else if (currentRoom[(10*playery+playerx)] == '1' ) {
         if (lock18unlocked == true) {
             room = 1
             playerx = 5
@@ -312,6 +319,13 @@ function moveRight() {
     if (canYouGoHere() == false) {
         playerx -= 1
         currentMP += 1
+    } else if (currentRoom[(10*playery+playerx)] == 'K') {
+        if (room = 4) {
+            getRoom4Key()
+        } else if (room = 7) {
+            getRoom7Key()
+        }
+
     } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
@@ -395,7 +409,14 @@ function moveUp() {
     if (canYouGoHere() == false) {
         playery += 1
         currentMP += 1
-    }  else if (currentRoom[(10*playery+playerx)] == '1' ) {
+    } else if (currentRoom[(10*playery+playerx)] == 'K') {
+        if (room = 4) {
+            getRoom4Key()
+        } else if (room = 7) {
+            getRoom7Key()
+        }
+
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
         playery = 7
@@ -448,7 +469,14 @@ function moveDown() {
     if (canYouGoHere() == false) {
         playery -= 1
         currentMP += 1
-    }  else if (currentRoom[(10*playery+playerx)] == '1' ) {
+    } else if (currentRoom[(10*playery+playerx)] == 'K') {
+        if (room = 4) {
+            getRoom4Key()
+        } else if (room = 7) {
+            getRoom7Key()
+        }
+
+    } else if (currentRoom[(10*playery+playerx)] == '1' ) {
         room = 1
         playerx = 5
         playery = 7
@@ -1395,3 +1423,14 @@ function lootBox() {
     }
 }
 
+// Functions to remove keys
+function getRoom4Key() {
+    keys += 1
+    room4fullstringWithoutPlayer = room4fullstringWithoutPlayer.substr(0, 45) + '0' + room4fullstringWithoutPlayer.substr(46,99)
+    addNewMessage('You got the Room 4 key!')
+}
+function getRoom7Key() {
+    keys += 1
+    room7fullstringWithoutPlayer = room7fullstringWithoutPlayer.substr(0, 45) + '0' + room7fullstringWithoutPlayer.substr(46,99)
+    addNewMessage('You got the room 7 key!')
+}
