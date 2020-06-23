@@ -229,9 +229,9 @@ function moveLeft() {
         playerx += 1
         currentMP += 1
     } else if (currentRoom[(10*playery+playerx)] == 'K') {
-        if (room = 4) {
+        if (room == 4) {
             getRoom4Key()
-        } else if (room = 7) {
+        } else if (room == 7) {
             getRoom7Key()
         }
 
@@ -320,9 +320,9 @@ function moveRight() {
         playerx -= 1
         currentMP += 1
     } else if (currentRoom[(10*playery+playerx)] == 'K') {
-        if (room = 4) {
+        if (room == 4) {
             getRoom4Key()
-        } else if (room = 7) {
+        } else if (room == 7) {
             getRoom7Key()
         }
 
@@ -410,9 +410,9 @@ function moveUp() {
         playery += 1
         currentMP += 1
     } else if (currentRoom[(10*playery+playerx)] == 'K') {
-        if (room = 4) {
+        if (room == 4) {
             getRoom4Key()
-        } else if (room = 7) {
+        } else if (room == 7) {
             getRoom7Key()
         }
 
@@ -1366,6 +1366,7 @@ function mainGameLoop() {
     checkforBuff()
     floorInformation()
     updateWeaponsAndItems()
+    console.log(room)
 }
 
 // Cheat function
