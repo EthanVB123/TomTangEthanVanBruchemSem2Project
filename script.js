@@ -46,7 +46,7 @@ var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
 var boss1 = [6, 6, 4, 4, 50, 50, 'BOSS King Slime', 50, 'k']
 var boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime', 100, 'k']
 var boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime', 150, 'k']
-var placeholder = [0,0,0,0,0,0,'Placeholder',0,'z']
+var No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
 // Enemies in play
 var currentEnemy1 = enemy1
 var currentEnemy2 = enemy2
@@ -54,14 +54,14 @@ var currentEnemy3 = enemy3
 // enemies are [enemy, enemy, enemy, alive, alive, alive, enemy1.x, enemy1y, enemy2x, enemy2y, enemy3x, enemy3y].
 // A bug is thrown if two of the same enemies are in the room!
 var room1enemies = [enemy1, lock, shop, 'alive', 'alive', 'alive',3,3, 8,4, 2,2]
-var room2enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
-var room3enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
-var room4enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
-var room5enemies = [enemy1, enemy2, placeholder, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
-var room6enemies = [enemy1, enemy3, placeholder, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
-var room7enemies = [chest, placeholder, placeholder, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
+var room2enemies = [enemy1, enemy2, No_Enemy_In_Room, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room3enemies = [enemy1, enemy3, No_Enemy_In_Room, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
+var room4enemies = [chest, No_Enemy_In_Room, No_Enemy_In_Room, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
+var room5enemies = [enemy1, enemy2, No_Enemy_In_Room, 'alive', 'alive', 'alive', 3,3, 4,5, 9,9]
+var room6enemies = [enemy1, enemy3, No_Enemy_In_Room, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
+var room7enemies = [chest, No_Enemy_In_Room, No_Enemy_In_Room, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
+var room9enemies = [boss1, No_Enemy_In_Room, No_Enemy_In_Room, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
 
 
 var currentEnemies = room1enemies
@@ -531,17 +531,17 @@ function attack(weapon) {
             console.log('Enemy 1')
             changeMP(-1*weapon[1])
             changeEnemy1HP(-1*weapon[2])
-            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
         } else if (arePlayerAndEnemy2Adjacent() == true) {
             console.log('Enemy 2')
             changeMP(-1*weapon[1])
             changeEnemy2HP(-1*weapon[2])
-            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
         } else if (arePlayerAndEnemy3Adjacent() == true) {
             console.log('Enemy 3')
             changeMP(-1*weapon[1])
             changeEnemy3HP(-1*weapon[2])
-            addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
+            addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
             console.log(-1*weapon[2])
         } else { addNewMessage("You're not adjacent.")}
     } 
@@ -967,18 +967,18 @@ function displayHP() {
     if (currentEnemies[3] == 'alive') {
         enemy1str = currentEnemy1[6] + ': '+ currentEnemy1[4] + ' / ' + currentEnemy1[7]
     } else {
-        enemy1str = 'Placeholder: 0 / 0'
+        enemy1str = 'No_Enemy_In_Room'
     }
     if (currentEnemies[4] == 'alive') {
         enemy2str = currentEnemy2[6] + ': '+ currentEnemy2[4] + ' / ' + currentEnemy2[7]
     } else {
-        enemy2str = 'Placeholder: 0 / 0'
+        enemy2str = 'No_Enemy_In_Room'
     }
     if (currentEnemies[5] == 'alive') {
         enemy3str = currentEnemy3[6] + ': '+ currentEnemy3[4] + ' / ' + currentEnemy3[7]
         
     } else {
-        enemy3str = 'Placeholder: 0 / 0'
+        enemy3str = 'No_Enemy_In_Room'
     }
     document.getElementsByClassName('info1')[0].innerHTML = enemy1str
     document.getElementsByClassName('info2')[0].innerHTML = enemy2str
