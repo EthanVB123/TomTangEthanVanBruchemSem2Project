@@ -272,25 +272,11 @@ function moveLeft() {
         playery = 7
         initialiseRoom4()
     } else if (currentRoom[(10*playery+playerx)] == '5' ) {
+        room = 5
+            playerx = 5
+            playery = 7
+            initialiseRoom5()
         
-        if (lock89unlocked == true) {
-            room = 5
-            playerx = 5
-            playery = 7
-            initialiseRoom5()
-        } else if (keys > 0) {
-            keys -= 1
-            alert('You consumed a key. This door is now unlocked.')
-            room = 5
-            playerx = 5
-            playery = 7
-            initialiseRoom5()
-            lock89unlocked = true
-        } else {
-            playerx += 1
-            currentMP += 1
-            alert('The door is locked. You need a key to get in.')
-        }
     } else if (currentRoom[(10*playery+playerx)] == '6' ) {
         room = 6
         playerx = 5
@@ -302,10 +288,24 @@ function moveLeft() {
         playery = 7
         initialiseRoom7()
     } else if (currentRoom[(10*playery+playerx)] == '8' ) {
-        room = 8
-        playerx = 5
-        playery = 7
-        initialiseRoom8()
+        if (lock89unlocked == true) {
+            room = 8
+            playerx = 5
+            playery = 7
+            initialiseRoom8()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 8
+            playerx = 5
+            playery = 7
+            initialiseRoom8()
+            lock89unlocked = true
+        } else {
+            playerx += 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
     } else if (currentRoom[(10*playery+playerx)] == '9' ) {
         room = 9
         playerx = 5
