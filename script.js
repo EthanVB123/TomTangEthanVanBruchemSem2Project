@@ -64,9 +64,9 @@ var room9enemies = [boss1, placeholder, placeholder, 'alive', 'dead', 'dead',3,5
 
 var currentEnemies = room1enemies
 // Weapons are [name, MP, damage, type]
-var weapon1 = ['-Small knife [1]', 1, strength, 'melee']
-var weapon2 = ['Bow', 2, dexterity, 'ranged']
-var weapon3 = ['[Empty]', 0, 0, 'blank']
+var weapon1 = ['Small knife [1]', 1, 1, 'Strength']
+var weapon2 = ['Flail [2]', 2, 3, 'Dexterity']
+var weapon3 = ['Magic Hammer [3]', 3, 5, 'Magic']
 var weapon4 = ['[Empty]', 0, 0, 'blank']
 // Items are [name, MP, effect]
 var item1 = ['[Empty]', 0, 0]
@@ -525,7 +525,6 @@ function moveDown() {
 }
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
-    if (weapon[3] == 'melee') {
         if (arePlayerAndEnemy1Adjacent() == true) {
             console.log('Enemy 1')
             changeMP(-1*weapon[1])
@@ -544,18 +543,7 @@ function attack(weapon) {
             console.log(-1*weapon[2])
         } else { addNewMessage("You're not adjacent.")}
     } 
-    if (weapon[3] == 'ranged') {
-        // Currently only attacks enemy 1
-        changeMP(-1*weapon[1])
         
-        changeEnemy1HP(-1*weapon[2])
-        addNewMessage('You dealt '+weapon[2]+' damage to an enemy at the cost of '+weapon[1]+' mana points.')
-    } 
-    if (weapon[3] == 'blank' ) {
-        addNewMessage('No weapon equipped.')
-    }
-        
-}
 
 // updateMap: the room variable is a 100char string variable
 // The add player function also changes the room
@@ -894,33 +882,15 @@ function levelUp() {
 }
 function increaseStrength() {
     strength += 1
-    if (weapon1[3] == 'melee') {
-        weapon1[2] += 1
-    }
-    if (weapon2[3] == 'melee') {
-        weapon2[2] += 1
-    }
-    if (weapon3[3] == 'melee') {
-        weapon3[2] += 1
-    }
-    if (weapon4[3] == 'melee') {
-        weapon4[2] += 1
-    }
+    weapon1[2] += 1
 }
 function increaseDexterity() {
     dexterity += 1
-    if (weapon1[3] == 'ranged') {
-        weapon1[2] += 1
-    }
-    if (weapon2[3] == 'ranged') {
-        weapon2[2] += 1
-    }
-    if (weapon3[3] == 'ranged') {
-        weapon3[2] += 1
-    }
-    if (weapon4[3] == 'ranged') {
-        weapon4[2] += 1
-    }
+    weapon2[2] += 2
+}
+function increaseMagic() {
+    magic += 1
+    weapon3[2] += 3
 }
 function grantBuff() {
     var chosenBuff = prompt(`Leveling Up! Please select a buff!  You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
@@ -949,6 +919,7 @@ function grantBuff() {
             break
         case 'magic':
             alert('Your magic increased')
+            increaseMagic()
             break
         default:
             alert('Failed buff, please retry')
