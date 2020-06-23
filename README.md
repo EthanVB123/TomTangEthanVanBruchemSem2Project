@@ -95,7 +95,7 @@ VERSION 1.2
 - I can now change the map from the code.
 
 VERSION 1.1
-- Added a map of 100 <div>s, with placeholder images of Blue Slime
+- Added a map of 100 divs, with placeholder images of Blue Slime
   
 VERSION 1.0
 - HTML at a basic standard, map not done.
