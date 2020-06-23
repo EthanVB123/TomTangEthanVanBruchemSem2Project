@@ -13,21 +13,22 @@ Link: https://ethanvb123.github.io/TomTangEthanVanBruchemSem2Project/
 HP bar indicates your health points.
 MP bar indicates your movement points which is consumed by any action. When it is empty, you have to use MP potion or end the turn.
 XP bar indicates your exp, and when it fills, your level increases. 
-If the Level increases, your health, movement and attack strength will all increase.
+If the Level increases, two of your health, gold, movement and attack strength will increase. (more on that later)
 The higher the level, the more XP points you are required to obtain to get them.
 
 Move the player with the WASD keys. (If they don't work, try turning off the caps lock.)
 
 Use the 1-3 keys to attack with corresponding weapons.
-Use the 4 key to open locks with keys you obtained.
 Use 5 and 6 to heal HP and MP with potions.
+
+Walk over keys to pick them up and shops to shop for potions and buffs.
 
 z ends your turn, refilling your MP and letting the enemies move and attack.
 x heals you and gives you XP, at the cost of MP.
 
-There is a cheat button, but we're not telling you what it is!
+There is a cheat button, but we're not telling you what it is! (also a hidden buff button)
 
-Use 1 to shop and open chests if you are close to them.
+Use 1 to open chests if you are close to them.
 
 Strength, dexterity and magic mark the attack you can do with melee, ranged and magic weapons. Increased when leveling up.
 Gold is used to exchange treasures in the shop. 
@@ -37,6 +38,10 @@ Gold is used to exchange treasures in the shop.
 * Made with git, github and Microsoft VS code.
 
 # CHANGELOG
+VERSION 1.18
+- Coded a functional shop system to buy buffs and potions in.
+- Boss has different stages now.
+
 VERSION 1.17
 - We have fixed the ranged weapons by removing them! We now have 3 weapons which work.
 - Balance update, buffs the enemies.
