@@ -36,9 +36,9 @@ var playery = 6;
 // skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 2, 2, 5, 4, 'Green Slime', 4, 'g']
-var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 7, 'b']
-var enemy3 = [3, 5, 4, 4, 20, 25, 'Red Slime', 13,'r']
+var enemy1 = [3, 3, 1, 2, 4, 5, 'Green Slime', 4, 'g']
+var enemy2 = [4, 5, 2, 3, 8, 10, 'Blue Slime', 8, 'b']
+var enemy3 = [3, 5, 3, 4, 12, 20, 'Red Slime', 12,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var shop = [2, 2, 0, 0, 1, 's', 'Shop', 1, '$']
