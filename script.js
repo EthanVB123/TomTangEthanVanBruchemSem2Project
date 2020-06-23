@@ -25,6 +25,7 @@ var gold = 10;
 var goldReward = 20;
 var buffs = 1;
 var keys = 0;
+var priceOfBuff = 25;
 
 var playerx = 6;
 var playery = 6;
@@ -1405,4 +1406,44 @@ function getRoom7Key() {
     keys += 1
     room7fullstringWithoutPlayer = room7fullstringWithoutPlayer.substr(0, 45) + '0' + room7fullstringWithoutPlayer.substr(46,99)
     addNewMessage('You got the room 7 key!')
+}
+
+function goToShop() {
+    alert('Welcome to the shop!')
+    var purchased = prompt(`You have $${gold}. A HP potion costs $10. A MP potion costs $15. A buff currently costs ${priceOfBuff}. \r\n Type HP to buy HP, type MP to buy MP, type buff to buy a buff. \r\n Type quit to leave the store.`)
+    switch(purchased) {
+        case 'HP':
+            if (gold >= 10) {
+                gold -= 10
+                alert('You bought a HP potion!')
+                // HP potions += 1
+                goToShop()
+            } else {
+                alert("You can't afford that.")
+                goToShop()
+            }
+        case 'MP':
+            if (gold >= 15) {
+                gold -= 15
+                alert('You bought a MP potion!')
+                // MP potions += 1
+                goToShop()
+            } else {
+                alert("You can't afford that.")
+                goToShop()
+            }
+        case 'buff':
+            if (gold >= priceOfBuff) {
+                gold -= priceOfBuff
+                grantBuff()
+                priceOfBuff *= 2
+                goToShop()
+            } else {
+                alert("You can't afford that.")
+                goToShop()
+            }
+        case 'quit':
+            break
+    }   
+
 }
