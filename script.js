@@ -839,17 +839,11 @@ function changeEnemy2HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
-<<<<<<< HEAD
         currentEnemy2[0] = 9
         currentEnemy2[1] = 9
         currentEnemy2[2] = 0
         currentEnemy2[3] = 0
         currentEnemy2[4] = 0
-=======
-        currentEnemy2[4] = currentEnemy2[7]
-        currentEnemy2[0] = 999
-        currentEnemy2[1] = 999
->>>>>>> 17530186d96326fcfd8a01f32ce9671f0355154d
         if (Number.isInteger(currentEnemy2[5])) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
@@ -1058,10 +1052,12 @@ function changeFloorInfo9() {
 }
 // Weapons are [name, MP, damage, type]
 function updateWeaponsAndItems() {
-    document.getElementsByClassName('w1')[0].innerHTML = weapon1[0] + ' ' + weapon1[1] + 'MP ' + weapon1[3]
-    document.getElementsByClassName('w2')[0].innerHTML = weapon2[0] + ' '+ weapon2[1] + 'MP ' + weapon2[3]
-    document.getElementsByClassName('w3')[0].innerHTML = weapon3[0] +' '+ weapon3[1] + 'MP ' + weapon3[3]
-    document.getElementsByClassName('w4')[0].innerHTML = 'Key x'+keys
+    document.getElementsByClassName('w1')[0].innerHTML = `${weapon1[0]} ${weapon1[1]}MP ${weapon1[3]}`
+    document.getElementsByClassName('w2')[0].innerHTML = `${weapon2[0]} ${weapon2[1]}MP ${weapon2[3]}`
+    document.getElementsByClassName('w3')[0].innerHTML = `${weapon3[0]} ${weapon3[1]}MP ${weapon3[3]}`
+    document.getElementsByClassName('w4')[0].innerHTML = `Key x${keys}`
+    document.getElementsByClassName('w5')[0].innerHTML = `HP Potion x${hpPotionAmount}: Heals 50% HP`
+    document.getElementsByClassName('w6')[0].innerHTML = `MP Potion x${mpPotionAmount}: Restores 50% MP`
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
@@ -1380,6 +1376,7 @@ function cheat() {
     maxHP = 1000
     currentMP = 1000
     maxMP = 1000
+    gold = 1000
 }
 function checkforBuff() {
     if (buffs > 0) {
@@ -1451,7 +1448,7 @@ function goToShop() {
             if (gold >= 10) {
                 gold -= 10
                 alert('You bought a HP potion!')
-                // HP potions += 1
+                hpPotionAmount += 1
                 goToShop()
             } else {
                 alert("You can't afford that.")
@@ -1464,7 +1461,7 @@ function goToShop() {
             if (gold >= 15) {
                 gold -= 15
                 alert('You bought a MP potion!')
-                // MP potions += 1
+                mpPotionAmount += 1
                 goToShop()
             } else {
                 alert("You can't afford that.")
