@@ -805,9 +805,12 @@ function changeEnemy1HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         currentEnemy1[4] = currentEnemy1[7]
     } else if (currentEnemy1[4] + amount <= 0) {
-        currentEnemy1[4] = currentEnemy1[7]
-        currentEnemy1[0] = 999
-        currentEnemy1[1] = 999
+        currentEnemy1[0] = 9
+        currentEnemy1[1] = 9
+        currentEnemy1[2] = 0
+        currentEnemy1[3] = 0
+        currentEnemy1[4] = 0
+        
         if (Number.isInteger(currentEnemy1[5])) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
@@ -828,9 +831,11 @@ function changeEnemy2HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
-        currentEnemy2[4] = currentEnemy2[7]
-        currentEnemy2[0] = 2
-        currentEnemy2[1] = 2
+        currentEnemy2[0] = 9
+        currentEnemy2[1] = 9
+        currentEnemy2[2] = 0
+        currentEnemy2[3] = 0
+        currentEnemy2[4] = 0
         if (Number.isInteger(currentEnemy2[5])) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
@@ -850,9 +855,11 @@ function changeEnemy3HP(amount) {
         console.log('Enemy Hp at max, cannot increase higher')
         currentEnemy3[4] = currentEnemy3[7]
     } else if (currentEnemy3[4] + amount <= 0) {
-        currentEnemy3[4] = currentEnemy3[7]
-        currentEnemy3[0] = 999
-        currentEnemy3[1] = 999
+        currentEnemy3[0] = 9
+        currentEnemy3[1] = 9
+        currentEnemy3[2] = 0
+        currentEnemy3[3] = 0
+        currentEnemy3[4] = 0
         if (Number.isInteger(currentEnemy3[5])) {
             changeXP(currentEnemy3[5])
             alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
