@@ -19,7 +19,7 @@ The higher the level, the more XP points you are required to obtain to get them.
 Move the player with the WASD keys. (If they don't work, try turning off the caps lock.)
 
 Use the 1-3 keys to attack with corresponding weapons.
-Use 5 and 6 to heal HP and MP with potions.
+Use 5 and 6 to heal HP and MP with potions that restore 50% of them.
 
 Walk over keys to pick them up and shops to shop for potions and buffs.
 
