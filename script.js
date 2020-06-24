@@ -44,8 +44,8 @@ var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
 var boss1 = [6, 6, 4, 4, 50, 50, 'BOSS King Slime', 50, 'k']
-var boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime', 100, 'k']
-var boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime', 150, 'k']
+var boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+var boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
 var No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
 // Enemies in play
 var currentEnemy1 = enemy1
