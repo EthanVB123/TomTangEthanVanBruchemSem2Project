@@ -829,8 +829,8 @@ function changeEnemy2HP(amount) {
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
         currentEnemy2[4] = currentEnemy2[7]
-        currentEnemy2[0] = 2
-        currentEnemy2[1] = 2
+        currentEnemy2[0] = 999
+        currentEnemy2[1] = 999
         if (Number.isInteger(currentEnemy2[5])) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
