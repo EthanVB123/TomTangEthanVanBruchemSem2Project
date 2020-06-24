@@ -182,13 +182,21 @@ function keypresschecker(e){
             attack(weapon4)
         }
     }
-    if (actualkey=='5' && hpPotionAmount != 0) {
-        hpPotion()
-        removehpPotion()
+    if (actualkey=='5') {
+        if (hpPotionAmount > 0) {
+            hpPotion()
+            hpPotionAmount -= 1
+        } else {
+            addNewMessage('You have no HP Potions.')
+        }
     }
-    if (actualkey=='6'&& mpPotionAmount != 0) {
-        mpPotion()
-        removempPotion()
+    if (actualkey=='6') {
+        if (mpPotionAmount > 0) {
+            mpPotion()
+            mpPotionAmount -= 1
+        } else {
+            addNewMessage('You have no MP Potions.')
+        }
     }
     if (actualkey=='c') {
         cheat()
@@ -199,14 +207,14 @@ function keypresschecker(e){
 }
 // HP and MP potions' functions
 function hpPotion() {
-    currentHP = maxHP
+    changeHP(Math.floor(0.5*maxHP))
 }
 function removehpPotion() {
     hpPotionAmount = 0
 }
 
 function mpPotion() {
-    currentMP = maxMP
+    changeMP(Math.floor(0.5*maxMP))
 }
 function removempPotion() {
     mpPotionAmount = 0
