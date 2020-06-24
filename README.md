@@ -41,6 +41,7 @@ Gold is used to exchange treasures in the shop.
 VERSION 1.18
 - Coded a functional shop system to buy buffs and potions in.
 - Boss has different stages now.
+- Balance potions.
 
 VERSION 1.17
 - We have fixed the ranged weapons by removing them! We now have 3 weapons which work.
