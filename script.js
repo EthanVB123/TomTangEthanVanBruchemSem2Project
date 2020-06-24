@@ -1407,22 +1407,20 @@ function floorInformation() {
 
 function lootBox() {
     var randomN = Math.random()
-    if (randomN > 0.9) {
-        changeXP(15)
-        return '15 experience points'
-        alert('You gained 15 XP from the chest!')
+    var xpReward = Math.floor(16*Math.random()) + 10
+    var randomGold = Math.floor(41*Math.random()) + 10
+    if (randomN > 0.85) {
+        hpPotionAmount += 1
+        return '1 HP potion'
     } else if (randomN > 0.7) {
-        gold += 30
-        return '30 gold'
-        alert('You gained 30 gold from the chest!')
-    } else if (randomN > 0.4) {
-        gold += 10
-        return '10 gold'
-        alert('You gained 10 gold from the chest!')
+        mpPotionAmount += 1
+        return '1 MP potion'
+    } else if (randomN > 0.5) {
+        changeXP(xpReward)
+        return `${xpReward} XP`
     } else {
-        gold += 1
-        return 'Only one gold piece :('
-        alert('You gained 1 gold from the chest :(')
+        gold += randomGold
+        return `$${randomGold}`
     }
 }
 
