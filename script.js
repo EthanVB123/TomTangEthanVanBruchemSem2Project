@@ -928,13 +928,13 @@ function increaseMagic() {
     weapon3[2] += 3
 }
 function grantBuff() {
-    var chosenBuff = prompt(`Leveling Up! Please select a buff!  You have ${buffs+1} buffs remaining.  Type melee for a melee damage buff, ranged for a ranged damage buff, magic for a magic damage buff, hp for a hitpoints buff, mp for a mana points buff, or gold for a one-time gold bonus.`)
+    var chosenBuff = prompt(`Leveling Up! Please select a buff!  You have ${buffs+1} buffs remaining. \r\n Type melee for a small knife damage buff, \r\n dex for a flail damage buff, \r\n magic for a magic hammer damage buff, \r\n hp for a hitpoints buff, \r\n mp for a mana points buff, \r\n gold for a one-time gold bonus.`)
     switch (chosenBuff) {
         case 'melee':
             increaseStrength()
             alert('Your Strength increased')
             break
-        case 'ranged':
+        case 'dex':
             increaseDexterity()
             alert('Your Dexterity increased')
             break
@@ -1636,9 +1636,9 @@ function getRoom7Key() {
 
 function goToShop() {
     alert('Welcome to the shop!')
-    var purchased = prompt(`You have $${gold}. A HP potion costs $10. A MP potion costs $15. A buff currently costs ${priceOfBuff}. \r\n Type HP to buy HP, type MP to buy MP, type buff to buy a buff. \r\n Type quit to leave the store.`)
+    var purchased = prompt(`You have $${gold}. \r\n A HP potion costs $10. \r\nA MP potion costs $15. \r\nA buff currently costs ${priceOfBuff}. \r\n Type HP to buy HP, type MP to buy MP, type buff to buy a buff. \r\n Type quit to leave the store.`)
     switch(purchased) {
-        case 'HP':
+        case 'HP': 
         case 'hp':
         case 'h':
             if (gold >= 10) {
