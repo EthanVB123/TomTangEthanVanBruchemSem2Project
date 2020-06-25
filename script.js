@@ -1490,23 +1490,29 @@ function damageBoss(amount) {
         alert('Thank you Player! But your princess is in another dungeon!')
     } else {
         currentEnemy1[4] += amount
-        if (currentEnemy1[4] <= 45) {
+        if (currentEnemy1[4] <= 45 && bossState == 'furious') {
             alert('The boss turns HARD MODE on! (He now has 6 actions)')
-        } else if (currentEnemy1[4] <= 70) {
+            bossState = 'hardmodeON'
+        } else if (currentEnemy1[4] <= 70 && bossState == 'angry') {
             alert('The boss is furious! (He now deals 6 DMG per attack)')
             // dmg = 6
-        } else if (currentEnemy1[4] <= 95) {
+            bossState = 'furious'
+        } else if (currentEnemy1[4] <= 95 && bossState == 'wounded') {
             alert('The boss is angry! (He now has 5 actions)')
             // acts = 5
-        } else if (currentEnemy1[4] <= 120) {
+            bossState = 'angry'
+        } else if (currentEnemy1[4] <= 120 && bossState == 'enraged') {
             alert('The boss is wounded! (He now deals 5 DMG per attack)')
             // dmg = 5
-        } else if (currentEnemy1[4] <= 145) {
+            bossState = 'wounded'
+        } else if (currentEnemy1[4] <= 145 && bossState == 'annoyed') {
             alert('The boss is enraged! (He now has 4 actions)')
             // acts = 4
-        } else if (currentEnemy1[4] <= 170) {
+            bossState = 'enraged'
+        } else if (currentEnemy1[4] <= 170 && bossState == 'starting') {
             alert('The boss is annoyed! (He now deals 4 DMG per attack)')
             // dmg = 4
+            bossState = 'annoyed'
         } 
     }
 }
