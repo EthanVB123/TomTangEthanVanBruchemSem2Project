@@ -26,7 +26,7 @@ Walk over keys to pick them up and shops to shop for potions and buffs.
 z ends your turn, refilling your MP and letting the enemies move and attack.
 x heals you and gives you XP, at the cost of MP.
 
-There is a cheat button, but we're not telling you what it is! (also a hidden buff button)
+There is a cheat button, but we're not telling you what it is! :trollface: (also a hidden buff button)
 
 Use 1 to open chests if you are close to them.
 

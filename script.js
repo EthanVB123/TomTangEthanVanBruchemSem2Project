@@ -811,7 +811,7 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (currentEnemy1[6] == 'King Slime') {
+    if (currentEnemy1[6] == 'BOSS King Slime') {
         damageBoss(amount)
     }
     else if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
