@@ -683,6 +683,12 @@ function updateMap() {
         } else if (splitstring[0] == 'k') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlime.png'
             splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'l') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlimeP2.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'm') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Creatures/KingSlimeP3.png'
+            splitstring = splitstring.substring(1)
         } else if (splitstring[0] == 'z') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Floor.png'
             splitstring = splitstring.substring(1)
@@ -805,7 +811,7 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (currentEnemy1[6] = 'King Slime') {
+    if (currentEnemy1[6] == 'King Slime') {
         damageBoss(amount)
     }
     else if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
@@ -1376,6 +1382,7 @@ function cheat() {
     currentMP = 1000
     maxMP = 1000
     gold = 1000
+    keys = 2
 }
 function checkforBuff() {
     if (buffs > 0) {
@@ -1495,27 +1502,29 @@ function damageBoss(amount) {
         currentEnemy1[4] += amount
         if (currentEnemy1[4] <= 45 && bossState == 'furious') {
             alert('The boss turns HARD MODE on! (He now has 6 actions)')
-            boss1[2] = 6
+            currentEnemy1[2] = 6
             bossState = 'hardmodeON'
         } else if (currentEnemy1[4] <= 70 && bossState == 'angry') {
             alert('The boss is furious! (He now deals 6 DMG per attack)')
-            boss1[3] = 6
+            currentEnemy1[3] = 6
             bossState = 'furious'
+            currentEnemy1[8] = 'm'
         } else if (currentEnemy1[4] <= 95 && bossState == 'wounded') {
             alert('The boss is angry! (He now has 5 actions)')
-            boss1[2] = 5
+            currentEnemy1[2] = 5
             bossState = 'angry'
         } else if (currentEnemy1[4] <= 120 && bossState == 'enraged') {
             alert('The boss is wounded! (He now deals 5 DMG per attack)')
-            boss1[3] = 5
+            currentEnemy1[3] = 5
             bossState = 'wounded'
+            currentEnemy1[8] = 'l'
         } else if (currentEnemy1[4] <= 145 && bossState == 'annoyed') {
             alert('The boss is enraged! (He now has 4 actions)')
-            boss1[2] = 4
+            currentEnemy1[2] = 4
             bossState = 'enraged'
         } else if (currentEnemy1[4] <= 170 && bossState == 'starting') {
             alert('The boss is annoyed! (He now deals 4 DMG per attack)')
-            boss1[3] = 4
+            currentEnemy1[3] = 4
             bossState = 'annoyed'
         } 
     }
