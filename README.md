@@ -44,7 +44,7 @@ VERSION 2.0
 VERSION 1.19
 - Boss has different stages now.
 - Chests give more loot and are removed from map once you opened them.
-- Bug fixes.
+- Bug fixes and altered positioning.
 
 VERSION 1.18
 - Coded a functional shop system to buy buffs and potions in.

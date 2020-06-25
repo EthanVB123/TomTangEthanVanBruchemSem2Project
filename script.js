@@ -42,7 +42,7 @@ var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
 var enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
-var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
+var lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
 var boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
 var bossState = 'starting'
 var boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
@@ -848,7 +848,7 @@ function changeEnemy2HP(amount) {
             changeXP(currentEnemy2[5])
             alert('You killed a '+currentEnemy2[6]+' and gained '+currentEnemy2[5]+' experience points!')
         } else if (currentEnemy2[5] = 's') {
-            alert('You killed a '+currentEnemy2[6]+' and gained '+lootBox())
+            alert('You opened a '+currentEnemy2[6]+' and gained '+lootBox())
         } else {
             keys += 1
             alert(`You found a key! You now have ${keys} keys!`)
@@ -872,7 +872,7 @@ function changeEnemy3HP(amount) {
             changeXP(currentEnemy3[5])
             alert('You killed a '+currentEnemy3[6]+' and gained '+currentEnemy3[5]+' experience points!')
         } else if (currentEnemy3[5] = 's') {
-            alert('You killed a '+currentEnemy3[6]+' and gained '+lootBox())
+            alert('You opened a '+currentEnemy3[6]+' and gained '+lootBox())
         } else {
             keys += 1
             alert(`You found a key! You now have ${keys} keys!`)
