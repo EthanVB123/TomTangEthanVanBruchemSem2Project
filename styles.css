@@ -28,7 +28,7 @@ body {
     align-items: center;
   }
   .map {
-    position: absolute;
+    position: fixed;
     top: 30%;
     left: 25%;
     margin: auto;
@@ -57,34 +57,40 @@ body {
 .GraphIcon {
   height: 32px;
   width: 32px;
+
+}
+.HPpotion {
+  position: fixed;
+  top: 20%;
+  left: 20%;
 }
 .bars {
   font-size: 1.5em;
   top: 3%;
   left: 2%;
-  position: absolute;
+  position: fixed;
 }
 .statistics {
   top: 3%;
   left: 51%;
-  position: absolute;
+  position: fixed;
 }
 .floorinfo {
   font-size: 2em;
   top: 22.5%;
   left: 35%;
-  position: absolute;
+  position: fixed;
 }
 .actions-main {
   top: 20.5%;
   left: 2%;
-  position: absolute;
+  position: fixed;
   font-size: 1.25em;
 }
 .information-main {
   top: 20.5%;
   left: 76.5%;
-  position: absolute;
+  position: fixed;
 }
 .information {
   font-size: 1.25em;
@@ -92,64 +98,64 @@ body {
 .map {
   top: 26.25%;
   left: 24.5%;
-  position: absolute;
+  position: fixed;
 }
 .barIcon1 {
-  top: -4%;
-  left: 100%;
-  position: absolute;
+  top: 1.5%;
+  left: 30%;
+  position: fixed;
 }
 .barIcon2 {
-  top: 35%;
-  left: 100%;
-  position: absolute;
+  top: 6%;
+  left: 30%;
+  position: fixed;
 }
 .barIcon3 {
-  top: -8%;
-  left: 200%;
-  position: absolute;
+  top: 1.3%;
+  left: 65%;
+  position: fixed;
 }
 .barIcon4 {
-  top: 22%;
-  left: 200%;
-  position: absolute;
+  top: 5.3%;
+  left: 65%;
+  position: fixed;
 }
 .barIcon5 {
-  top: 52%;
-  left: 200%;
-  position: absolute;
+  top: 9.3%;
+  left: 65%;
+  position: fixed;
 }
 .barIcon6 {
-  top: 80%;
-  left: 200%;
-  position: absolute;
+  top: 13.3%;
+  left: 65%;
+  position: fixed;
 }
 .weaponssection {
   top: 78%;
   left: 2%;
-  position: absolute;
+  position: fixed;
   
 }
 .itemssection {
   top: 79%;
   left: 51%;
-  position: absolute;
+  position: fixed;
   font-size: 1.2em;
 }
 .ads {
   top: 96.5%;
   left: 2%;
-  position: absolute;
+  position: fixed;
 }
 .adsbutton {
   top: 96.5%;
   left: 52%;
-  position: absolute;
+  position: fixed;
 }
 .itemIcon {
-  top: 70%;
-  left: 90%;
-  position: absolute;
+  top: 10%;
+  left: 10%;
+  position: fixed;
 }
 .itemIcon {
   height: 100px;
@@ -158,7 +164,7 @@ body {
 .music {
   top: 96%;
   left: 31.5%;
-  position: absolute;
+  position: fixed;
 }
 .i00 {
   height: 32px;
