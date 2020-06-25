@@ -832,8 +832,8 @@ function changeEnemy1HP(amount) {
         } else {
             keys += 1
             alert(`You found a key! You now have ${keys} keys!`)
-        }
-            currentEnemies[3] = 'dead' 
+        }   
+        currentEnemies[3] = 'dead' 
     } else {
         
         currentEnemy1[4] += amount
@@ -883,6 +883,7 @@ function changeEnemy3HP(amount) {
             keys += 1
             alert(`You found a key! You now have ${keys} keys!`)
         }
+       
         currentEnemies[5] = 'dead'
     } else {
         currentEnemy3[4] += amount
@@ -1215,6 +1216,7 @@ function initialiseRoom1() {
     currentEnemy3 = room1enemies[2]
     currentEnemy1[0] = room1enemies[6]
     currentEnemy1[1] = room1enemies[7]
+    currentEnemy1[2] = room1enemies[0][2]
     currentEnemy2[0] = room1enemies[8]
     currentEnemy2[1] = room1enemies[9]
     currentEnemy3[0] = room1enemies[10]
@@ -1224,6 +1226,28 @@ function initialiseRoom1() {
     playery = 6
     addNewMessage('Welcome to Room 1!')
     roomsExplored[0] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom2() {
     room = 2
@@ -1239,6 +1263,27 @@ function initialiseRoom2() {
     currentEnemies = room2enemies
     addNewMessage('Welcome to Room 2!')
     roomsExplored[1] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom3() {
     room = 3
@@ -1256,6 +1301,27 @@ function initialiseRoom3() {
     playery = 4
     addNewMessage('Welcome to Room 3!')
     roomsExplored[2] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom4() {
     room = 4
@@ -1273,6 +1339,27 @@ function initialiseRoom4() {
     playery = 4
     addNewMessage('Welcome to Room 4!')
     roomsExplored[3] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom5() {
     room = 5
@@ -1290,6 +1377,27 @@ function initialiseRoom5() {
     playery = 2
     addNewMessage('Welcome to Room 5!')
     roomsExplored[4] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom6() {
     room = 6
@@ -1307,6 +1415,27 @@ function initialiseRoom6() {
     playery = 4
     addNewMessage('Welcome to Room 6!')
     roomsExplored[5] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom7() {
     room = 7
@@ -1324,6 +1453,27 @@ function initialiseRoom7() {
     playery = 4
     addNewMessage('Welcome to Room 7!')
     roomsExplored[6] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom8() {
     room = 8
@@ -1341,6 +1491,27 @@ function initialiseRoom8() {
     playery = 4
     addNewMessage('Welcome to Room 8!')
     roomsExplored[7] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 function initialiseRoom9() {
     room = 9
@@ -1358,6 +1529,27 @@ function initialiseRoom9() {
     playery = 4
     addNewMessage('Welcome to Room 9!')
     roomsExplored[8] = 1
+
+    enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+    enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+    enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
+    enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
+    chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
+    lock = [8, 4, 0, 0, 1, 's', 'Hidden Chest', 1, 'L']
+    boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
+    bossState = 'starting'
+    boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+    boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
+    No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
+    if (currentEnemies[3] !== 'dead') {
+        reviveEnemy(currentEnemy1)
+    }
+    if (currentEnemies[4] !== 'dead') {
+        reviveEnemy(currentEnemy2)
+    }
+    if (currentEnemies[5] !== 'dead') {
+        reviveEnemy(currentEnemy3)
+    }
 }
 // The main game loop is called every 100ms (at a rate of 10FPS)
 function mainGameLoop() {
@@ -1501,7 +1693,7 @@ function damageBoss(amount) {
     } else {
         currentEnemy1[4] += amount
         if (currentEnemy1[4] <= 45 && bossState == 'furious') {
-            alert('The boss turns HARD MODE on! (He now has 6 actions)')
+            alert('The boss hacks the game to turn HARD MODE on! (He now has 6 actions)')
             currentEnemy1[2] = 6
             bossState = 'hardmodeON'
         } else if (currentEnemy1[4] <= 70 && bossState == 'angry') {
@@ -1527,5 +1719,21 @@ function damageBoss(amount) {
             currentEnemy1[3] = 4
             bossState = 'annoyed'
         } 
+    }
+}
+
+function reviveEnemy(x) {
+    if (x[6] == 'Green Slime') {
+        x[2] = enemy1[2]
+        x[3] = enemy1[3]
+    } else if (x[6] == 'Blue Slime') {
+        x[2] = enemy2[2]
+        x[3] = enemy3[3]
+    } else if (x[6] == 'Red Slime') {
+        x[2] = enemy3[2]
+        x[3] = enemy3[3]
+    } else if (x[6] == 'BOSS King Slime') {
+        x[2] = enemy2[2]
+        x[3] = enemy3[3]
     }
 }
