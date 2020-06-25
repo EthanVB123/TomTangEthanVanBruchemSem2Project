@@ -1492,26 +1492,27 @@ function damageBoss(amount) {
         currentEnemy1[4] += amount
         if (currentEnemy1[4] <= 45 && bossState == 'furious') {
             alert('The boss turns HARD MODE on! (He now has 6 actions)')
+            boss1[2] = 6
             bossState = 'hardmodeON'
         } else if (currentEnemy1[4] <= 70 && bossState == 'angry') {
             alert('The boss is furious! (He now deals 6 DMG per attack)')
-            // dmg = 6
+            boss1[3] = 6
             bossState = 'furious'
         } else if (currentEnemy1[4] <= 95 && bossState == 'wounded') {
             alert('The boss is angry! (He now has 5 actions)')
-            // acts = 5
+            boss1[2] = 5
             bossState = 'angry'
         } else if (currentEnemy1[4] <= 120 && bossState == 'enraged') {
             alert('The boss is wounded! (He now deals 5 DMG per attack)')
-            // dmg = 5
+            boss1[3] = 5
             bossState = 'wounded'
         } else if (currentEnemy1[4] <= 145 && bossState == 'annoyed') {
             alert('The boss is enraged! (He now has 4 actions)')
-            // acts = 4
+            boss1[2] = 4
             bossState = 'enraged'
         } else if (currentEnemy1[4] <= 170 && bossState == 'starting') {
             alert('The boss is annoyed! (He now deals 4 DMG per attack)')
-            // dmg = 4
+            boss1[3] = 4
             bossState = 'annoyed'
         } 
     }
