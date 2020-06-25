@@ -38,9 +38,16 @@ Gold is used to exchange treasures in the shop.
 * Made with git, github and Microsoft VS code.
 
 # CHANGELOG
+VERSION 2.0
+- Code complete and ready for submission.
+
+VERSION 1.19
+- Boss has different stages now.
+- Chests give more loot and are removed from map once you opened them.
+- Bug fixes.
+
 VERSION 1.18
 - Coded a functional shop system to buy buffs and potions in.
-- Boss has different stages now.
 - Balance potions.
 
 VERSION 1.17

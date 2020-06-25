@@ -822,7 +822,7 @@ function changeEnemy1HP(amount) {
             changeXP(currentEnemy1[5])
             alert('You killed a '+currentEnemy1[6]+' and gained '+currentEnemy1[5]+' experience points!')
         } else if (currentEnemy1[5] = 's') {
-            alert('You killed a '+currentEnemy1[6]+' and gained '+lootBox())
+            alert('You opened a '+currentEnemy1[6]+' and gained '+lootBox())
         } else {
             keys += 1
             alert(`You found a key! You now have ${keys} keys!`)
