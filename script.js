@@ -1058,6 +1058,9 @@ function updateWeaponsAndItems() {
     document.getElementsByClassName('w4')[0].innerHTML = `Key x${keys}`
     document.getElementsByClassName('w5')[0].innerHTML = `HP Potion x${hpPotionAmount}: Heals 50% HP`
     document.getElementsByClassName('w6')[0].innerHTML = `MP Potion x${mpPotionAmount}: Restores 50% MP`
+    document.getElementsByClassName('DMG1')[0].innerHTML = `--- ${weapon1[2]}`
+    document.getElementsByClassName('DMG2')[0].innerHTML = `--- ${weapon2[2]}`
+    document.getElementsByClassName('DMG3')[0].innerHTML = `--- ${weapon3[2]}`
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
