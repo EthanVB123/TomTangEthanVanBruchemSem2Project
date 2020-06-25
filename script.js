@@ -37,15 +37,16 @@ var playery = 6;
 // skeletons are 2action 4damage 12hp 15xp
 
 // Enemy Bank
-var enemy1 = [3, 3, 1, 2, 5, 5, 'Green Slime', 5, 'g']
-var enemy2 = [4, 5, 2, 3, 10, 10, 'Blue Slime', 10, 'b']
-var enemy3 = [3, 7, 3, 4, 15, 20, 'Red Slime', 15,'r']
+var enemy1 = [3, 3, 2, 2, 5, 5, 'Green Slime', 5, 'g']
+var enemy2 = [4, 5, 3, 3, 10, 10, 'Blue Slime', 10, 'b']
+var enemy3 = [3, 7, 4, 4, 15, 20, 'Red Slime', 15,'r']
 var enemy4 = [5, 2, 2, 4, 12, 15, 'Skeleton', 12,'s']
 var chest = [7, 6, 0, 0, 1, 's', 'Chest', 1, 'c']
 var lock = [8, 4, 0, 0, 1, 's', 'Lock', 1, 'L']
 var boss1 = [6, 6, 3, 3, 200, 50, 'BOSS King Slime', 200, 'k']
-var boss2 = [6, 6, 4, 4, 100, 100, 'BOSS King Slime P2', 100, 'k']
-var boss3 = [6, 6, 5, 5, 50, 150, 'BOSS King Slime P3', 50, 'k']
+var bossState = 'starting'
+var boss2 = [6, 6, 5, 5, 100, 100, 'BOSS King Slime P2', 100, 'k']
+var boss3 = [6, 6, 6, 6, 150, 150, 'BOSS King Slime P3', 150, 'k']
 var No_Enemy_In_Room = [0,0,0,0,0,0,'No_Enemy_In_Room',0,'z']
 // Enemies in play
 var currentEnemy1 = enemy1
@@ -804,7 +805,10 @@ function changeHP(amount) {
     }
 }
 function changeEnemy1HP(amount) {
-    if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
+    if (currentEnemy1[6] = 'King Slime') {
+        damageBoss(amount)
+    }
+    else if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
         addNewMessage('Enemy Hp at max, cannot increase higher')
         currentEnemy1[4] = currentEnemy1[7]
     } else if (currentEnemy1[4] + amount <= 0) {
@@ -825,6 +829,7 @@ function changeEnemy1HP(amount) {
         }
             currentEnemies[3] = 'dead' 
     } else {
+        
         currentEnemy1[4] += amount
     }
 
@@ -1476,4 +1481,32 @@ function goToShop() {
         
     }   
 
+}
+
+function damageBoss(amount) {
+    if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
+        alert("Why is the boss healing? This shouldn't happen.")
+    } else if (currentEnemy1[4] + amount <= 0) {
+        alert('Thank you Player! But your princess is in another dungeon!')
+    } else {
+        currentEnemy1[4] += amount
+        if (currentEnemy1[4] <= 45) {
+            alert('The boss turns HARD MODE on! (He now has 6 actions)')
+        } else if (currentEnemy1[4] <= 70) {
+            alert('The boss is furious! (He now deals 6 DMG per attack)')
+            // dmg = 6
+        } else if (currentEnemy1[4] <= 95) {
+            alert('The boss is angry! (He now has 5 actions)')
+            // acts = 5
+        } else if (currentEnemy1[4] <= 120) {
+            alert('The boss is wounded! (He now deals 5 DMG per attack)')
+            // dmg = 5
+        } else if (currentEnemy1[4] <= 145) {
+            alert('The boss is enraged! (He now has 4 actions)')
+            // acts = 4
+        } else if (currentEnemy1[4] <= 170) {
+            alert('The boss is annoyed! (He now deals 4 DMG per attack)')
+            // dmg = 4
+        } 
+    }
 }
