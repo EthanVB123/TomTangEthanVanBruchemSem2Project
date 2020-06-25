@@ -61,100 +61,100 @@ body {
 }
 .HPpotion {
   position: fixed;
-  top: 20%;
-  left: 20%;
+  top: 20vh;
+  left: 20vw;
 }
 .bars {
   font-size: 1.5em;
-  top: 3%;
-  left: 2%;
+  top: 3vh;
+  left: 2vw;
   position: fixed;
 }
 .statistics {
-  top: 3%;
-  left: 51%;
+  top: 3vh;
+  left: 51vw;
   position: fixed;
 }
 .floorinfo {
   font-size: 2em;
-  top: 22.5%;
-  left: 35%;
+  top: 22.5vh;
+  left: 35vw;
   position: fixed;
 }
 .actions-main {
-  top: 20.5%;
-  left: 2%;
+  top: 20.5vh;
+  left: 2vw;
   position: fixed;
   font-size: 1.25em;
 }
 .information-main {
-  top: 20.5%;
-  left: 76.5%;
+  top: 20.5vh;
+  left: 76.5vw;
   position: fixed;
 }
 .information {
   font-size: 1.25em;
 }
 .map {
-  top: 26.25%;
-  left: 24.5%;
+  top: 26.25vh;
+  left: 24.5vw;
   position: fixed;
 }
 .barIcon1 {
-  top: 1.5%;
-  left: 30%;
+  top: 1.5vh;
+  left: 30vw;
   position: fixed;
 }
 .barIcon2 {
-  top: 6%;
-  left: 30%;
+  top: 6vh;
+  left: 30vw;
   position: fixed;
 }
 .barIcon3 {
-  top: 1.3%;
-  left: 65%;
+  top: 1.3vh;
+  left: 65vw;
   position: fixed;
 }
 .barIcon4 {
-  top: 5.3%;
-  left: 65%;
+  top: 5.3vh;
+  left: 65vw;
   position: fixed;
 }
 .barIcon5 {
-  top: 9.3%;
-  left: 65%;
+  top: 9.3vh;
+  left: 65vw;
   position: fixed;
 }
 .barIcon6 {
-  top: 13.3%;
-  left: 65%;
+  top: 13.3vh;
+  left: 65vw;
   position: fixed;
 }
 .weaponssection {
-  top: 78%;
-  left: 2%;
+  top: 78vh;
+  left: 2vw;
   position: fixed;
   
 }
 .itemssection {
-  top: 79%;
-  left: 51%;
+  top: 79vh;
+  left: 51vw;
   position: fixed;
   font-size: 1.2em;
 }
 .ads {
-  top: 96.5%;
-  left: 2%;
+  top: 96.5vh;
+  left: 2vw;
   position: fixed;
 }
 .adsbutton {
-  top: 96.5%;
-  left: 52%;
+  top: 96.5vh;
+  left: 52vw;
   position: fixed;
 }
 .itemIcon {
-  top: 10%;
-  left: 10%;
+  top: 10vh;
+  left: 10vw;
   position: fixed;
 }
 .itemIcon {
@@ -162,8 +162,8 @@ body {
   width: 100px;
 }
 .music {
-  top: 96%;
-  left: 31.5%;
+  top: 96vh;
+  left: 31.5vw;
   position: fixed;
 }
 .i00 {
