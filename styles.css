@@ -16,6 +16,7 @@ div {
 }
 body {
     background-image: url("PixelDungeonImages/UI/Background.png");
+    background-size: 100% 95vh;
     size: 100%;
     background-repeat: auto;
 }
