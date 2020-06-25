@@ -164,7 +164,6 @@ function keypresschecker(e){
         
         if (currentMP >= weapon1[1]) {
             attack(weapon1)
-            console.log('Attacked!')
         } else { addNewMessage("You're out of MP! ")}
     }
     if (actualkey=='2') {
@@ -547,21 +546,17 @@ function moveDown() {
 // Recall: weapons are ['Name', MPCost, damage, type ('ranged' or 'melee' or 'blank')]
 function attack(weapon) {
         if (arePlayerAndEnemy1Adjacent() == true) {
-            console.log('Enemy 1')
             changeMP(-1*weapon[1])
             changeEnemy1HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
         } else if (arePlayerAndEnemy2Adjacent() == true) {
-            console.log('Enemy 2')
             changeMP(-1*weapon[1])
             changeEnemy2HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
         } else if (arePlayerAndEnemy3Adjacent() == true) {
-            console.log('Enemy 3')
             changeMP(-1*weapon[1])
             changeEnemy3HP(-1*weapon[2])
             addNewMessage('You dealt '+weapon[2]+' damage to an enemy with '+weapon[1]+' mana points.')
-            console.log(-1*weapon[2])
         } else { addNewMessage("You're not adjacent.")}
     } 
         
@@ -797,7 +792,7 @@ function drawBars() {
 
 function changeHP(amount) {
     if (currentHP + amount >= maxHP) {
-        console.log('Hp at max, cannot increase higher')
+        addNewMessage('Hp at max, cannot increase higher')
         currentHP = maxHP
     } else if (currentHP + amount <= 0) {
         currentHP = 0
@@ -810,7 +805,7 @@ function changeHP(amount) {
 }
 function changeEnemy1HP(amount) {
     if (currentEnemy1[4] + amount >= currentEnemy1[7]) {
-        console.log('Enemy Hp at max, cannot increase higher')
+        addNewMessage('Enemy Hp at max, cannot increase higher')
         currentEnemy1[4] = currentEnemy1[7]
     } else if (currentEnemy1[4] + amount <= 0) {
         currentEnemy1[0] = 9
@@ -836,7 +831,7 @@ function changeEnemy1HP(amount) {
 }
 function changeEnemy2HP(amount) {
     if (currentEnemy2[4] + amount >= currentEnemy2[7]) {
-        console.log('Enemy Hp at max, cannot increase higher')
+        addNewMessage('Enemy Hp at max, cannot increase higher')
         currentEnemy2[4] = currentEnemy2[7]
     } else if (currentEnemy2[4] + amount <= 0) {
         currentEnemy2[0] = 9
@@ -860,7 +855,7 @@ function changeEnemy2HP(amount) {
 }
 function changeEnemy3HP(amount) {
     if (currentEnemy3[4] + amount >= currentEnemy3[7]) {
-        console.log('Enemy Hp at max, cannot increase higher')
+        addNewMessage('Enemy Hp at max, cannot increase higher')
         currentEnemy3[4] = currentEnemy3[7]
     } else if (currentEnemy3[4] + amount <= 0) {
         currentEnemy3[0] = 9
@@ -1061,8 +1056,9 @@ function updateWeaponsAndItems() {
 }
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
+    console.log('Called')
     for (var i = 0; i < currentEnemy1[2]; i++) {
-        console.log(currentEnemy1[2])
+        console.log(1)
 
         if (arePlayerAndEnemyAdjacent(currentEnemy1[0], currentEnemy1[1])) {
             addNewMessage(currentEnemy1[6] + ' dealt ' + currentEnemy1[3] + ' damage to you.')
@@ -1106,7 +1102,7 @@ function enemy1turn() {
 
 function enemy2turn() {
     for (var i = 0; i < currentEnemy2[2]; i++) {
-        console.log(currentEnemy2[2])
+        console.log(2)
         if (arePlayerAndEnemyAdjacent(currentEnemy2[0], currentEnemy2[1])) {
             addNewMessage(currentEnemy2[6] + ' dealt ' + currentEnemy2[3] + ' damage to you.')
             changeHP(-1*currentEnemy2[3])
@@ -1149,7 +1145,7 @@ function enemy2turn() {
 
 function enemy3turn() {
     for (var i = 0; i < currentEnemy3[2]; i++) {
-        console.log(currentEnemy3[2])
+        console.log(3)
         if (arePlayerAndEnemyAdjacent(currentEnemy3[0], currentEnemy3[1])) {
             addNewMessage(currentEnemy3[6] + ' dealt ' + currentEnemy3[3] + ' damage to you.')
             changeHP(-1*currentEnemy3[3])
@@ -1201,7 +1197,6 @@ function endTurn() {
 function initialiseRoom1() {
     room = 1
     currentEnemy1 = room1enemies[0]
-    changeEnemy1HP(1)
     currentEnemy2 = room1enemies[1]
     currentEnemy3 = room1enemies[2]
     currentEnemy1[0] = room1enemies[6]
@@ -1285,11 +1280,8 @@ function initialiseRoom5() {
 function initialiseRoom6() {
     room = 6
     currentEnemy1 = room6enemies[0]
-    changeEnemy1HP(1)
     currentEnemy2 = room6enemies[1]
-    changeEnemy2HP(1)
     currentEnemy3 = room6enemies[2]
-    changeEnemy3HP(1)
     currentEnemy1[0] = room6enemies[6]
     currentEnemy1[1] = room6enemies[7]
     currentEnemy2[0] = room6enemies[8]
@@ -1367,7 +1359,6 @@ function mainGameLoop() {
     checkforBuff()
     floorInformation()
     updateWeaponsAndItems()
-    console.log(room)
 }
 
 // Cheat function
