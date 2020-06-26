@@ -1690,6 +1690,7 @@ function damageBoss(amount) {
         alert("Why is the boss healing? This shouldn't happen.")
     } else if (currentEnemy1[4] + amount <= 0) {
         alert('Thank you Player! But your princess is in another dungeon!')
+        window.location.replace("congrats.html");
     } else {
         currentEnemy1[4] += amount
         if (currentEnemy1[4] <= 45 && bossState == 'furious') {
