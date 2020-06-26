@@ -62,7 +62,7 @@ var room5enemies = [enemy1, enemy2, No_Enemy_In_Room, 'alive', 'alive', 'alive',
 var room6enemies = [enemy1, enemy3, No_Enemy_In_Room, 'alive', 'alive', 'alive', 4,5, 3,5, 0,0]
 var room7enemies = [chest, No_Enemy_In_Room, No_Enemy_In_Room, 'alive', 'alive', 'alive', 7,6, 9,9, 0,0]
 var room8enemies = [enemy1, enemy2, enemy3, 'alive', 'alive', 'alive',3,5, 6,4, 4,2]
-var room9enemies = [boss1, No_Enemy_In_Room, No_Enemy_In_Room, 'alive', 'dead', 'dead',3,5, 0,0, 9,9]
+var room9enemies = [boss1, lock, No_Enemy_In_Room, 'alive', 'alive', 'alive',3,5, 1,4, 9,9]
 
 
 var currentEnemies = room1enemies
@@ -83,6 +83,7 @@ var currentRoom = room1fullstringWithoutPlayer
 var roomsExplored = [1,0,0,0,0,0,0,0,0]
 var lock18unlocked = false
 var lock89unlocked = false
+var lock98unlocked = false
 var messages = ['No message', 'No message', 'No message', 'No message', 'No message', '11%', '22%', '33%', '44%', '55%', '66%', '77%', '88%', '100%']
 // Elements to change
 
@@ -403,6 +404,26 @@ function moveRight() {
             playerx = 5
             playery = 7
             initialiseRoom9()
+        } else if (keys > 0) {
+            keys -= 1
+            alert('You consumed a key. This door is now unlocked.')
+            room = 9
+            playerx = 5
+            playery = 7
+            initialiseRoom9()
+            lock89unlocked = true
+        } else {
+            playerx -= 1
+            currentMP += 1
+            alert('The door is locked. You need a key to get in.')
+        }
+    } else if (currentRoom[(10*playery+playerx)] == '9' ) {
+        
+        if (lock98unlocked == true) {
+            room = 8
+            playerx = 5
+            playery = 7
+            initialiseRoom8()
         } else if (keys > 0) {
             keys -= 1
             alert('You consumed a key. This door is now unlocked.')
