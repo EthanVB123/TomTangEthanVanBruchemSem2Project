@@ -5,6 +5,9 @@ Pixel Dungeon 64
 
 This is an RPG game using pixel art. You will fight monsters, explore dungeon floors, find treasure and win the game!
 A fun game for all the family.
+You will explore a dungeon composed of several rooms, while fighting enemies to level up, and eventually reaching the boss of the dungeon. This is a roguelike RPG (death is permanent, you reset the game when you die). There will be a variety of chests in the dungeon filled with useful items to use on your journey, buffed weapons, and keys.
+WARNING FOR NOOBS: This game is very hard!
+You cannot beat it.
 Currently having one floor, may add more later.
 
 Link: https://ethanvb123.github.io/TomTangEthanVanBruchemSem2Project/
