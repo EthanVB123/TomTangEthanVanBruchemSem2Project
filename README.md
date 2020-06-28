@@ -39,12 +39,14 @@ Gold is used to exchange treasures in the shop.
 
 # CHANGELOG
 VERSION 2.0
+- Added Thank you page.
+- All bugs fixed; All issues closed.
 - Code complete and ready for submission.
 
 VERSION 1.19
 - Boss has different stages now.
 - Chests give more loot and are removed from map once you opened them.
-- Bug fixes and altered positioning.
+- Bug fixes for enemies in room 4 and altered positioning.
 
 VERSION 1.18
 - Coded a functional shop system to buy buffs and potions in.
