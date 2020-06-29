@@ -1093,6 +1093,7 @@ function updateWeaponsAndItems() {
 // Enemies are [x, y, #actions, damage, hp, xp, name]
 function enemy1turn() {
     console.log('Called')
+    if (currentEnemies[3] == 'alive') {
     for (var i = 0; i < currentEnemy1[2]; i++) {
         console.log(1)
 
@@ -1130,13 +1131,14 @@ function enemy1turn() {
                         currentEnemy1[1] += 1
                     }
                 }
-        
+            }
             }
         }
     }
 }
 
 function enemy2turn() {
+    if (currentEnemies[4] == 'alive') {
     for (var i = 0; i < currentEnemy2[2]; i++) {
         console.log(2)
         if (arePlayerAndEnemyAdjacent(currentEnemy2[0], currentEnemy2[1])) {
@@ -1173,13 +1175,14 @@ function enemy2turn() {
                         currentEnemy2[1] += 1
                     }
                 }
-        
+            }
             }
         }
     }
 }
 
 function enemy3turn() {
+    if (currentEnemies[5] == 'alive') {
     for (var i = 0; i < currentEnemy3[2]; i++) {
         console.log(3)
         if (arePlayerAndEnemyAdjacent(currentEnemy3[0], currentEnemy3[1])) {
@@ -1216,7 +1219,7 @@ function enemy3turn() {
                         currentEnemy3[1] += 1
                     }
                 }
-        
+            }
             }
         }
     }
