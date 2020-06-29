@@ -122,6 +122,7 @@ var fullstringWithEnemy1 = fullstringWithPlayer
 var fullstringWithEnemy2 = fullstringWithPlayer
 var fullstringWithEnemy3 = fullstringWithPlayer
 // Event listeners
+    alert('Welcome to Pixel Dungeon 64 v2.0, presented by Ethan van Bruchem and Tom Tang! \r\nWe hope you enjoy it! \r\nPlease view in fullscreen for the optimum experience (CSS works better in fullscreen)')
     setInterval(mainGameLoop, 100)
     document.onkeypress=keypresschecker
     initialiseRoom1()
