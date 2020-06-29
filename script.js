@@ -1748,14 +1748,18 @@ function reviveEnemy(x) {
     if (x[6] == 'Green Slime') {
         x[2] = enemy1[2]
         x[3] = enemy1[3]
+        x[4] = enemy1[7]
     } else if (x[6] == 'Blue Slime') {
         x[2] = enemy2[2]
-        x[3] = enemy3[3]
+        x[3] = enemy2[3]
+        x[4] = enemy2[7]
     } else if (x[6] == 'Red Slime') {
         x[2] = enemy3[2]
         x[3] = enemy3[3]
+        x[4] = enemy3[7]
     } else if (x[6] == 'BOSS King Slime') {
-        x[2] = enemy2[2]
-        x[3] = enemy3[3]
+        x[2] = boss1[2]
+        x[3] = boss1[3]
+        x[4] = boss1[7]
     }
 }
