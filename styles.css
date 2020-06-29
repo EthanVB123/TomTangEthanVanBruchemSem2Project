@@ -67,14 +67,15 @@ body {
 }
 .bars {
   font-size: 1.5em;
-  top: 3vh;
+  top: 4vh;
   left: 2vw;
   position: fixed;
 }
 .statistics {
-  top: 3vh;
+  top: 4vh;
   left: 51vw;
   position: fixed;
+  font-size: 1.4em;
 }
 .floorinfo {
   font-size: 2em;
@@ -102,34 +103,40 @@ body {
   position: fixed;
 }
 .barIcon1 {
-  top: 1.5vh;
+  top: 2.5vh;
   left: 30vw;
   position: fixed;
 }
 .barIcon2 {
-  top: 6vh;
+  top: 7vh;
   left: 30vw;
   position: fixed;
 }
 .barIcon3 {
-  top: 1.3vh;
+  top: 2vh;
   left: 65vw;
   position: fixed;
 }
 .barIcon4 {
-  top: 5.3vh;
+  top: 7vh;
   left: 65vw;
   position: fixed;
 }
 .barIcon5 {
-  top: 9.3vh;
+  top: 12vh;
   left: 65vw;
   position: fixed;
 }
 .barIcon6 {
-  top: 13.3vh;
-  left: 65vw;
+  top: 7.5vh;
+  left: 88vw;
   position: fixed;
+}
+.gold {
+  position: fixed;
+  top: 8vh;
+  left: 75vw;
+  font-size: 1.5em;
 }
 .weaponssection {
   top: 78vh;
