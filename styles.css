@@ -169,11 +169,6 @@ body {
   height: 100px;
   width: 100px;
 }
-.limits {
-  top: 12.7vh;
-  left: 27vw;
-  position: fixed;
-}
 .music {
   top: 96vh;
   left: 31.5vw;
