@@ -726,7 +726,19 @@ function updateMap() {
         } else if (splitstring[0] == 'K') {
             document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/Icons/Items/Key.png'
             splitstring = splitstring.substring(1)
-        } 
+        } else if (splitstring[0] == 'v') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/CrackedFloor.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'h') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/Wall.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'L') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/MossFloor.png'
+            splitstring = splitstring.substring(1)
+        } else if (splitstring[0] == 'f') {
+            document.getElementsByClassName(square)[0].src = 'PixelDungeonImages/UI/Map/FlowerWall.png'
+            splitstring = splitstring.substring(1)
+        }
         
 
     
